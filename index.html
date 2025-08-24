@@ -358,7 +358,7 @@
 
       .container { max-width: 960px; margin: 0 auto; position: relative; z-index: 2; }
       
-      /* === NEW STYLES FOR COUPLE'S PARENTS === */
+      /* === STYLES FOR COUPLE'S PARENTS === */
       .couple-details {
         display: flex;
         justify-content: center;
@@ -369,12 +369,8 @@
       .groom-details, .bride-details {
         flex-basis: 45%;
       }
-      .groom-details {
-          text-align: right;
-      }
-      .bride-details {
-          text-align: left;
-      }
+      .groom-details { text-align: right; }
+      .bride-details { text-align: left; }
       .couple-details h3 {
         font-family: var(--font-heading);
         font-size: 5rem;
@@ -626,7 +622,7 @@
       .animated-item.visible .animated-child:nth-child(4) { animation-delay: 0.8s; }
       .animated-item.visible .animated-child:nth-child(5) { animation-delay: 1.0s; }
       
-      /* === FONT SIZE ADJUSTMENTS FOR MOBILE SCREENS === */
+      /* === FONT SIZE ADJUSTMENTS FOR DESKTOP AND TABLET SCREENS === */
       @media (max-width: 1024px) { 
         body { font-size: 16px; } 
         .section { padding: 70px 20px; } 
@@ -639,64 +635,106 @@
         .couple-img { width: 200px; height: 200px; } 
       }
       
+      /* === COMPREHENSIVE MOBILE STYLES (TABLET) === */
       @media (max-width: 768px) {
         body { font-size: 15px; }
-        .section { padding: 60px 15px; }
-        .section h2 { font-size: 4rem; }
-        .heading-divider { width: 300px; height: 100px; margin: 0 auto 30px auto; }
-        .splash-content h1 { font-size: 5rem; }
-        .splash-content h2 { font-size: 1.2rem; }
-        h1 { font-size: 5.5rem; }
-        .hero p { font-size: 1.3rem; }
+        .section { padding: 60px 20px; }
+        .section h2 { font-size: 4.5rem; }
+        .heading-divider { width: 320px; height: 105px; margin-bottom: 30px; }
+
+        .splash-content h1 { font-size: 5.5rem; }
+        .splash-content h2 { font-size: 1.3rem; }
+
+        h1 { font-size: 6rem; }
+        .hero p { font-size: 1.3rem; letter-spacing: 3.5px; }
+        #countdown div { min-width: 80px; font-size: 2.2rem; }
+        #countdown span { font-size: 0.9rem; }
+
         .couple-details h3 { font-size: 4rem; }
         .son-daughter-of { font-size: 1rem; }
         .ampersand { font-size: 5rem; }
         .couple-img { width: 180px; height: 180px; margin: 10px; }
-        .event-info { flex-direction: column; align-items: center; gap: 30px; }
+        
+        .event-info { flex-direction: column; align-items: center; gap: 35px; }
+
         .timeline::before { left: 31px; }
         .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
         .timeline-left, .timeline-right { left: 0%; }
         .timeline-left .timeline-content, .timeline-right .timeline-content { text-align: left; }
         .timeline-left::after, .timeline-right::after { left: 15px; }
         .timeline-left .timeline-content::before, .timeline-right .timeline-content::before { left: -10px; border-width: 10px 10px 10px 0; border-color: transparent white transparent transparent; }
-        .section::before, .section::after { width: 200px !important; height: 200px !important; }
+        
+        .section::before, .section::after { width: 180px !important; height: 180px !important; opacity: 0.3; }
+        
         .music-control { left: 15px; bottom: 15px; }
         #comments-container { max-height: 400px; }
-        .guestbook-wrapper { padding: 15px; }
+        .guestbook-wrapper { padding: 20px; }
         .map-wrapper h3 { font-size: 3.5rem; }
       }
       
+      /* === COMPREHENSIVE MOBILE STYLES (SMALL PHONE) === */
       @media (max-width: 480px) {
-        body { font-size: 14px; }
+        body { font-size: 14px; line-height: 1.6; }
         .hero::before { width: 100vh; height: 100vh; opacity: 0.08; }
         .section { padding: 50px 15px; }
         .section h2 { font-size: 3.2rem; }
-        .heading-divider { width: 280px; height: 90px; margin: 0 auto 25px auto; }
-        .splash-content h1 { font-size: 4rem; }
+        .heading-divider { width: 260px; height: 85px; margin-bottom: 25px; }
+
+        .splash-content h1 { font-size: 4rem; margin-bottom: 25px;}
         .splash-content h2 { font-size: 1.1rem; letter-spacing: 3px; }
-        .splash-content p { padding: 0 15px; }
+        .splash-content p { padding: 0 15px; font-size: 0.95rem; }
         .guest-name { font-size: 1.5rem; }
         #open-invitation-btn { padding: 12px 28px; font-size: 0.9rem; }
+
         h1 { font-size: 4.2rem; }
-        .hero p { font-size: 0.9rem; letter-spacing: 3px; margin-bottom: 25px; }
-        #countdown { flex-direction: row; flex-wrap: nowrap; gap: 8px; justify-content: center; width: 100%; box-sizing: border-box; padding: 0 10px; }
-        #countdown div { padding: 8px 4px; min-width: 0; flex: 1; font-size: 1.6rem; border-radius: 8px; }
-        #countdown span { font-size: 0.6rem; margin-top: 5px; letter-spacing: 1px; word-break: keep-all; }
-        .couple-details { flex-direction: column; gap: 15px; }
+        .hero p { font-size: 0.9rem; letter-spacing: 3px; margin: 10px 0 25px; }
+        
+        /* Revamped countdown for small screens */
+        #countdown { 
+          flex-direction: row; 
+          flex-wrap: nowrap; 
+          gap: 8px; 
+          justify-content: center; 
+          width: 100%; 
+          box-sizing: border-box; 
+          padding: 0 10px; 
+        }
+        #countdown div { 
+          padding: 10px 5px; 
+          min-width: 0; 
+          flex: 1; 
+          font-size: 1.8rem; /* Increased number size */
+          border-radius: 8px; 
+          line-height: 1.1;
+        }
+        #countdown span { 
+          font-size: 0.65rem; /* Adjusted text size */
+          margin-top: 6px; 
+          letter-spacing: 1px; 
+          word-break: keep-all; 
+        }
+
+        .couple-details { flex-direction: column; gap: 15px; margin-bottom: 30px; }
         .groom-details, .bride-details { text-align: center; }
         .couple-details h3 { font-size: 3.5rem; }
         .son-daughter-of { font-size: 0.9rem; }
         .ampersand { font-size: 4rem; }
+
         .couple-images { flex-direction: column; }
         .couple-img { width: 160px; height: 160px; margin: 15px 0; }
         .container p { font-size: 0.95rem; }
+        
         .timeline-content h3 { font-size: 2rem; }
         .timeline-content p { font-size: 0.9rem; }
+        .party-column h3 { font-size: 2.8rem; }
+        .party-member h4 { font-size: 1.8rem; }
+
         .music-control { bottom: 10px; left: 10px; }
         #music-toggle-btn { width: 50px; height: 50px; }
+
+        /* Hide distracting elements on very small screens */
         .section::before, .section::after { display: none; }
         .song-info { display: none; }
-        .map-wrapper h3 { font-size: 3rem; }
       }
     </style>
   </head>
@@ -704,10 +742,12 @@
     <div id="splash-screen">
       <div class="splash-content">
         <h2>Kami Undang Anda</h2>
+        <h1>Pramudya & Feristina</h1>
+        <p>Kami mengundang Anda untuk menjadi bagian dari awal kisah kami dan menyaksikan janji suci kami.</p>
         <div class="guest-name-wrapper">
-          <h1 class="guest-name">Undang</h1>
+          <!-- THIS TEXT WILL BE REPLACED -->
+          <h3 class="guest-name">Bapak/Ibu/Saudara/i</h3>
         </div>
-        <p>Untuk menjadi bagian dari awal kisah kami dan menyaksikan janji suci kami.</p>
         <button id="open-invitation-btn">Buka Undangan</button>
       </div>
     </div>
@@ -752,11 +792,10 @@
             <h2>Kisah Kami</h2>
             <hr class="heading-divider" />
             
-            <!-- === NEWLY ADDED PARENTS SECTION === -->
             <div class="couple-details animated-child">
               <div class="groom-details">
                 <h3>Pramudya</h3>
-                <p class="son-daughter-of">Putra dari Bapak Yuhardi & Ibu Amalia</p>
+                <p class="son-daughter-of">Putra dari Bapak John Doe & Ibu Jane Doe</p>
               </div>
               <div class="ampersand">&</div>
               <div class="bride-details">
@@ -765,11 +804,11 @@
               </div>
             </div>
             
-            <div class="couple-images">
-              <img src="https://images.unsplash.com/photo-1597826368522-9f4d5b182de8?q=80&w=1887&auto=format=fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mempelai Pria" class="couple-img animated-child" />
-              <img src="https://images.unsplash.com/photo-1606903720464-4d8528c12140?q=80&w=1887&auto=format=fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mempelai Wanita" class="couple-img animated-child" />
+            <div class="couple-images animated-child">
+              <img src="https://images.unsplash.com/photo-1597826368522-9f4d5b182de8?q=80&w=1887&auto=format=fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mempelai Pria" class="couple-img" />
+              <img src="https://images.unsplash.com/photo-1606903720464-4d8528c12140?q=80&w=1887&auto=format=fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mempelai Wanita" class="couple-img" />
             </div>
-            <p style="margin-top: 30px" class="animated-child">Kami bertemu, kami jatuh cinta, dan sekarang kami akan menikah! Kami tidak sabar untuk merayakan hari istimewa kami bersama Anda semua. Kehadiran Anda adalah hadiah terbesar yang bisa kami harapkan. Terima kasih telah menjadi bagian dari perjalanan kami.</p>
+            <p style="margin-top: 40px" class="animated-child">Kami bertemu, kami jatuh cinta, dan sekarang kami akan menikah! Kami tidak sabar untuk merayakan hari istimewa kami bersama Anda semua. Kehadiran Anda adalah hadiah terbesar yang bisa kami harapkan. Terima kasih telah menjadi bagian dari perjalanan kami.</p>
           </div>
         </section>
 
@@ -784,7 +823,6 @@
               </div>
             </div>
             
-            <!-- === THEMED MAP SECTION START === -->
             <div class="map-wrapper animated-child">
                 <h3>Lokasi Acara</h3>
                 <div class="map-container">
@@ -792,7 +830,6 @@
                 </div>
                 <a href="https://maps.app.goo.gl/nVd64to7ZKEc5dn49" target="_blank" class="rsvp-button map-button">Buka di Google Maps</a>
             </div>
-            <!-- === THEMED MAP SECTION END === -->
 
           </div>
         </section>
