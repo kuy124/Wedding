@@ -137,21 +137,42 @@
         opacity: 0;
         animation: splashFadeInUp 0.9s cubic-bezier(0.23, 1, 0.32, 1) both;
       }
-
-      .splash-content h2 { animation-delay: 0.2s; }
-      .splash-content h1 { animation-delay: 0.3s; }
-      .splash-content p { animation-delay: 0.4s; }
+      
+      .splash-quote { animation-delay: 0.2s; }
+      .splash-content h2 { animation-delay: 0.4s; }
       .guest-name-wrapper { animation-delay: 0.5s; }
-      #open-invitation-btn { animation-delay: 0.7s; }
+      .splash-content p:not(.splash-translation) { animation-delay: 0.6s; }
+      #open-invitation-btn { animation-delay: 0.8s; }
 
       .splash-content.closing > * {
         transition: opacity 0.5s ease-in, transform 0.5s ease-in;
         opacity: 0;
         transform: translateY(-40px);
       }
-      .splash-content.closing h2 { transition-delay: 0s; }
-      .splash-content.closing h1 { transition-delay: 0.1s; }
+      .splash-content.closing .splash-quote { transition-delay: 0s; }
+      .splash-content.closing h2 { transition-delay: 0.1s; }
       .splash-content.closing #open-invitation-btn { transition-delay: 0.2s; }
+      
+      .splash-quote {
+        border: none;
+        padding: 0 15px;
+        margin: 0 auto 30px auto;
+        max-width: 550px;
+      }
+      .splash-arabic {
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 1.6rem;
+        margin-bottom: 15px;
+        line-height: 1.8;
+      }
+      .splash-translation {
+        font-size: 0.95rem;
+        font-style: italic;
+        line-height: 1.6;
+        opacity: 0.95;
+        max-width: 500px;
+        margin: 0 auto;
+      }
 
       .splash-content h2 {
         font-family: var(--font-body);
@@ -358,9 +379,19 @@
       .hero-content { position: relative; z-index: 3; padding: 20px; }
       @keyframes heroContentFadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
       .hero-content > * { animation: heroContentFadeIn 1.5s ease-out 0.5s both; }
-      .hero-content h1 { animation-delay: 0.7s; }
-      .hero-content p:last-of-type { animation-delay: 0.9s; }
-      #countdown { animation-delay: 1.1s; }
+      .hero-content .bismillah { animation-delay: 0.5s; }
+      .hero-content p:nth-of-type(2) { animation-delay: 0.7s; }
+      .hero-content h1 { animation-delay: 0.9s; }
+      .hero-content p:last-of-type { animation-delay: 1.1s; }
+      #countdown { animation-delay: 1.3s; }
+      
+      .bismillah {
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 2.5rem;
+        margin: 0 0 25px 0;
+        letter-spacing: 0;
+        text-transform: none;
+      }
       h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: normal; }
       h1 { font-size: 9rem; line-height: 1; margin: 0; text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.4); }
       .hero p { font-family: var(--font-body); font-size: 1.8rem; margin: 15px 0 40px; text-transform: uppercase; letter-spacing: 4px; font-weight: 300; }
@@ -731,7 +762,30 @@
       .faq-section::before { background-image: url('data/image/Flower2.png'); width: 260px; height: 260px; top: 12%; right: 10%; }
       .faq-section::after { background-image: url('data/image/Flower2.png'); width: 200px; height: 200px; bottom: 12%; left: 10%; }
       
-      /* === SCROLL ANIMATION === */
+      /* === SCROLL ANIMATION & NOTIFICATION === */
+      #copy-notification {
+        position: fixed;
+        bottom: -100px; /* Initially hidden */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #00796b; /* Success color */
+        color: white;
+        padding: 15px 30px;
+        border-radius: 50px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        z-index: 25000;
+        font-family: var(--font-body);
+        font-weight: bold;
+        font-size: 1rem;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      #copy-notification.show {
+        bottom: 30px; /* Position when shown */
+        opacity: 1;
+        visibility: visible;
+      }
       @keyframes goldPulse { 0% { background-size: 200% 200%; } 50% { background-size: 250% 250%; } 100% { background-size: 200% 200%; } }
       @keyframes sunPulse { 0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); opacity: 0.1; } 50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.05); opacity: 0.15; } 100% { transform: translate(-50%, -50%) rotate(360deg) scale(1); opacity: 0.1; } }
       @keyframes move-clouds { 0% { left: -450px; } 100% { left: 100vw; } }
@@ -808,11 +862,14 @@
         .section { padding: 50px 15px; }
         .section h2 { font-size: 3.2rem; }
         .heading-divider { width: 260px; height: 85px; margin-bottom: 25px; }
+        .splash-arabic { font-size: 1.4rem; }
+        .splash-translation { font-size: 0.9rem; }
         .splash-content h1 { font-size: 4rem; margin-bottom: 25px;}
         .splash-content h2 { font-size: 1.1rem; letter-spacing: 3px; }
         .splash-content p { padding: 0 15px; font-size: 0.95rem; }
         .guest-name { font-size: 1.5rem; }
         #open-invitation-btn { padding: 12px 28px; font-size: 0.9rem; }
+        .bismillah { font-size: 2rem; margin-bottom: 15px;}
         h1 { font-size: 4.2rem; }
         .hero p { font-size: 0.9rem; letter-spacing: 3px; margin: 10px 0 25px; }
         #countdown { flex-direction: row; flex-wrap: nowrap; gap: 8px; justify-content: center; width: 100%; box-sizing: border-box; padding: 0 10px; }
@@ -831,6 +888,7 @@
         #music-toggle-btn { width: 50px; height: 50px; }
         .section::before, .section::after { display: none; }
         .song-info { display: none; }
+        footer .final-thanks { font-size: 5rem; }
       }
     </style>
   </head>
@@ -844,6 +902,10 @@
 
     <div id="splash-screen">
       <div class="splash-content">
+        <blockquote class="splash-quote">
+            <p dir="rtl" class="splash-arabic">وَاَنْكِحُوا الْاَيَامٰى مِنْكُمْ وَالصّٰلِحِيْنَ مِنْ عِبَادِكُمْ وَاِمَاۤىِٕكُمْۗ اِنْ يَّكُوْنُوْا فُقَرَاۤءَ يُغْنِهِمُ اللّٰهُ مِنْ فَضْلِهٖۗ وَاللّٰهُ وَاسِعٌ عَلِيْمٌ</p>
+            <p class="splash-translation">"Nikahkanlah orang-orang yang masih membujang di antara kamu dan juga orang-orang yang layak (menikah) dari hamba-hamba sahayamu, baik laki-laki maupun perempuan. Jika mereka miskin, Allah akan memberi kemampuan kepada mereka dengan karunia-Nya. Allah Mahaluas (pemberian-Nya) lagi Maha Mengetahui."<br><strong>- QS An-Nur: 32 -</strong></p>
+        </blockquote>
         <h2>Mengundang</h2>
         <div class="guest-name-wrapper">
           <h3>Kepada Yth. Bapak/Ibu/Saudara/i</h3>
@@ -875,6 +937,7 @@
       <header class="hero">
         <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div><div class="cloud c4"></div>
         <div class="hero-content">
+          <p class="bismillah">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
           <p>Kami Akan Menikah</p>
           <h1>Pramudya & Feristina</h1>
           <p>30 November 2025</p>
@@ -920,6 +983,7 @@
               <p style="font-size: 1.1rem; font-style: italic; max-width: 700px; margin: 0 auto;">
                 "Allah menjadikan bagimu pasangan (suami atau istri) dari jenis kamu sendiri, menjadikan bagimu dari pasanganmu anak-anak dan cucu-cucu, serta menganugerahi kamu rezeki yang baik-baik. Mengapa terhadap yang batil mereka beriman, sedangkan terhadap nikmat Allah mereka ingkar?"
               </p>
+              <p style="font-size: 1rem; font-weight: bold; margin-top: 20px;">(QS An-Nahl: 72)</p>
             </blockquote>
           </div>
         </section>
@@ -1063,6 +1127,8 @@
       </footer>
     </div>
 
+    <div id="copy-notification">Nomor berhasil disalin!</div>
+
     <script>
       window.addEventListener('load', () => {
         const loadingScreen = document.getElementById('loading-screen');
@@ -1076,11 +1142,26 @@
         }, 500);
       });
 
+      let notificationTimeout;
       function copyToClipboard(text) {
         navigator.clipboard.writeText(text).then(() => {
-            alert('Nomor berhasil disalin: ' + text);
+            const notification = document.getElementById('copy-notification');
+            notification.textContent = 'Nomor berhasil disalin!';
+            notification.style.backgroundColor = '#00796b'; // Success color
+            notification.classList.add('show');
+            clearTimeout(notificationTimeout);
+            notificationTimeout = setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
         }, (err) => {
-            alert('Gagal menyalin nomor.');
+            const notification = document.getElementById('copy-notification');
+            notification.textContent = 'Gagal menyalin nomor.';
+            notification.style.backgroundColor = '#c62828'; // Error color
+            notification.classList.add('show');
+            clearTimeout(notificationTimeout);
+            notificationTimeout = setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
         });
       }
 
