@@ -159,13 +159,22 @@
         text-transform: uppercase;
         letter-spacing: 4px;
         font-weight: 300;
-        margin: 0 0 10px;
+        margin: 0 0 20px;
+      }
+      /* Styling for "Kepada Yth..." h3 to use Quicksand font */
+      .guest-name-wrapper h3:first-child {
+        font-family: var(--font-body);
+        font-size: 1.1rem;
+        font-weight: 400;
+        text-transform: none;
+        letter-spacing: 1px;
+        margin: 0;
       }
       .guest-name {
         font-family: var(--font-body);
         font-size: 1.8rem;
         font-weight: 700;
-        margin: 20px 0;
+        margin: 10px 0 20px 0;
       }
       .splash-content p {
         font-family: var(--font-body);
@@ -352,7 +361,7 @@
       .hero-content h1 { animation-delay: 0.7s; }
       .hero-content p:last-of-type { animation-delay: 0.9s; }
       #countdown { animation-delay: 1.1s; }
-      h1, h2, h4 { font-family: var(--font-heading); font-weight: normal; }
+      h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: normal; }
       h1 { font-size: 9rem; line-height: 1; margin: 0; text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.4); }
       .hero p { font-family: var(--font-body); font-size: 1.8rem; margin: 15px 0 40px; text-transform: uppercase; letter-spacing: 4px; font-weight: 300; }
       #countdown { font-size: 3rem; display: flex; justify-content: center; gap: 30px; margin-top: 30px; font-family: var(--font-body); font-weight: 300; }
@@ -393,7 +402,7 @@
         margin-bottom: 20px;
       }
       .couple-details .person-details {
-        flex-basis: 45%;
+        flex-basis: 46%;
       }
       .couple-details .person-details h3 {
         font-size: 5rem;
@@ -410,7 +419,7 @@
         font-size: 5rem;
         color: var(--accent-color);
         line-height: 1;
-        flex-basis: 10%;
+        flex-basis: 8%;
         align-self: center;
       }
       .couple-details .groom-details { text-align: right; }
@@ -535,12 +544,6 @@
       .timeline-right .timeline-content::before { left: -10px; border-width: 10px 10px 10px 0; border-color: transparent white transparent transparent; }
       .timeline-content h3 { font-size: 2.8rem; color: var(--primary-color); margin: 0 0 10px 0; }
       .timeline-content p { font-size: 1.1rem; margin: 0; font-family: var(--font-body); }
-      .wedding-party-container { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 40px; }
-      .party-column { flex-basis: 45%; min-width: 300px; }
-      .party-column h3 { font-size: 3.5rem; color: var(--primary-color); }
-      .party-member { margin-bottom: 20px; }
-      .party-member h4 { font-size: 2.2rem; margin-bottom: 5px; }
-      .party-member p { font-style: italic; font-size: 1rem; font-family: var(--font-body); }
       .faq-item { margin-bottom: 30px; text-align: left; max-width: 700px; margin-left: auto; margin-right: auto; }
       .faq-item h3 { font-size: 2.2rem; color: var(--primary-color); }
       .map-wrapper { margin-top: 60px; }
@@ -549,6 +552,167 @@
       .map-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
       .map-button { margin-top: 30px; }
       
+      /* === GALLERY CAROUSEL STYLES (ENHANCED) === */
+      .gallery-carousel {
+        max-width: 900px; /* A bit wider for better presence */
+        margin: 60px auto 0;
+        position: relative;
+      }
+      .gallery-slider-wrapper {
+        overflow: hidden;
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(184, 147, 142, 0.3), 0 0 0 10px rgba(255, 255, 255, 0.5);
+        background-color: #fff; /* A solid background to prevent seeing through during transitions */
+      }
+      .gallery-slider {
+        display: flex;
+        transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+      }
+      .gallery-slide {
+        flex: 0 0 100%;
+        position: relative;
+        overflow: hidden; /* Important for the zoom effect */
+        aspect-ratio: 16 / 10; /* A wider aspect ratio */
+      }
+      .gallery-slide::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        box-shadow: inset 0 0 120px rgba(0,0,0,0.3);
+        transition: opacity 0.5s ease;
+        opacity: 1;
+      }
+      .gallery-slide.active::after {
+        opacity: 0.5; /* Reduce vignette on active slide to see image better */
+      }
+      .gallery-slide img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        /* This is the key part for fixing the cut-off heads. It centers the image vertically. */
+        object-position: center 20%; /* Will position the image 20% from the top */
+        transform: scale(1.15); /* Start slightly zoomed in */
+        transition: transform 8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      /* The zoom-in effect */
+      .gallery-slide.active img {
+        transform: scale(1.0);
+      }
+      .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(255, 255, 255, 0.8);
+        border: none;
+        color: var(--text-color);
+        font-size: 2.5rem;
+        font-weight: 300;
+        cursor: pointer;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 1;
+        transition: background-color 0.4s ease, color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+        z-index: 10;
+        padding-bottom: 5px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      }
+      .carousel-btn:hover {
+        background-color: var(--primary-color);
+        color: white;
+        transform: translateY(-50%) scale(1.1);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      }
+      .carousel-btn.prev { left: -30px; }
+      .carousel-btn.next { right: -30px; }
+      .carousel-nav {
+        position: absolute;
+        bottom: -40px; /* Positioned outside the frame */
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 12px;
+        z-index: 10;
+      }
+      .nav-dot {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.8);
+        cursor: pointer;
+        transition: background-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+        border: 2px solid var(--primary-color);
+        padding: 0;
+      }
+      .nav-dot:hover {
+        transform: scale(1.2);
+        background-color: white;
+      }
+      .nav-dot.active {
+        background-color: var(--primary-color);
+        transform: scale(1.3);
+        box-shadow: 0 0 10px rgba(184, 147, 142, 0.7);
+      }
+
+      /* === WEDDING GIFT SECTION === */
+      .wedding-gift-section {
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 15px;
+        padding: 40px;
+        margin: 60px auto 0;
+        max-width: 600px;
+        box-shadow: 0 8px 32px 0 rgba(184, 147, 142, 0.2);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        text-align: center;
+      }
+      .wedding-gift-section h3 {
+        font-family: var(--font-heading);
+        font-size: 3.5rem;
+        color: var(--primary-color);
+        margin: 0 0 15px;
+      }
+      .wedding-gift-section p {
+        font-size: 1.1rem;
+        color: var(--text-color);
+        line-height: 1.6;
+        margin: 0 auto 30px;
+        max-width: 450px;
+      }
+      .account-details {
+        margin-top: 20px;
+      }
+      .account-card {
+        background-color: #fff;
+        border-left: 5px solid var(--accent-color);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 15px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        text-align: left;
+      }
+      .account-card h4 {
+        font-family: var(--font-body);
+        font-weight: 700;
+        font-size: 1.2rem;
+        color: var(--primary-color-dark);
+        margin: 0 0 5px;
+      }
+      .account-card p {
+        font-family: var(--font-body);
+        font-size: 1.1rem;
+        color: var(--text-color);
+        margin: 0;
+      }
+
       /* === FOOTER STYLES === */
       footer { padding: 60px 20px 20px; text-align: center; background-color: #383838; color: white; font-family: var(--font-body); font-weight: 300; font-size: 1rem; position: relative; z-index: 1;}
       footer .final-thanks { font-family: var(--font-heading); font-size: 4rem; color: var(--accent-color); margin-bottom: 20px; }
@@ -609,6 +773,11 @@
         #countdown div { padding: 12px 20px; min-width: 90px; font-size: 2.5rem; } 
         #countdown span { font-size: 1rem; } 
         .couple-img { width: 225px; height: 225px; } /* Proportional increase */
+        .gallery-carousel { max-width: 100%; margin-top: 40px; }
+        .gallery-slider-wrapper { border-radius: 0; box-shadow: 0 10px 30px rgba(184, 147, 142, 0.2); }
+        .carousel-btn.prev { left: 15px; }
+        .carousel-btn.next { right: 15px; }
+        .carousel-nav { bottom: 20px; }
       }
       
       @media (max-width: 768px) {
@@ -653,6 +822,11 @@
         #comments-container { max-height: 400px; }
         .guestbook-wrapper { padding: 20px; }
         .map-wrapper h3 { font-size: 3.5rem; }
+        .carousel-btn { width: 50px; height: 50px; font-size: 2rem; }
+        .gallery-slide { aspect-ratio: 4 / 3; }
+        .wedding-gift-section { padding: 30px 25px; margin-top: 50px; }
+        .wedding-gift-section h3 { font-size: 3rem; }
+        .wedding-gift-section p { font-size: 1rem; }
       }
       
       @media (max-width: 480px) {
@@ -680,8 +854,6 @@
         .container p { font-size: 0.95rem; }
         .timeline-content h3 { font-size: 2rem; }
         .timeline-content p { font-size: 0.9rem; }
-        .party-column h3 { font-size: 2.8rem; }
-        .party-member h4 { font-size: 1.8rem; }
         .music-control { bottom: 10px; left: 10px; }
         #music-toggle-btn { width: 50px; height: 50px; }
         .section::before, .section::after { display: none; }
@@ -699,11 +871,13 @@
 
     <div id="splash-screen">
       <div class="splash-content">
-        <h2>Mengundang</h2>
+        <h2>The Wedding Of</h2>
+        <h1>Pramudya & Feristina</h1>
         <div class="guest-name-wrapper">
-          <h3>Kepada Yth. Bapak/Ibu/Saudara/i<h3 class="guest-name">Bapak/Ibu/Saudara/i</h3></h3>
+          <h3>Kepada Yth. Bapak/Ibu/Saudara/i</h3>
+          <h3 class="guest-name">Bapak/Ibu/Saudara/i</h3>
         </div>
-        <p>Pernikahan Pramudya & Feristina</p>
+        <p>Kami mengundang Anda untuk merayakan hari bahagia kami. Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Anda berkenan hadir untuk memberikan doa restu.</p>
         <button id="open-invitation-btn">Buka Undangan</button>
       </div>
     </div>
@@ -729,7 +903,7 @@
       <header class="hero">
         <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div><div class="cloud c4"></div>
         <div class="hero-content">
-          <p>Kami Akan Menikah</p>
+          <p>We Are Getting Married</p>
           <h1>Pramudya & Feristina</h1>
           <p>30 November 2025</p>
           <div id="countdown">
@@ -738,7 +912,7 @@
             <div><div id="minutes">00</div><span>Menit</span></div>
             <div><div id="seconds">00</div><span>Detik</span></div>
           </div>
-          <div id="countdown-end" style="display: none"><h2>Harinya Telah Tiba!</h2></div>
+          <div id="countdown-end" style="display: none"><h2>The Day Is Here!</h2></div>
         </div>
       </header>
 
@@ -767,7 +941,7 @@
                 <img src="data/Image/KakFeris1.jpeg" alt="Mempelai Wanita" class="couple-img" />
             </div>
 
-            <p style="margin-top: 40px" class="animated-child">Kami bertemu, kami jatuh cinta, dan sekarang kami akan menikah! Kami tidak sabar untuk merayakan hari istimewa kami bersama Anda semua. Kehadiran Anda adalah hadiah terbesar yang bisa kami harapkan. Terima kasih telah menjadi bagian dari perjalanan kami.</p>
+            <p style="margin-top: 40px" class="animated-child">We met, we fell in love, and now we're getting married! We can't wait to celebrate our special day with all of you. Your presence is the greatest gift we could ever ask for. Thank you for being a part of our journey.</p>
           </div>
         </section>
 
@@ -779,7 +953,7 @@
               <div class="event-info">
                 <div class="animated-child">
                   <h3>Akad Nikah</h3>
-                  <p>09:00 WIB (Masih Tentatif)</p>
+                  <p>09:00 WIB (Tentative)</p>
                   <p>Aula Direktorat Jenderal Bina Pemerintahan Desa Kemendagri</p>
                   <p>Jl. Raya Pasar Minggu No.19, Pejaten Barat, Kec. Ps. Minggu, Jakarta Selatan.</p>
                 </div>
@@ -808,28 +982,32 @@
             <h2>Perjalanan Kami</h2>
             <hr class="heading-divider" />
             <div class="timeline">
-              <div class="timeline-item timeline-left animated-child"><div class="timeline-content"><h3>Juni 2021</h3><p>Kisah kami dimulai. Pertemuan tak terduga yang memicu cinta seumur hidup.</p></div></div>
-              <div class="timeline-item timeline-right animated-child"><div class="timeline-content"><h3>Mei 2022</h3><p>Petualangan pertama kami bersama, menjelajahi tempat baru dan menciptakan kenangan.</p></div></div>
-              <div class="timeline-item timeline-left animated-child"><div class="timeline-content"><h3>Desember 2024</h3><p>Lamaran! Momen sempurna yang akan selalu kami kenang selamanya.</p></div></div>
-              <div class="timeline-item timeline-right animated-child"><div class="timeline-content"><h3>November 2025</h3><p>Kami mengucapkan janji suci dan memulai babak baru kami sebagai suami dan istri!</p></div></div>
+              <div class="timeline-item timeline-left animated-child"><div class="timeline-content"><h3>August 2017</h3><p>Our story began. An unexpected meeting that sparked a lifetime of love.</p></div></div>
+              <div class="timeline-item timeline-right animated-child"><div class="timeline-content"><h3>September 2020</h3><p>Our first adventure together, exploring new places and making memories.</p></div></div>
+              <div class="timeline-item timeline-left animated-child"><div class="timeline-content"><h3>October 2024</h3><p>The proposal! A perfect moment we will cherish forever.</p></div></div>
+              <div class="timeline-item timeline-right animated-child"><div class="timeline-content"><h3>November 2025</h3><p>We say "I do" and start our next chapter as husband and wife!</p></div></div>
             </div>
           </div>
         </section>
 
         <section class="section party-section animated-item">
           <div class="container">
-            <h2>Keluarga & Sahabat</h2>
+            <h2>Galeri Foto</h2>
             <hr class="heading-divider" />
-            <div class="wedding-party-container">
-              <div class="party-column animated-child">
-                <h3>Pengiring Mempelai Wanita</h3>
-                <div class="party-member"><h4>Jane Doe</h4><p>Ketua Pengiring Wanita</p></div>
-                <div class="party-member"><h4>Emily Smith</h4><p>Pengiring Wanita</p></div>
+            <div class="gallery-carousel animated-child">
+              <div class="gallery-slider-wrapper">
+                <div class="gallery-slider">
+                  <div class="gallery-slide"><img src="data/Image/BerduaMonokrom.jpeg" alt="Pramudya & Feristina 1"></div>
+                  <div class="gallery-slide"><img src="data/Image/Berdua1.jpeg" alt="Pramudya & Feristina 2"></div>
+                  <div class="gallery-slide"><img src="data/Image/Berdua2.jpeg" alt="Pramudya & Feristina 3"></div>
+                  <div class="gallery-slide"><img src="data/Image/KakYafi2.jpeg" alt="Pramudya"></div>
+                  <div class="gallery-slide"><img src="data/Image/KakFeris1.jpeg" alt="Feristina"></div>
+                </div>
               </div>
-              <div class="party-column animated-child">
-                <h3>Pengiring Mempelai Pria</h3>
-                <div class="party-member"><h4>John Smith</h4><p>Ketua Pengiring Pria</p></div>
-                <div class="party-member"><h4>Michael Brown</h4><p>Pengiring Pria</p></div>
+              <button class="carousel-btn prev" aria-label="Previous Slide">&lt;</button>
+              <button class="carousel-btn next" aria-label="Next Slide">&gt;</button>
+              <div class="carousel-nav">
+                <!-- Dots are generated by JavaScript -->
               </div>
             </div>
           </div>
@@ -839,27 +1017,43 @@
           <div class="container">
             <h2>Konfirmasi Kehadiran</h2>
             <hr class="heading-divider" />
-            <p class="animated-child">Kehadiran dan doa restu Anda adalah hadiah terindah bagi kami. Mohon konfirmasi kehadiran Anda sebelum 30 November 2025.</p>
+            <p class="animated-child">Your presence and prayers are the most beautiful gift for us. Please confirm your attendance before November 30, 2025.</p>
             <form id="rsvp-form" class="rsvp-form animated-child">
               <div class="form-group">
-                <label for="name">Nama Anda</label>
-                <input type="text" id="name" name="name" placeholder="Tulis nama Anda di sini" required />
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" placeholder="Write your name here" required />
               </div>
               <div class="form-group">
-                <label for="confirmation">Apakah Anda akan hadir?</label>
+                <label for="confirmation">Will you be attending?</label>
                 <select id="confirmation" name="confirmation" required>
-                  <option value="" disabled selected>Pilih salah satu...</option>
-                  <option value="Hadir">Ya, saya akan hadir</option>
-                  <option value="Tidak Hadir">Maaf, saya tidak bisa hadir</option>
+                  <option value="" disabled selected>Choose one...</option>
+                  <option value="Hadir">Yes, I will attend</option>
+                  <option value="Tidak Hadir">Sorry, I can't attend</option>
                 </select>
               </div>
               <div class="form-group">
-                <label for="message">Tulis Ucapan & Doa</label>
-                <textarea id="message" name="message" rows="4" placeholder="Bagikan ucapan bahagia Anda untuk kami..." required></textarea>
+                <label for="message">Write Your Wishes & Prayers</label>
+                <textarea id="message" name="message" rows="4" placeholder="Share your happy wishes for us..." required></textarea>
               </div>
-              <button type="submit" id="submit-button" class="rsvp-button">Kirim Pesan</button>
+              <button type="submit" id="submit-button" class="rsvp-button">Send Message</button>
               <p id="form-status"></p>
             </form>
+            <div class="wedding-gift-section animated-child">
+              <h3>Hadiah Pernikahan</h3>
+              <p>Doa restu Anda adalah hadiah yang paling berarti bagi kami. Namun, jika Anda ingin memberikan tanda kasih, kami telah menyediakan cara yang lebih mudah.</p>
+              <div class="account-details">
+                  <div class="account-card">
+                      <h4>Bank Mandiri</h4>
+                      <p>1270013987944</p>
+                      <p>a.n Pramudya</p>
+                  </div>
+                  <div class="account-card">
+                      <h4>Gopay</h4>
+                      <p>087771800110</p>
+                      <p>a.n Pramudya</p>
+                  </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -879,18 +1073,18 @@
           <div class="container">
             <h2>Tanya Jawab</h2>
             <hr class="heading-divider" />
-            <div class="faq-item animated-child"><h3>Apa aturan berpakaiannya?</h3><p>Kami akan sangat senang jika keluarga dan teman-teman bisa berdandan bersama kami! Aturan berpakaiannya adalah semi-formal atau pakaian koktail.</p></div>
-            <div class="faq-item animated-child"><h3>Apakah anak-anak diperbolehkan?</h3><p>Meskipun kami menyayangi anak-anak Anda, pernikahan kami akan menjadi perayaan khusus orang dewasa. Kami harap Anda dapat menikmati malam istimewa ini!</p></div>
-            <div class="faq-item animated-child"><h3>Apakah tersedia tempat parkir di dekat lokasi?</h3><p>Ya, baik Masjid maupun Rumah memiliki tempat parkir yang luas dan gratis untuk para tamu.</p></div>
+            <div class="faq-item animated-child"><h3>What is the dress code?</h3><p>We would be delighted if our family and friends could come dressed smartly! The dress code is semi-formal or formal.</p></div>
+            <div class="faq-item animated-child"><h3>Is it okay to give gifts?</h3><p>Yes, but if you are unable to attend and still wish to give a gift, we have provided a platform for gifting.</p></div>
+            <div class="faq-item animated-child"><h3>Is there parking available near the venue?</h3><p>Yes, we have provided ample parking space for cars and motorcycles.</p></div>
           </div>
         </section>
       </main>
 
       <footer>
         <div class="container">
-          <p class="final-thanks">Terima Kasih</p>
+          <p class="final-thanks">Thank You</p>
           <div class="footer-divider"></div>
-          <p>Dengan Cinta, Pramudya & Feristina | 30 November 2025</p>
+          <p>With Love, Pramudya & Feristina | November 30, 2025</p>
         </div>
       </footer>
     </div>
@@ -1038,6 +1232,83 @@
         });
 
         fetchAndDisplayComments();
+
+        // --- GALLERY CAROUSEL LOGIC (ENHANCED) ---
+        const slider = document.querySelector('.gallery-slider');
+        if (slider) {
+            const slides = Array.from(slider.children);
+            const nextBtn = document.querySelector('.carousel-btn.next');
+            const prevBtn = document.querySelector('.carousel-btn.prev');
+            const navContainer = document.querySelector('.carousel-nav');
+            let currentIndex = 0;
+            let autoPlayInterval;
+
+            if(slides.length > 0) {
+              // Create nav dots
+              slides.forEach((_, index) => {
+                  const dot = document.createElement('button');
+                  dot.classList.add('nav-dot');
+                  dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+                  navContainer.appendChild(dot);
+              });
+              
+              const dots = Array.from(navContainer.children);
+
+              const updateSlideActivity = () => {
+                  slides.forEach((slide, index) => {
+                      if (index === currentIndex) {
+                          slide.classList.add('active');
+                      } else {
+                          slide.classList.remove('active');
+                      }
+                  });
+                  dots.forEach(dot => dot.classList.remove('active'));
+                  dots[currentIndex].classList.add('active');
+              };
+
+              const goToSlide = (index) => {
+                  currentIndex = index;
+                  slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+                  updateSlideActivity();
+              };
+
+              const nextSlide = () => {
+                  const nextIndex = (currentIndex + 1) % slides.length;
+                  goToSlide(nextIndex);
+              };
+
+              const startAutoPlay = () => {
+                  stopAutoPlay(); // Prevent multiple intervals
+                  autoPlayInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+              };
+
+              const stopAutoPlay = () => {
+                  clearInterval(autoPlayInterval);
+              };
+              
+              nextBtn.addEventListener('click', () => {
+                  nextSlide();
+                  stopAutoPlay();
+              });
+
+              prevBtn.addEventListener('click', () => {
+                  const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+                  goToSlide(prevIndex);
+                  stopAutoPlay();
+              });
+              
+              dots.forEach((dot, index) => {
+                  dot.addEventListener('click', () => {
+                      goToSlide(index);
+                      stopAutoPlay();
+                  });
+              });
+
+              // Initial setup
+              goToSlide(0);
+              startAutoPlay();
+            }
+        }
       });
     </script>
   </body>
