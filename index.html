@@ -156,7 +156,7 @@
       .splash-quote {
         border: none;
         padding: 0 15px;
-        margin: 0 auto 30px auto;
+        margin: 30px auto 0 auto;
         max-width: 550px;
       }
       .splash-arabic {
@@ -391,6 +391,9 @@
         margin: 0 0 25px 0;
         letter-spacing: 0;
         text-transform: none;
+      }
+      .mobile-break {
+        display: none;
       }
       h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: normal; }
       h1 { font-size: 9rem; line-height: 1; margin: 0; text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.4); }
@@ -804,7 +807,13 @@
         body { font-size: 16px; } 
         .section { padding: 70px 20px; } 
         .section h2 { font-size: 5rem; } 
-        h1 { font-size: 7rem; } 
+        h1 { 
+          font-size: 7rem;
+          line-height: 1.2;
+        }
+        .mobile-break {
+          display: block;
+        }
         .hero p { font-size: 1.5rem; } 
         #countdown { gap: 20px; } 
         #countdown div { padding: 12px 20px; min-width: 90px; font-size: 2.5rem; } 
@@ -819,7 +828,10 @@
         .heading-divider { width: 320px; height: 105px; margin-bottom: 30px; }
         .splash-content h1 { font-size: 5.5rem; }
         .splash-content h2 { font-size: 1.3rem; }
-        h1 { font-size: 6rem; }
+        h1 {
+          font-size: 6rem;
+          line-height: 1.2;
+        }
         .hero p { font-size: 1.3rem; letter-spacing: 3.5px; }
         #countdown div { min-width: 80px; font-size: 2.2rem; }
         #countdown span { font-size: 0.9rem; }
@@ -870,7 +882,10 @@
         .guest-name { font-size: 1.5rem; }
         #open-invitation-btn { padding: 12px 28px; font-size: 0.9rem; }
         .bismillah { font-size: 2rem; margin-bottom: 15px;}
-        h1 { font-size: 4.2rem; }
+        h1 {
+          font-size: 4.2rem;
+          line-height: 1.2;
+        }
         .hero p { font-size: 0.9rem; letter-spacing: 3px; margin: 10px 0 25px; }
         #countdown { flex-direction: row; flex-wrap: nowrap; gap: 8px; justify-content: center; width: 100%; box-sizing: border-box; padding: 0 10px; }
         #countdown div { padding: 10px 5px; min-width: 0; flex: 1; font-size: 1.8rem; border-radius: 8px; line-height: 1.1; }
@@ -902,10 +917,6 @@
 
     <div id="splash-screen">
       <div class="splash-content">
-        <blockquote class="splash-quote">
-            <p dir="rtl" class="splash-arabic">وَاَنْكِحُوا الْاَيَامٰى مِنْكُمْ وَالصّٰلِحِيْنَ مِنْ عِبَادِكُمْ وَاِمَاۤىِٕكُمْۗ اِنْ يَّكُوْنُوْا فُقَرَاۤءَ يُغْنِهِمُ اللّٰهُ مِنْ فَضْلِهٖۗ وَاللّٰهُ وَاسِعٌ عَلِيْمٌ</p>
-            <p class="splash-translation">"Nikahkanlah orang-orang yang masih membujang di antara kamu dan juga orang-orang yang layak (menikah) dari hamba-hamba sahayamu, baik laki-laki maupun perempuan. Jika mereka miskin, Allah akan memberi kemampuan kepada mereka dengan karunia-Nya. Allah Mahaluas (pemberian-Nya) lagi Maha Mengetahui."<br><strong>- QS An-Nur: 32 -</strong></p>
-        </blockquote>
         <h2>Mengundang</h2>
         <div class="guest-name-wrapper">
           <h3>Kepada Yth. Bapak/Ibu/Saudara/i</h3>
@@ -913,6 +924,10 @@
         </div>
         <p>Ke Pernikahan Pramudya & Feristina.</p>
         <button id="open-invitation-btn">Buka Undangan</button>
+        <blockquote class="splash-quote">
+            <p dir="rtl" class="splash-arabic">وَاَنْكِحُوا الْاَيَامٰى مِنْكُمْ وَالصّٰلِحِيْنَ مِنْ عِبَادِكُمْ وَاِمَاۤىِٕكُمْۗ اِنْ يَّكُوْنُوْا فُقَرَاۤءَ يُغْنِهِمُ اللّٰهُ مِنْ فَضْلِهٖۗ وَاللّٰهُ وَاسِعٌ عَلِيْمٌ</p>
+            <p class="splash-translation">"Nikahkanlah orang-orang yang masih membujang di antara kamu dan juga orang-orang yang layak (menikah) dari hamba-hamba sahayamu, baik laki-laki maupun perempuan. Jika mereka miskin, Allah akan memberi kemampuan kepada mereka dengan karunia-Nya. Allah Mahaluas (pemberian-Nya) lagi Maha Mengetahui."<br><strong>- QS An-Nur: 32 -</strong></p>
+        </blockquote>
       </div>
     </div>
 
@@ -939,7 +954,7 @@
         <div class="hero-content">
           <p class="bismillah">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
           <p>Kami Akan Menikah</p>
-          <h1>Pramudya & Feristina</h1>
+          <h1>Pramudya<br class="mobile-break"> & <br class="mobile-break">Feristina</h1>
           <p>30 November 2025</p>
           <div id="countdown">
             <div><div id="days">00</div><span>Hari</span></div>
@@ -1123,6 +1138,7 @@
           <p class="final-thanks">Terima Kasih</p>
           <div class="footer-divider"></div>
           <p>Dengan Cinta, Pramudya & Feristina | 30 November 2025</p>
+          <p>Dibuat oleh Kun Faris Al-Malik</p>
         </div>
       </footer>
     </div>
