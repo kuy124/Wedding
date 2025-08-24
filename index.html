@@ -457,6 +457,46 @@
       .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 8px rgba(184, 147, 142, 0.5); }
       #submit-button { width: 100%; cursor: pointer; }
       #form-status { margin-top: 20px; font-size: 1rem; text-align: center; min-height: 24px; font-weight: bold; }
+
+      /* === WEDDING GIFT SECTION === */
+      .wedding-gift-section {
+        margin-top: 60px;
+        padding: 30px;
+        border-radius: 15px;
+        background: rgba(255, 255, 255, 0.7);
+        box-shadow: 0 8px 32px 0 rgba(184, 147, 142, 0.2);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .wedding-gift-section h3 {
+        font-family: var(--font-heading);
+        font-size: 3.5rem;
+        color: var(--primary-color-dark);
+        margin: 0 0 20px 0;
+      }
+      .wedding-gift-section p {
+        font-size: 1rem;
+        margin: 15px 0;
+        line-height: 1.6;
+      }
+      .account-details {
+        font-weight: bold;
+        color: var(--text-color);
+        background: #fdfdfd;
+        padding: 10px 15px;
+        border-radius: 8px;
+        border-left: 4px solid var(--accent-color);
+        margin-top: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      .account-details:hover {
+          background-color: #f5f5f5;
+      }
       
       /* === GUESTBOOK STYLES === */
       .guestbook-wrapper {
@@ -552,165 +592,108 @@
       .map-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
       .map-button { margin-top: 30px; }
       
-      /* === GALLERY CAROUSEL STYLES (ENHANCED) === */
-      .gallery-carousel {
-        max-width: 900px; /* A bit wider for better presence */
-        margin: 60px auto 0;
-        position: relative;
+      /* === GALLERY CAROUSEL STYLES (IMPROVED) === */
+      @keyframes kenburns-zoom {
+        0% {
+            transform: scale(1.05) translateY(0);
+        }
+        100% {
+            transform: scale(1.15) translateY(-3px);
+        }
       }
-      .gallery-slider-wrapper {
+      .gallery-carousel {
+        max-width: 800px;
+        margin: 40px auto 0;
+        position: relative;
         overflow: hidden;
         border-radius: 15px;
-        box-shadow: 0 10px 40px rgba(184, 147, 142, 0.3), 0 0 0 10px rgba(255, 255, 255, 0.5);
-        background-color: #fff; /* A solid background to prevent seeing through during transitions */
+        box-shadow: 0 10px 40px rgba(184, 147, 142, 0.3);
+        border: 5px solid white;
       }
       .gallery-slider {
         display: flex;
-        transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+        transition: transform 0.6s cubic-bezier(0.455, 0.03, 0.515, 0.955);
       }
       .gallery-slide {
         flex: 0 0 100%;
         position: relative;
         overflow: hidden; /* Important for the zoom effect */
-        aspect-ratio: 16 / 10; /* A wider aspect ratio */
       }
-      .gallery-slide::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        box-shadow: inset 0 0 120px rgba(0,0,0,0.3);
-        transition: opacity 0.5s ease;
-        opacity: 1;
-      }
-      .gallery-slide.active::after {
-        opacity: 0.5; /* Reduce vignette on active slide to see image better */
+      .gallery-slide::after { /* Adds a nice vignette effect */
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          box-shadow: inset 0 0 80px rgba(0,0,0,0.3);
+          z-index: 1;
       }
       .gallery-slide img {
         width: 100%;
-        height: 100%;
         display: block;
+        aspect-ratio: 3 / 4;
         object-fit: cover;
-        /* This is the key part for fixing the cut-off heads. It centers the image vertically. */
-        object-position: center 20%; /* Will position the image 20% from the top */
-        transform: scale(1.15); /* Start slightly zoomed in */
-        transition: transform 8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        object-position: center 30%; /* Moves image focus slightly up */
       }
-      /* The zoom-in effect */
-      .gallery-slide.active img {
-        transform: scale(1.0);
+      .gallery-slide.active-slide img {
+          animation: kenburns-zoom 12s ease-out forwards;
       }
       .carousel-btn {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        background-color: rgba(255, 255, 255, 0.8);
+        background-color: rgba(255, 255, 255, 0.7);
         border: none;
         color: var(--text-color);
-        font-size: 2.5rem;
-        font-weight: 300;
+        font-size: 2rem;
+        font-weight: bold;
         cursor: pointer;
         border-radius: 50%;
-        width: 60px;
-        height: 60px;
+        width: 50px;
+        height: 50px;
         display: flex;
         justify-content: center;
         align-items: center;
         line-height: 1;
-        transition: background-color 0.4s ease, color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+        transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
         z-index: 10;
-        padding-bottom: 5px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        padding-bottom: 5px; /* Visual alignment */
+        text-shadow: 0 0 5px rgba(0,0,0,0.1);
       }
       .carousel-btn:hover {
         background-color: var(--primary-color);
         color: white;
         transform: translateY(-50%) scale(1.1);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
       }
-      .carousel-btn.prev { left: -30px; }
-      .carousel-btn.next { right: -30px; }
+      .carousel-btn.prev { left: 15px; }
+      .carousel-btn.next { right: 15px; }
       .carousel-nav {
         position: absolute;
-        bottom: -40px; /* Positioned outside the frame */
+        bottom: 20px;
         left: 50%;
         transform: translateX(-50%);
         display: flex;
-        gap: 12px;
+        gap: 10px;
         z-index: 10;
+        background: rgba(0,0,0,0.2);
+        padding: 8px 15px;
+        border-radius: 20px;
       }
       .nav-dot {
-        width: 15px;
-        height: 15px;
+        width: 12px;
+        height: 12px;
         border-radius: 50%;
-        background-color: rgba(255, 255, 255, 0.8);
+        background-color: rgba(255, 255, 255, 0.6);
         cursor: pointer;
-        transition: background-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
-        border: 2px solid var(--primary-color);
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        border: 1px solid rgba(0,0,0,0.1);
         padding: 0;
       }
-      .nav-dot:hover {
-        transform: scale(1.2);
-        background-color: white;
-      }
       .nav-dot.active {
-        background-color: var(--primary-color);
-        transform: scale(1.3);
-        box-shadow: 0 0 10px rgba(184, 147, 142, 0.7);
-      }
-
-      /* === WEDDING GIFT SECTION === */
-      .wedding-gift-section {
-        background-color: rgba(255, 255, 255, 0.7);
-        border-radius: 15px;
-        padding: 40px;
-        margin: 60px auto 0;
-        max-width: 600px;
-        box-shadow: 0 8px 32px 0 rgba(184, 147, 142, 0.2);
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
-        border: 1px solid rgba(255, 255, 255, 0.18);
-        text-align: center;
-      }
-      .wedding-gift-section h3 {
-        font-family: var(--font-heading);
-        font-size: 3.5rem;
-        color: var(--primary-color);
-        margin: 0 0 15px;
-      }
-      .wedding-gift-section p {
-        font-size: 1.1rem;
-        color: var(--text-color);
-        line-height: 1.6;
-        margin: 0 auto 30px;
-        max-width: 450px;
-      }
-      .account-details {
-        margin-top: 20px;
-      }
-      .account-card {
-        background-color: #fff;
-        border-left: 5px solid var(--accent-color);
-        border-radius: 8px;
-        padding: 20px;
-        margin-bottom: 15px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-        text-align: left;
-      }
-      .account-card h4 {
-        font-family: var(--font-body);
-        font-weight: 700;
-        font-size: 1.2rem;
-        color: var(--primary-color-dark);
-        margin: 0 0 5px;
-      }
-      .account-card p {
-        font-family: var(--font-body);
-        font-size: 1.1rem;
-        color: var(--text-color);
-        margin: 0;
+        background-color: white;
+        transform: scale(1.2);
+        box-shadow: 0 0 5px rgba(0,0,0,0.3);
       }
 
       /* === FOOTER STYLES === */
@@ -773,11 +756,6 @@
         #countdown div { padding: 12px 20px; min-width: 90px; font-size: 2.5rem; } 
         #countdown span { font-size: 1rem; } 
         .couple-img { width: 225px; height: 225px; } /* Proportional increase */
-        .gallery-carousel { max-width: 100%; margin-top: 40px; }
-        .gallery-slider-wrapper { border-radius: 0; box-shadow: 0 10px 30px rgba(184, 147, 142, 0.2); }
-        .carousel-btn.prev { left: 15px; }
-        .carousel-btn.next { right: 15px; }
-        .carousel-nav { bottom: 20px; }
       }
       
       @media (max-width: 768px) {
@@ -822,11 +800,6 @@
         #comments-container { max-height: 400px; }
         .guestbook-wrapper { padding: 20px; }
         .map-wrapper h3 { font-size: 3.5rem; }
-        .carousel-btn { width: 50px; height: 50px; font-size: 2rem; }
-        .gallery-slide { aspect-ratio: 4 / 3; }
-        .wedding-gift-section { padding: 30px 25px; margin-top: 50px; }
-        .wedding-gift-section h3 { font-size: 3rem; }
-        .wedding-gift-section p { font-size: 1rem; }
       }
       
       @media (max-width: 480px) {
@@ -871,13 +844,12 @@
 
     <div id="splash-screen">
       <div class="splash-content">
-        <h2>The Wedding Of</h2>
-        <h1>Pramudya & Feristina</h1>
+        <h2>Mengundang</h2>
         <div class="guest-name-wrapper">
           <h3>Kepada Yth. Bapak/Ibu/Saudara/i</h3>
           <h3 class="guest-name">Bapak/Ibu/Saudara/i</h3>
         </div>
-        <p>Kami mengundang Anda untuk merayakan hari bahagia kami. Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Anda berkenan hadir untuk memberikan doa restu.</p>
+        <p>Ke Pernikahan Pramudya & Feristina.</p>
         <button id="open-invitation-btn">Buka Undangan</button>
       </div>
     </div>
@@ -903,7 +875,7 @@
       <header class="hero">
         <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div><div class="cloud c4"></div>
         <div class="hero-content">
-          <p>We Are Getting Married</p>
+          <p>Kami Akan Menikah</p>
           <h1>Pramudya & Feristina</h1>
           <p>30 November 2025</p>
           <div id="countdown">
@@ -912,7 +884,7 @@
             <div><div id="minutes">00</div><span>Menit</span></div>
             <div><div id="seconds">00</div><span>Detik</span></div>
           </div>
-          <div id="countdown-end" style="display: none"><h2>The Day Is Here!</h2></div>
+          <div id="countdown-end" style="display: none"><h2>Harinya Telah Tiba!</h2></div>
         </div>
       </header>
 
@@ -941,7 +913,14 @@
                 <img src="data/Image/KakFeris1.jpeg" alt="Mempelai Wanita" class="couple-img" />
             </div>
 
-            <p style="margin-top: 40px" class="animated-child">We met, we fell in love, and now we're getting married! We can't wait to celebrate our special day with all of you. Your presence is the greatest gift we could ever ask for. Thank you for being a part of our journey.</p>
+            <blockquote style="margin-top: 40px; border: none; padding: 0;" class="animated-child">
+              <p dir="rtl" style="font-size: 2rem; color: var(--primary-color-dark); margin-bottom: 20px;">
+                الَّذِيْنَ تَتَوَفّٰىهُمُ الْمَلٰۤىِٕكَةُ طَيِّبِيْنَۙ يَقُوْلُوْنَ سَلٰمٌ عَلَيْكُمُ ادْخُلُوا الْجَنَّةَ بِمَا كُنْتُمْ تَعْمَلُوْنَ
+              </p>
+              <p style="font-size: 1.1rem; font-style: italic; max-width: 700px; margin: 0 auto;">
+                "(Yaitu) orang-orang yang diwafatkan oleh malaikat dalam keadaan baik. Mereka (para malaikat) mengatakan, “Salāmun ‘alaikum (semoga keselamatan tercurah kepadamu). Masuklah ke dalam surga karena apa yang telah kamu kerjakan.”."
+              </p>
+            </blockquote>
           </div>
         </section>
 
@@ -953,7 +932,7 @@
               <div class="event-info">
                 <div class="animated-child">
                   <h3>Akad Nikah</h3>
-                  <p>09:00 WIB (Tentative)</p>
+                  <p>09:00 WIB (Masih Tentatif)</p>
                   <p>Aula Direktorat Jenderal Bina Pemerintahan Desa Kemendagri</p>
                   <p>Jl. Raya Pasar Minggu No.19, Pejaten Barat, Kec. Ps. Minggu, Jakarta Selatan.</p>
                 </div>
@@ -982,10 +961,10 @@
             <h2>Perjalanan Kami</h2>
             <hr class="heading-divider" />
             <div class="timeline">
-              <div class="timeline-item timeline-left animated-child"><div class="timeline-content"><h3>August 2017</h3><p>Our story began. An unexpected meeting that sparked a lifetime of love.</p></div></div>
-              <div class="timeline-item timeline-right animated-child"><div class="timeline-content"><h3>September 2020</h3><p>Our first adventure together, exploring new places and making memories.</p></div></div>
-              <div class="timeline-item timeline-left animated-child"><div class="timeline-content"><h3>October 2024</h3><p>The proposal! A perfect moment we will cherish forever.</p></div></div>
-              <div class="timeline-item timeline-right animated-child"><div class="timeline-content"><h3>November 2025</h3><p>We say "I do" and start our next chapter as husband and wife!</p></div></div>
+              <div class="timeline-item timeline-left animated-child"><div class="timeline-content"><h3>Agustus 2017</h3><p>Kisah kami dimulai. Pertemuan tak terduga yang memicu cinta seumur hidup.</p></div></div>
+              <div class="timeline-item timeline-right animated-child"><div class="timeline-content"><h3>September 2020</h3><p>Petualangan pertama kami bersama, menjelajahi tempat baru dan menciptakan kenangan.</p></div></div>
+              <div class="timeline-item timeline-left animated-child"><div class="timeline-content"><h3>Oktober 2024</h3><p>Lamaran! Momen sempurna yang akan selalu kami kenang selamanya.</p></div></div>
+              <div class="timeline-item timeline-right animated-child"><div class="timeline-content"><h3>November 2025</h3><p>Kami mengucapkan janji suci dan memulai babak baru kami sebagai suami dan istri!</p></div></div>
             </div>
           </div>
         </section>
@@ -995,14 +974,12 @@
             <h2>Galeri Foto</h2>
             <hr class="heading-divider" />
             <div class="gallery-carousel animated-child">
-              <div class="gallery-slider-wrapper">
-                <div class="gallery-slider">
-                  <div class="gallery-slide"><img src="data/Image/BerduaMonokrom.jpeg" alt="Pramudya & Feristina 1"></div>
-                  <div class="gallery-slide"><img src="data/Image/Berdua1.jpeg" alt="Pramudya & Feristina 2"></div>
-                  <div class="gallery-slide"><img src="data/Image/Berdua2.jpeg" alt="Pramudya & Feristina 3"></div>
-                  <div class="gallery-slide"><img src="data/Image/KakYafi2.jpeg" alt="Pramudya"></div>
-                  <div class="gallery-slide"><img src="data/Image/KakFeris1.jpeg" alt="Feristina"></div>
-                </div>
+              <div class="gallery-slider">
+                <div class="gallery-slide"><img src="data/Image/BerduaMonokrom.jpeg" alt="Pramudya & Feristina 1"></div>
+                <div class="gallery-slide"><img src="data/Image/Berdua1.jpeg" alt="Pramudya & Feristina 2"></div>
+                <div class="gallery-slide"><img src="data/Image/Berdua2.jpeg" alt="Pramudya & Feristina 3"></div>
+                <div class="gallery-slide"><img src="data/Image/KakYafi2.jpeg" alt="Pramudya"></div>
+                <div class="gallery-slide"><img src="data/Image/KakFeris1.jpeg" alt="Feristina"></div>
               </div>
               <button class="carousel-btn prev" aria-label="Previous Slide">&lt;</button>
               <button class="carousel-btn next" aria-label="Next Slide">&gt;</button>
@@ -1017,42 +994,39 @@
           <div class="container">
             <h2>Konfirmasi Kehadiran</h2>
             <hr class="heading-divider" />
-            <p class="animated-child">Your presence and prayers are the most beautiful gift for us. Please confirm your attendance before November 30, 2025.</p>
+            <p class="animated-child">Kehadiran dan doa restu Anda adalah hadiah terindah bagi kami. Mohon konfirmasi kehadiran Anda sebelum 30 November 2025.</p>
             <form id="rsvp-form" class="rsvp-form animated-child">
               <div class="form-group">
-                <label for="name">Your Name</label>
-                <input type="text" id="name" name="name" placeholder="Write your name here" required />
+                <label for="name">Nama Anda</label>
+                <input type="text" id="name" name="name" placeholder="Tulis nama Anda di sini" required />
               </div>
               <div class="form-group">
-                <label for="confirmation">Will you be attending?</label>
+                <label for="confirmation">Apakah Anda akan hadir?</label>
                 <select id="confirmation" name="confirmation" required>
-                  <option value="" disabled selected>Choose one...</option>
-                  <option value="Hadir">Yes, I will attend</option>
-                  <option value="Tidak Hadir">Sorry, I can't attend</option>
+                  <option value="" disabled selected>Pilih salah satu...</option>
+                  <option value="Hadir">Ya, saya akan hadir</option>
+                  <option value="Tidak Hadir">Maaf, saya tidak bisa hadir</option>
                 </select>
               </div>
               <div class="form-group">
-                <label for="message">Write Your Wishes & Prayers</label>
-                <textarea id="message" name="message" rows="4" placeholder="Share your happy wishes for us..." required></textarea>
+                <label for="message">Tulis Ucapan & Doa</label>
+                <textarea id="message" name="message" rows="4" placeholder="Bagikan ucapan bahagia Anda untuk kami..." required></textarea>
               </div>
-              <button type="submit" id="submit-button" class="rsvp-button">Send Message</button>
+              <button type="submit" id="submit-button" class="rsvp-button">Kirim Pesan</button>
               <p id="form-status"></p>
             </form>
-            <div class="wedding-gift-section animated-child">
-              <h3>Hadiah Pernikahan</h3>
-              <p>Doa restu Anda adalah hadiah yang paling berarti bagi kami. Namun, jika Anda ingin memberikan tanda kasih, kami telah menyediakan cara yang lebih mudah.</p>
-              <div class="account-details">
-                  <div class="account-card">
-                      <h4>Bank Mandiri</h4>
-                      <p>1270013987944</p>
-                      <p>a.n Pramudya</p>
-                  </div>
-                  <div class="account-card">
-                      <h4>Gopay</h4>
-                      <p>087771800110</p>
-                      <p>a.n Pramudya</p>
-                  </div>
-              </div>
+
+            <div class="wedding-gift-section animated-child" style="animation-delay: 0.8s;">
+                <h3>Hadiah Pernikahan</h3>
+                <p>Bagi Anda yang ingin memberikan tanda kasih, dapat melakukannya melalui tautan berikut. Terima kasih banyak atas kebaikan Anda.</p>
+                <p>
+                    Bank Mandiri
+                    <span class="account-details" onclick="copyToClipboard('1270013987944')">1270013987944</span>
+                </p>
+                <p>
+                    Gopay
+                    <span class="account-details" onclick="copyToClipboard('087771800110')">087771800110</span>
+                </p>
             </div>
           </div>
         </section>
@@ -1073,18 +1047,18 @@
           <div class="container">
             <h2>Tanya Jawab</h2>
             <hr class="heading-divider" />
-            <div class="faq-item animated-child"><h3>What is the dress code?</h3><p>We would be delighted if our family and friends could come dressed smartly! The dress code is semi-formal or formal.</p></div>
-            <div class="faq-item animated-child"><h3>Is it okay to give gifts?</h3><p>Yes, but if you are unable to attend and still wish to give a gift, we have provided a platform for gifting.</p></div>
-            <div class="faq-item animated-child"><h3>Is there parking available near the venue?</h3><p>Yes, we have provided ample parking space for cars and motorcycles.</p></div>
+            <div class="faq-item animated-child"><h3>Apa aturan berpakaiannya?</h3><p>Kami akan sangat senang jika keluarga dan teman-teman bisa datang dengan berpakaian yang rapi! Aturan berpakaiannya adalah semi-formal atau formal.</p></div>
+            <div class="faq-item animated-child"><h3>Apakah boleh memberi hadiah?</h3><p>Boleh, tetapi jika berhalangan hadir dan ingin tetap memberi hadiah, kami sudah menyediakan platform untuk memberi hadiah</p></div>
+            <div class="faq-item animated-child"><h3>Apakah tersedia tempat parkir di dekat lokasi?</h3><p>Ya, kami sudah menyediakan tempat parkir untuk mobil dan motor yang cukup luas.</p></div>
           </div>
         </section>
       </main>
 
       <footer>
         <div class="container">
-          <p class="final-thanks">Thank You</p>
+          <p class="final-thanks">Terima Kasih</p>
           <div class="footer-divider"></div>
-          <p>With Love, Pramudya & Feristina | November 30, 2025</p>
+          <p>Dengan Cinta, Pramudya & Feristina | 30 November 2025</p>
         </div>
       </footer>
     </div>
@@ -1101,6 +1075,14 @@
             }, { once: true });
         }, 500);
       });
+
+      function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            alert('Nomor berhasil disalin: ' + text);
+        }, (err) => {
+            alert('Gagal menyalin nomor.');
+        });
+      }
 
       document.addEventListener("DOMContentLoaded", () => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -1233,7 +1215,7 @@
 
         fetchAndDisplayComments();
 
-        // --- GALLERY CAROUSEL LOGIC (ENHANCED) ---
+        // --- GALLERY CAROUSEL LOGIC (IMPROVED) ---
         const slider = document.querySelector('.gallery-slider');
         if (slider) {
             const slides = Array.from(slider.children);
@@ -1241,7 +1223,6 @@
             const prevBtn = document.querySelector('.carousel-btn.prev');
             const navContainer = document.querySelector('.carousel-nav');
             let currentIndex = 0;
-            let autoPlayInterval;
 
             if(slides.length > 0) {
               // Create nav dots
@@ -1254,59 +1235,36 @@
               
               const dots = Array.from(navContainer.children);
 
-              const updateSlideActivity = () => {
-                  slides.forEach((slide, index) => {
-                      if (index === currentIndex) {
-                          slide.classList.add('active');
-                      } else {
-                          slide.classList.remove('active');
-                      }
-                  });
-                  dots.forEach(dot => dot.classList.remove('active'));
-                  dots[currentIndex].classList.add('active');
-              };
-
               const goToSlide = (index) => {
+                  slides.forEach(slide => slide.classList.remove('active-slide'));
+                  
                   currentIndex = index;
                   slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-                  updateSlideActivity();
+                  
+                  dots.forEach(dot => dot.classList.remove('active'));
+                  dots[currentIndex].classList.add('active');
+                  
+                  slides[currentIndex].classList.add('active-slide');
               };
 
-              const nextSlide = () => {
+              nextBtn.addEventListener('click', () => {
                   const nextIndex = (currentIndex + 1) % slides.length;
                   goToSlide(nextIndex);
-              };
-
-              const startAutoPlay = () => {
-                  stopAutoPlay(); // Prevent multiple intervals
-                  autoPlayInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
-              };
-
-              const stopAutoPlay = () => {
-                  clearInterval(autoPlayInterval);
-              };
-              
-              nextBtn.addEventListener('click', () => {
-                  nextSlide();
-                  stopAutoPlay();
               });
 
               prevBtn.addEventListener('click', () => {
                   const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
                   goToSlide(prevIndex);
-                  stopAutoPlay();
               });
               
               dots.forEach((dot, index) => {
                   dot.addEventListener('click', () => {
                       goToSlide(index);
-                      stopAutoPlay();
                   });
               });
 
-              // Initial setup
+              // Initialize first slide
               goToSlide(0);
-              startAutoPlay();
             }
         }
       });
