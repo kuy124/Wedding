@@ -1379,6 +1379,13 @@
       }
 
       document.addEventListener("DOMContentLoaded", () => {
+        // --- PREVENT RIGHT-CLICK ON IMAGES ---
+        document.addEventListener('contextmenu', event => {
+            if (event.target.tagName === 'IMG') {
+                event.preventDefault();
+            }
+        });
+
         const urlParams = new URLSearchParams(window.location.search);
         const guestName = urlParams.get('to');
         const guestNameElement = document.querySelector('.guest-name');
