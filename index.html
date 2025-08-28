@@ -802,6 +802,148 @@
       .animated-item.visible .animated-child:nth-child(4) { animation-delay: 0.8s; }
       .animated-item.visible .animated-child:nth-child(5) { animation-delay: 1.0s; }
       
+      /* === CHATBOT STYLES === */
+      #chatbot-toggle-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        background-color: var(--primary-color);
+        color: white;
+        border-radius: 50%;
+        border: none;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        cursor: pointer;
+        z-index: 9998;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+      }
+      #chatbot-toggle-btn:hover {
+        transform: scale(1.1);
+        background-color: var(--primary-color-dark);
+      }
+      #chatbot-toggle-btn svg {
+        width: 32px;
+        height: 32px;
+      }
+      #chat-window {
+        position: fixed;
+        bottom: 100px;
+        right: 20px;
+        width: 350px;
+        max-width: 90vw;
+        height: 500px;
+        max-height: 70vh;
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        transform: scale(0.95) translateY(20px);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s ease;
+      }
+      #chat-window.show {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      #chat-header {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: var(--font-body);
+        font-weight: bold;
+        font-size: 1.1rem;
+      }
+      #close-chat-btn {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.8rem;
+        cursor: pointer;
+        padding: 0 5px;
+        line-height: 1;
+        opacity: 0.8;
+        transition: opacity 0.2s ease;
+      }
+      #close-chat-btn:hover {
+        opacity: 1;
+      }
+      #chat-messages {
+        flex-grow: 1;
+        padding: 20px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .chat-message {
+        padding: 10px 15px;
+        border-radius: 18px;
+        max-width: 80%;
+        line-height: 1.5;
+        font-size: 0.95rem;
+      }
+      .chat-message.user {
+        background-color: var(--primary-color);
+        color: white;
+        border-bottom-right-radius: 4px;
+        align-self: flex-end;
+      }
+      .chat-message.bot {
+        background-color: #f1f1f1;
+        color: var(--text-color);
+        border-bottom-left-radius: 4px;
+        align-self: flex-start;
+      }
+      #chat-typing-indicator {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        color: #999;
+        font-style: italic;
+      }
+      #chat-typing-indicator.hidden {
+        display: none;
+      }
+      #chat-form {
+        display: flex;
+        border-top: 1px solid #eee;
+        padding: 10px;
+      }
+      #chat-input {
+        flex-grow: 1;
+        border: none;
+        padding: 10px;
+        font-size: 1rem;
+        font-family: var(--font-body);
+        outline: none;
+      }
+      #chat-send-btn {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0 10px;
+        color: var(--primary-color);
+        transition: color 0.2s;
+      }
+      #chat-send-btn:hover {
+        color: var(--primary-color-dark);
+      }
+      #chat-send-btn svg {
+        width: 24px;
+        height: 24px;
+      }
+      
       /* === MEDIA QUERIES FOR RESPONSIVE DESIGN === */
       @media (max-width: 1024px) { 
         body { font-size: 16px; } 
@@ -904,6 +1046,21 @@
         .section::before, .section::after { display: none; }
         .song-info { display: none; }
         footer .final-thanks { font-size: 40px; }
+        
+        /* Chatbot responsive styles */
+        #chatbot-toggle-btn {
+            width: 50px;
+            height: 50px;
+            right: 15px;
+            bottom: 15px;
+        }
+        #chatbot-toggle-btn svg { width: 28px; height: 28px; }
+        #chat-window {
+            bottom: 80px;
+            right: 15px;
+            left: 15px;
+            width: auto;
+        }
       }
     </style>
   </head>
@@ -1159,6 +1316,32 @@
 
     <div id="copy-notification">Nomor berhasil disalin!</div>
 
+    <!-- CHATBOT UI -->
+    <div id="chatbot-container">
+      <div id="chat-window">
+        <div id="chat-header">
+          <span>Wedding Assistant</span>
+          <button id="close-chat-btn" aria-label="Close Chat">&times;</button>
+        </div>
+        <div id="chat-messages">
+            <!-- Messages will be appended here -->
+        </div>
+        <div id="chat-typing-indicator" class="hidden">
+            <span></span><span></span><span></span>
+        </div>
+        <form id="chat-form">
+          <input type="text" id="chat-input" placeholder="Tanya sesuatu..." autocomplete="off" required>
+          <button type="submit" id="chat-send-btn" aria-label="Send Message">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+          </button>
+        </form>
+      </div>
+      <button id="chatbot-toggle-btn" aria-label="Open Chat">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+      </button>
+    </div>
+
+
     <script>
       window.addEventListener('load', () => {
         const loadingScreen = document.getElementById('loading-screen');
@@ -1378,6 +1561,128 @@
               goToSlide(0);
             }
         }
+        
+        // --- CHATBOT LOGIC ---
+        const chatWindow = document.getElementById('chat-window');
+        const chatbotToggleBtn = document.getElementById('chatbot-toggle-btn');
+        const closeChatBtn = document.getElementById('close-chat-btn');
+        const chatForm = document.getElementById('chat-form');
+        const chatInput = document.getElementById('chat-input');
+        const chatMessages = document.getElementById('chat-messages');
+        const typingIndicator = document.getElementById('chat-typing-indicator');
+
+        // --- IMPORTANT: REPLACE WITH YOUR KEY ---
+        const GEMINI_API_KEY = 'AIzaSyD6rkhvtJGhHWVKgk85QZvsMFSUuA1S4A0'; // <--- PASTE YOUR API KEY HERE
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`;
+        
+        // This context provides the AI with all the information it needs about the wedding.
+        const weddingContext = `
+            You are a friendly and helpful wedding assistant for the wedding of Pramudya and Feristina.
+            Your role is to answer guest questions based ONLY on the information provided below.
+            Be polite, concise, and cheerful. Keep answers short and to the point.
+            If a question is unrelated to the wedding, politely decline to answer.
+            The current date is ${new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}.
+            
+            **WEDDING DETAILS:**
+            - **Couple:** Pramudya & Feristina
+            - **Groom's Parents:** Bapak Yuhardi & Ibu Amalia Fiora Irma
+            - **Bride's Parents:** Bapak Ferry Yanes & Ibu Risma Amalia
+            - **Wedding Date:** 30 November 2025
+            
+            **EVENT SCHEDULE:**
+            - **Akad Nikah (Ceremony):** 09:00 WIB (Time is still tentative)
+            - **Resepsi (Reception):** 11:00 - 13:00 WIB
+            
+            **LOCATION (for both Ceremony and Reception):**
+            - **Venue:** Aula Direktorat Jenderal Bina Pemerintahan Desa Kemendagri
+            - **Address:** Jl. Raya Pasar Minggu No.19, Pejaten Barat, Kec. Ps. Minggu, Jakarta Selatan.
+            - **Google Maps Link:** https://maps.app.goo.gl/pB9XnHQSxj8bdVGFA
+            
+            **FAQ / GUEST INFORMATION:**
+            - **Dress Code:** Semi-formal or formal attire is requested. Guests should dress neatly.
+            - **Gifts:** Gifts are welcome. For guests who cannot attend but wish to give a gift, they can use the provided bank/e-wallet details.
+                - Bank Mandiri: 1270013987944
+                - Gopay: 087771800110
+            - **Parking:** Ample parking space is available for cars and motorcycles at the venue.
+            - **RSVP:** Guests are asked to confirm their attendance via the form on the website before November 30, 2025.
+        `;
+
+        let conversationHistory = [{
+            role: "user",
+            parts: [{ text: weddingContext }]
+        }, {
+            role: "model",
+            parts: [{ text: "Tentu, saya siap membantu! Ada yang bisa ditanyakan mengenai pernikahan Pramudya dan Feristina?" }]
+        }];
+        
+        // Function to toggle the chat window
+        const toggleChatWindow = () => {
+            chatWindow.classList.toggle('show');
+            if (chatWindow.classList.contains('show')) {
+                chatInput.focus();
+            }
+        };
+
+        chatbotToggleBtn.addEventListener('click', toggleChatWindow);
+        closeChatBtn.addEventListener('click', toggleChatWindow);
+        
+        // Function to append a message to the chat UI
+        const appendMessage = (sender, message) => {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('chat-message', sender);
+            messageElement.textContent = message;
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        };
+        
+        // Add the initial bot message to the UI
+        appendMessage('bot', 'Halo! Ada yang bisa saya bantu terkait pernikahan Pramudya & Feristina?');
+        
+        // Handle form submission
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const userMessage = chatInput.value.trim();
+            if (!userMessage) return;
+
+            if (GEMINI_API_KEY === 'YOUR_API_KEY') {
+                appendMessage('bot', 'Maaf, chatbot belum diaktifkan. Harap masukkan API Key yang valid pada kode website.');
+                chatInput.value = '';
+                return;
+            }
+            
+            appendMessage('user', userMessage);
+            chatInput.value = '';
+            typingIndicator.classList.remove('hidden');
+
+            // Add user message to history
+            conversationHistory.push({ role: "user", parts: [{ text: userMessage }] });
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents: conversationHistory })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API Error: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                const botMessage = data.candidates[0].content.parts[0].text;
+                
+                // Add bot response to history
+                conversationHistory.push({ role: "model", parts: [{ text: botMessage }] });
+                
+                appendMessage('bot', botMessage);
+
+            } catch (error) {
+                console.error("Chatbot Error:", error);
+                appendMessage('bot', 'Maaf, terjadi sedikit gangguan. Coba tanyakan lagi nanti ya.');
+            } finally {
+                typingIndicator.classList.add('hidden');
+            }
+        });
       });
     </script>
   </body>
