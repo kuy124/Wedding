@@ -815,7 +815,7 @@
       .animated-item.visible .animated-child:nth-child(4) { animation-delay: 0.8s; }
       .animated-item.visible .animated-child:nth-child(5) { animation-delay: 1.0s; }
       
-      /* === CHATBOT STYLES === */
+      /* === CHATBOT STYLES (IMPROVED) === */
       #chatbot-toggle-btn {
         position: fixed;
         bottom: 20px;
@@ -833,6 +833,7 @@
         justify-content: center;
         align-items: center;
         transition: transform 0.3s ease, background-color 0.3s ease;
+        overflow: hidden;
       }
       #chatbot-toggle-btn:hover {
         transform: scale(1.1);
@@ -841,6 +842,24 @@
       #chatbot-toggle-btn svg {
         width: 32px;
         height: 32px;
+        position: absolute;
+        transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s ease;
+      }
+      #chatbot-toggle-btn .icon-chat {
+        transform: scale(1) rotate(0);
+        opacity: 1;
+      }
+      #chatbot-toggle-btn .icon-close {
+        transform: scale(0.7) rotate(-90deg);
+        opacity: 0;
+      }
+      #chatbot-toggle-btn.chat-open .icon-chat {
+        transform: scale(0.7) rotate(90deg);
+        opacity: 0;
+      }
+      #chatbot-toggle-btn.chat-open .icon-close {
+        transform: scale(1) rotate(0);
+        opacity: 1;
       }
       #chat-window {
         position: fixed;
@@ -877,6 +896,16 @@
         font-family: var(--font-body);
         font-weight: bold;
         font-size: 1.1rem;
+        flex-shrink: 0;
+      }
+      #chat-header > div {
+        display: flex;
+        flex-direction: column;
+      }
+      #chat-header small {
+        font-size: 0.75rem;
+        font-weight: 400;
+        opacity: 0.8;
       }
       #close-chat-btn {
         background: none;
@@ -899,6 +928,11 @@
         display: flex;
         flex-direction: column;
         gap: 12px;
+        background-color: #f9f9f9;
+      }
+      @keyframes message-fade-in {
+        from { opacity: 0; transform: translateY(15px) scale(0.95); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
       }
       .chat-message {
         padding: 10px 15px;
@@ -906,6 +940,7 @@
         max-width: 80%;
         line-height: 1.5;
         font-size: 0.95rem;
+        animation: message-fade-in 0.4s cubic-bezier(0.23, 1, 0.32, 1);
       }
       .chat-message.user {
         background-color: var(--primary-color);
@@ -914,16 +949,85 @@
         align-self: flex-end;
       }
       .chat-message.bot {
-        background-color: #f1f1f1;
+        background-color: #e9e9eb;
         color: var(--text-color);
         border-bottom-left-radius: 4px;
         align-self: flex-start;
       }
+      .bot-welcome {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        max-width: 90%;
+        animation: message-fade-in 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+      .bot-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        font-family: var(--font-heading);
+        font-size: 1.5rem;
+      }
+      .bot-welcome-text {
+        background-color: #e9e9eb;
+        padding: 10px 15px;
+        border-radius: 18px;
+        border-bottom-left-radius: 4px;
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+      .suggested-questions {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+        margin-top: 10px;
+        padding-left: 50px; /* Align with message bubble */
+        animation: message-fade-in 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0.2s both;
+      }
+      .suggestion-btn {
+        background: none;
+        border: 1px solid var(--primary-color);
+        color: var(--primary-color);
+        padding: 8px 15px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        font-family: var(--font-body);
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      .suggestion-btn:hover {
+        background-color: var(--primary-color);
+        color: white;
+      }
       #chat-typing-indicator {
-        padding: 10px 20px;
-        font-size: 0.9rem;
-        color: #999;
-        font-style: italic;
+        align-self: flex-start;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 10px 15px;
+        background-color: #e9e9eb;
+        border-radius: 18px;
+        border-bottom-left-radius: 4px;
+      }
+      #chat-typing-indicator span {
+        width: 8px;
+        height: 8px;
+        background-color: #9e9e9e;
+        border-radius: 50%;
+        animation: typing-bounce 1.2s infinite ease-in-out;
+      }
+      #chat-typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+      #chat-typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+      @keyframes typing-bounce {
+        0%, 80%, 100% { transform: scale(0); }
+        40% { transform: scale(1); }
       }
       #chat-typing-indicator.hidden {
         display: none;
@@ -932,6 +1036,7 @@
         display: flex;
         border-top: 1px solid #eee;
         padding: 10px;
+        flex-shrink: 0;
       }
       #chat-input {
         flex-grow: 1;
@@ -1168,7 +1273,7 @@
 
             <blockquote style="margin-top: 40px; border: none; padding: 0;" class="animated-child">
               <p dir="rtl" style="font-size: 2rem; color: var(--primary-color-dark); margin-bottom: 20px;">
-                وَاللّٰهُ جَعَلَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا وَّجَعَلَ لَكُمْ مِّنْ اَزْوَاجِكُمْ بَنِيْنَ وَحَفَدَةً وَّرَزَقَكُمْ مِّنَ الطَّيِّبٰتِۗ اَفَبِالْبَاطِلِ يُؤْمِنُوْنَ وَبِنِعْمَتِ اللّٰهِ هُمْ يَكْفُرُوْنَۙ
+                وَاللّٰهُ جَعَلَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا وَّجَعَلَ لَكُمْ مِّنْ اَزْوَاجِكُمْ بَنِيْنَ وَحَفَدَةً وَّرَזَقَكُمْ مِّنَ الطَّيِّبٰتِۗ اَفَبِالْبَاطِلِ يُؤْمِنُوْنَ وَبِنِعْمَتِ اللّٰهِ هُمْ يَكْفُرُوْنَۙ
               </p>
               <p style="font-size: 1.1rem; font-style: italic; max-width: 700px; margin: 0 auto;">
                 "Allah menjadikan bagimu pasangan (suami atau istri) dari jenis kamu sendiri, menjadikan bagimu dari pasanganmu anak-anak dan cucu-cucu, serta menganugerahi kamu rezeki yang baik-baik. Mengapa terhadap yang batil mereka beriman, sedangkan terhadap nikmat Allah mereka ingkar?"
@@ -1337,11 +1442,14 @@
 
     <div id="copy-notification">Nomor berhasil disalin!</div>
 
-    <!-- CHATBOT UI -->
+    <!-- CHATBOT UI (IMPROVED) -->
     <div id="chatbot-container">
       <div id="chat-window">
         <div id="chat-header">
-          <span>Bot Pembantu</span>
+          <div>
+            <span>Bot Asisten</span>
+            <small>Online</small>
+          </div>
           <button id="close-chat-btn" aria-label="Close Chat">&times;</button>
         </div>
         <div id="chat-messages">
@@ -1357,8 +1465,9 @@
           </button>
         </form>
       </div>
-      <button id="chatbot-toggle-btn" aria-label="Open Chat">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+      <button id="chatbot-toggle-btn" aria-label="Toggle Chat">
+        <svg class="icon-chat" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+        <svg class="icon-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
       </button>
     </div>
 
@@ -1590,7 +1699,7 @@
             }
         }
         
-        // --- CHATBOT LOGIC ---
+        // --- CHATBOT LOGIC (IMPROVED) ---
         const chatWindow = document.getElementById('chat-window');
         const chatbotToggleBtn = document.getElementById('chatbot-toggle-btn');
         const closeChatBtn = document.getElementById('close-chat-btn');
@@ -1599,7 +1708,8 @@
         const chatMessages = document.getElementById('chat-messages');
         const typingIndicator = document.getElementById('chat-typing-indicator');
 
-        const GEMINI_API_KEY = 'AIzaSyD6rkhvtJGhHWVKgk85QZvsMFSUuA1S4A0'; // <--- PASTE YOUR API KEY HERE
+        // IMPORTANT: Replace with your actual Gemini API Key
+        const GEMINI_API_KEY = 'YOUR_API_KEY'; 
         const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`;
         
         const weddingContext = `
@@ -1660,7 +1770,13 @@
             parts: [{ text: "Tentu, saya siap membantu! Ada yang bisa ditanyakan mengenai pernikahan Pramudya dan Feristina?" }]
         }];
         
-        const toggleChatWindow = () => chatWindow.classList.toggle('show');
+        const toggleChatWindow = () => {
+          const isOpen = chatWindow.classList.toggle('show');
+          chatbotToggleBtn.classList.toggle('chat-open', isOpen);
+          if (isOpen) {
+            chatInput.focus();
+          }
+        };
         chatbotToggleBtn.addEventListener('click', toggleChatWindow);
         closeChatBtn.addEventListener('click', toggleChatWindow);
         
@@ -1672,6 +1788,33 @@
             chatMessages.scrollTop = chatMessages.scrollHeight;
         };
         
+        const initializeChat = () => {
+            chatMessages.innerHTML = ''; 
+
+            const welcomeHTML = `
+                <div class="bot-welcome">
+                    <div class="bot-avatar">B</div>
+                    <div class="bot-welcome-text">
+                        Halo! Saya adalah asisten virtual untuk pernikahan Pramudya & Feristina. Ada yang bisa saya bantu?
+                    </div>
+                </div>
+                <div class="suggested-questions">
+                    <button class="suggestion-btn" data-question="Kapan acaranya?">Kapan acaranya?</button>
+                    <button class="suggestion-btn" data-question="Di mana lokasinya?">Di mana lokasinya?</button>
+                    <button class="suggestion-btn" data-question="Dress code-nya apa ya?">Dress code-nya apa ya?</button>
+                </div>
+            `;
+            chatMessages.insertAdjacentHTML('beforeend', welcomeHTML);
+            
+            document.querySelectorAll('.suggestion-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const question = btn.getAttribute('data-question');
+                    chatInput.value = question;
+                    chatForm.dispatchEvent(new Event('submit', { cancelable: true }));
+                });
+            });
+        };
+
         const executeCommand = (command) => {
             switch (command) {
                 case 'scroll_to_rsvp':
@@ -1700,12 +1843,15 @@
             }
         };
 
-        appendMessage('bot', 'Halo! Ada yang bisa saya bantu terkait pernikahan Pramudya & Feristina?');
+        initializeChat();
         
         chatForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const userMessage = chatInput.value.trim();
             if (!userMessage) return;
+
+            const suggestions = document.querySelector('.suggested-questions');
+            if (suggestions) suggestions.remove();
 
             if (GEMINI_API_KEY === 'YOUR_API_KEY' || !GEMINI_API_KEY) {
                 appendMessage('bot', 'Maaf, chatbot belum diaktifkan. Harap masukkan API Key yang valid pada kode website.');
@@ -1716,6 +1862,7 @@
             appendMessage('user', userMessage);
             chatInput.value = '';
             typingIndicator.classList.remove('hidden');
+            typingIndicator.scrollIntoView({ behavior: 'smooth' });
 
             conversationHistory.push({ role: "user", parts: [{ text: userMessage }] });
 
