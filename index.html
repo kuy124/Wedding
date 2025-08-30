@@ -729,19 +729,6 @@
         transform: scale(1.2);
         box-shadow: 0 0 5px rgba(0,0,0,0.3);
       }
-      .carousel-counter {
-        display: none; /* Hidden by default */
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        background-color: rgba(0, 0, 0, 0.4);
-        color: white;
-        padding: 5px 12px;
-        border-radius: 15px;
-        font-size: 0.9rem;
-        font-weight: bold;
-        z-index: 10;
-      }
 
       /* === FOOTER STYLES === */
       footer { padding: 60px 20px 20px; text-align: center; background-color: #383838; color: white; font-family: var(--font-body); font-weight: 300; font-size: 1rem; position: relative; z-index: 1;}
@@ -815,7 +802,7 @@
       .animated-item.visible .animated-child:nth-child(4) { animation-delay: 0.8s; }
       .animated-item.visible .animated-child:nth-child(5) { animation-delay: 1.0s; }
       
-      /* === CHATBOT STYLES (IMPROVED) === */
+      /* === CHATBOT STYLES === */
       #chatbot-toggle-btn {
         position: fixed;
         bottom: 20px;
@@ -833,7 +820,6 @@
         justify-content: center;
         align-items: center;
         transition: transform 0.3s ease, background-color 0.3s ease;
-        overflow: hidden;
       }
       #chatbot-toggle-btn:hover {
         transform: scale(1.1);
@@ -842,24 +828,6 @@
       #chatbot-toggle-btn svg {
         width: 32px;
         height: 32px;
-        position: absolute;
-        transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s ease;
-      }
-      #chatbot-toggle-btn .icon-chat {
-        transform: scale(1) rotate(0);
-        opacity: 1;
-      }
-      #chatbot-toggle-btn .icon-close {
-        transform: scale(0.7) rotate(-90deg);
-        opacity: 0;
-      }
-      #chatbot-toggle-btn.chat-open .icon-chat {
-        transform: scale(0.7) rotate(90deg);
-        opacity: 0;
-      }
-      #chatbot-toggle-btn.chat-open .icon-close {
-        transform: scale(1) rotate(0);
-        opacity: 1;
       }
       #chat-window {
         position: fixed;
@@ -896,16 +864,6 @@
         font-family: var(--font-body);
         font-weight: bold;
         font-size: 1.1rem;
-        flex-shrink: 0;
-      }
-      #chat-header > div {
-        display: flex;
-        flex-direction: column;
-      }
-      #chat-header small {
-        font-size: 0.75rem;
-        font-weight: 400;
-        opacity: 0.8;
       }
       #close-chat-btn {
         background: none;
@@ -928,11 +886,6 @@
         display: flex;
         flex-direction: column;
         gap: 12px;
-        background-color: #f9f9f9;
-      }
-      @keyframes message-fade-in {
-        from { opacity: 0; transform: translateY(15px) scale(0.95); }
-        to { opacity: 1; transform: translateY(0) scale(1); }
       }
       .chat-message {
         padding: 10px 15px;
@@ -940,7 +893,6 @@
         max-width: 80%;
         line-height: 1.5;
         font-size: 0.95rem;
-        animation: message-fade-in 0.4s cubic-bezier(0.23, 1, 0.32, 1);
       }
       .chat-message.user {
         background-color: var(--primary-color);
@@ -949,85 +901,16 @@
         align-self: flex-end;
       }
       .chat-message.bot {
-        background-color: #e9e9eb;
+        background-color: #f1f1f1;
         color: var(--text-color);
         border-bottom-left-radius: 4px;
         align-self: flex-start;
       }
-      .bot-welcome {
-        display: flex;
-        align-items: flex-start;
-        gap: 10px;
-        max-width: 90%;
-        animation: message-fade-in 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-      }
-      .bot-avatar {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background-color: var(--primary-color);
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-shrink: 0;
-        font-family: var(--font-heading);
-        font-size: 1.5rem;
-      }
-      .bot-welcome-text {
-        background-color: #e9e9eb;
-        padding: 10px 15px;
-        border-radius: 18px;
-        border-bottom-left-radius: 4px;
-        font-size: 0.95rem;
-        line-height: 1.5;
-      }
-      .suggested-questions {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        align-items: flex-start;
-        margin-top: 10px;
-        padding-left: 50px; /* Align with message bubble */
-        animation: message-fade-in 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0.2s both;
-      }
-      .suggestion-btn {
-        background: none;
-        border: 1px solid var(--primary-color);
-        color: var(--primary-color);
-        padding: 8px 15px;
-        border-radius: 20px;
-        cursor: pointer;
-        font-size: 0.85rem;
-        font-family: var(--font-body);
-        transition: background-color 0.3s ease, color 0.3s ease;
-      }
-      .suggestion-btn:hover {
-        background-color: var(--primary-color);
-        color: white;
-      }
       #chat-typing-indicator {
-        align-self: flex-start;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        padding: 10px 15px;
-        background-color: #e9e9eb;
-        border-radius: 18px;
-        border-bottom-left-radius: 4px;
-      }
-      #chat-typing-indicator span {
-        width: 8px;
-        height: 8px;
-        background-color: #9e9e9e;
-        border-radius: 50%;
-        animation: typing-bounce 1.2s infinite ease-in-out;
-      }
-      #chat-typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
-      #chat-typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
-      @keyframes typing-bounce {
-        0%, 80%, 100% { transform: scale(0); }
-        40% { transform: scale(1); }
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        color: #999;
+        font-style: italic;
       }
       #chat-typing-indicator.hidden {
         display: none;
@@ -1036,7 +919,6 @@
         display: flex;
         border-top: 1px solid #eee;
         padding: 10px;
-        flex-shrink: 0;
       }
       #chat-input {
         flex-grow: 1;
@@ -1165,11 +1047,6 @@
         .song-info { display: none; }
         footer .final-thanks { font-size: 40px; }
         
-        /* Carousel mobile improvements */
-        .carousel-nav { display: none; }
-        .carousel-counter { display: block; }
-        .carousel-btn { width: 40px; height: 40px; font-size: 1.5rem; }
-
         /* Chatbot responsive styles */
         #chatbot-toggle-btn {
             width: 50px;
@@ -1273,7 +1150,7 @@
 
             <blockquote style="margin-top: 40px; border: none; padding: 0;" class="animated-child">
               <p dir="rtl" style="font-size: 2rem; color: var(--primary-color-dark); margin-bottom: 20px;">
-                وَاللّٰهُ جَعَلَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا وَّجَعَلَ لَكُمْ مِّنْ اَزْوَاجِكُمْ بَنِيْنَ وَحَفَدَةً وَّرَזَقَكُمْ مِّنَ الطَّيِّبٰتِۗ اَفَبِالْبَاطِلِ يُؤْمِنُوْنَ وَبِنِعْمَتِ اللّٰهِ هُمْ يَكْفُرُوْنَۙ
+                وَاللّٰهُ جَعَلَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا وَّجَعَلَ لَكُمْ مِّنْ اَزْوَاجِكُمْ بَنِيْنَ وَحَفَدَةً وَّرَزَقَكُمْ مِّنَ الطَّيِّبٰتِۗ اَفَبِالْبَاطِلِ يُؤْمِنُوْنَ وَبِنِعْمَتِ اللّٰهِ هُمْ يَكْفُرُوْنَۙ
               </p>
               <p style="font-size: 1.1rem; font-style: italic; max-width: 700px; margin: 0 auto;">
                 "Allah menjadikan bagimu pasangan (suami atau istri) dari jenis kamu sendiri, menjadikan bagimu dari pasanganmu anak-anak dan cucu-cucu, serta menganugerahi kamu rezeki yang baik-baik. Mengapa terhadap yang batil mereka beriman, sedangkan terhadap nikmat Allah mereka ingkar?"
@@ -1359,9 +1236,6 @@
               <div class="carousel-nav">
                 <!-- Dots are generated by JavaScript -->
               </div>
-              <div class="carousel-counter">
-                <!-- Counter is generated by JavaScript -->
-              </div>
             </div>
           </div>
         </section>
@@ -1442,14 +1316,11 @@
 
     <div id="copy-notification">Nomor berhasil disalin!</div>
 
-    <!-- CHATBOT UI (IMPROVED) -->
+    <!-- CHATBOT UI -->
     <div id="chatbot-container">
       <div id="chat-window">
         <div id="chat-header">
-          <div>
-            <span>Bot Asisten</span>
-            <small>Online</small>
-          </div>
+          <span>Bot Pembantu</span>
           <button id="close-chat-btn" aria-label="Close Chat">&times;</button>
         </div>
         <div id="chat-messages">
@@ -1465,9 +1336,8 @@
           </button>
         </form>
       </div>
-      <button id="chatbot-toggle-btn" aria-label="Toggle Chat">
-        <svg class="icon-chat" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
-        <svg class="icon-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      <button id="chatbot-toggle-btn" aria-label="Open Chat">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
       </button>
     </div>
 
@@ -1653,10 +1523,10 @@
             const nextBtn = document.querySelector('.carousel-btn.next');
             const prevBtn = document.querySelector('.carousel-btn.prev');
             const navContainer = document.querySelector('.carousel-nav');
-            const counterElement = document.querySelector('.carousel-counter');
             let currentIndex = 0;
 
             if(slides.length > 0) {
+              // Create nav dots
               slides.forEach((_, index) => {
                   const dot = document.createElement('button');
                   dot.classList.add('nav-dot');
@@ -1674,7 +1544,6 @@
                   
                   dots.forEach(dot => dot.classList.remove('active'));
                   dots[currentIndex].classList.add('active');
-                  counterElement.textContent = `${currentIndex + 1} / ${slides.length}`;
                   
                   slides[currentIndex].classList.add('active-slide');
               };
@@ -1695,11 +1564,12 @@
                   });
               });
 
+              // Initialize first slide
               goToSlide(0);
             }
         }
         
-        // --- CHATBOT LOGIC (IMPROVED) ---
+        // --- CHATBOT LOGIC ---
         const chatWindow = document.getElementById('chat-window');
         const chatbotToggleBtn = document.getElementById('chatbot-toggle-btn');
         const closeChatBtn = document.getElementById('close-chat-btn');
@@ -1708,14 +1578,16 @@
         const chatMessages = document.getElementById('chat-messages');
         const typingIndicator = document.getElementById('chat-typing-indicator');
 
-        // IMPORTANT: Replace with your actual Gemini API Key
-        const GEMINI_API_KEY = 'AIzaSyD6rkhvtJGhHWVKgk85QZvsMFSUuA1S4A0'; 
+        // --- IMPORTANT: REPLACE WITH YOUR KEY ---
+        const GEMINI_API_KEY = 'AIzaSyD6rkhvtJGhHWVKgk85QZvsMFSUuA1S4A0'; // <--- PASTE YOUR API KEY HERE
         const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`;
         
+        // This context provides the AI with all the information it needs about the wedding.
         const weddingContext = `
-            You are a friendly, cheerful, and helpful wedding assistant chatbot for the wedding of Pramudya and Feristina. Your personality is helpful and slightly playful.
+            You are a friendly, cheerful, and helpful wedding assistant chatbot for the wedding of Pramudya and Feristina.
             Your main role is to answer guest questions based ONLY on the information provided below.
-            If a question is unrelated to the wedding, you must politely decline. A good response would be: "Maaf, saya adalah asisten virtual untuk pernikahan Pramudya & Feristina, jadi hanya bisa menjawab pertanyaan seputar acara spesial ini ya."
+            Always be polite and keep your answers concise and to the point.
+            If a question is unrelated to the wedding (e.g., asking about politics, personal opinions, or random facts), you must politely decline. A good response would be: "Maaf, saya hanya bisa menjawab pertanyaan seputar pernikahan Pramudya dan Feristina."
             The current date is ${new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}. Use this to answer questions about how far away the wedding is.
 
             **=== CORE WEDDING DETAILS ===**
@@ -1725,41 +1597,29 @@
             - **Wedding Date:** 30 November 2025
 
             **=== EVENT SCHEDULE & LOCATION ===**
-            - **Akad Nikah (Ceremony):** Starts at 09:00 WIB. (Time is still tentative).
+            - **Akad Nikah (Ceremony):** Starts at 09:00 WIB. The time is still tentative, but this is the current plan.
             - **Resepsi (Reception):** From 11:00 to 13:00 WIB.
             - **Venue (for both events):** Aula Direktorat Jenderal Bina Pemerintahan Desa Kemendagri. It is an indoor, air-conditioned venue.
             - **Address:** Jl. Raya Pasar Minggu No.19, Pejaten Barat, Kecamatan Pasar Minggu, Jakarta Selatan.
             - **Google Maps Link:** https://maps.app.goo.gl/pB9XnHQSxj8bdVGFA
 
             **=== GUEST INFORMATION (FAQ) ===**
-            - **Dress Code:** Semi-Formal or Formal. Guests are kindly requested to dress neatly. Batik or a suit/dress would be perfect.
-            - **Gifts:** Your presence and prayers are the greatest gift. For those unable to attend, digital gifts are also appreciated via:
+            - **Dress Code:** The dress code is Semi-Formal or Formal. Guests are kindly requested to dress neatly and appropriately for a wedding celebration. Batik or a suit/dress would be perfect.
+            - **Wedding Gifts:** Your presence and prayers are the greatest gift. However, if you wish to give a gift, you can do so at the venue. For those unable to attend, digital gifts are also appreciated via:
                 - Bank Mandiri: 1270013987944
                 - Gopay: 087771800110
-            - **Parking:** Yes, there is ample parking space available for cars and motorcycles.
-            - **RSVP:** Guests should confirm attendance via the form on the website before November 30, 2025.
+            - **Parking:** Yes, there is ample parking space available for both cars and motorcycles at the venue.
+            - **RSVP / Attendance Confirmation:** Guests are kindly requested to confirm their attendance by filling out the form on this website before the wedding day, November 30, 2025. This helps the couple with preparations.
 
-            **=== CHATBOT COMMANDS ===**
-            You can also perform actions for the user! If a user's request matches one of the actions below, formulate a helpful natural language response and place the corresponding command tag at the very end of your sentence.
+            **=== THE COUPLE'S STORY ===**
+            - **How they met:** Their story began in August 2017 with an unexpected meeting.
+            - **First big adventure:** They went on their first trip together in September 2020.
+            - **The Engagement:** Pramudya proposed to Feristina in October 2024.
+            - **The Big Day:** They will be married on November 30, 2025.
 
-            **Available Commands:**
-            *   '[COMMAND:scroll_to_rsvp]' - Scrolls the page to the RSVP form.
-            *   '[COMMAND:scroll_to_gallery]' - Scrolls the page to the photo gallery.
-            *   '[COMMAND:scroll_to_location]' - Scrolls the page to the event location map.
-            *   '[COMMAND:scroll_to_gift]' - Scrolls the page to the wedding gift section.
-            *   '[COMMAND:toggle_music]' - Plays or pauses the background music.
-            *   '[COMMAND:copy_mandiri]' - Copies the Mandiri account number to the clipboard.
-            *   '[COMMAND:copy_gopay]' - Copies the Gopay number to the clipboard.
-
-            **Command Usage Examples:**
-            *   User: "Gimana cara aku konfirmasi hadir?"
-            *   Your response: "Tentu! Saya akan langsung arahkan Anda ke formulir konfirmasi kehadiran ya. [COMMAND:scroll_to_rsvp]"
-            *   User: "Mau liat foto-fotonya dong"
-            *   Your response: "Siap! Ini dia galeri foto-foto pre-wedding mereka. [COMMAND:scroll_to_gallery]"
-            *   User: "Tolong putar musiknya."
-            *   Your response: "Oke, musiknya saya mainkan untuk Anda! [COMMAND:toggle_music]"
-            *   User: "Boleh minta nomor rekening Mandiri untuk hadiah?"
-            *   Your response: "Tentu, ini nomor rekening Mandiri-nya. Saya juga bantu salin nomornya untuk Anda. [COMMAND:copy_mandiri]"
+            **=== FUN FACTS & OTHER INFO ===**
+            - **Website Creator:** This invitation website was lovingly created by Kun Faris Al-Malik, Pramudya's younger brother.
+            - **Quranic Verses:** The invitation features verses from the Quran, specifically An-Nur: 32 and An-Nahl: 72, which speak about the sanctity and blessings of marriage in Islam.
         `;
 
         let conversationHistory = [{
@@ -1770,16 +1630,18 @@
             parts: [{ text: "Tentu, saya siap membantu! Ada yang bisa ditanyakan mengenai pernikahan Pramudya dan Feristina?" }]
         }];
         
+        // Function to toggle the chat window
         const toggleChatWindow = () => {
-          const isOpen = chatWindow.classList.toggle('show');
-          chatbotToggleBtn.classList.toggle('chat-open', isOpen);
-          if (isOpen) {
-            chatInput.focus();
-          }
+            chatWindow.classList.toggle('show');
+            if (chatWindow.classList.contains('show')) {
+                chatInput.focus();
+            }
         };
+
         chatbotToggleBtn.addEventListener('click', toggleChatWindow);
         closeChatBtn.addEventListener('click', toggleChatWindow);
         
+        // Function to append a message to the chat UI
         const appendMessage = (sender, message) => {
             const messageElement = document.createElement('div');
             messageElement.classList.add('chat-message', sender);
@@ -1788,70 +1650,14 @@
             chatMessages.scrollTop = chatMessages.scrollHeight;
         };
         
-        const initializeChat = () => {
-            chatMessages.innerHTML = ''; 
-
-            const welcomeHTML = `
-                <div class="bot-welcome">
-                    <div class="bot-avatar">B</div>
-                    <div class="bot-welcome-text">
-                        Halo! Saya adalah asisten virtual untuk pernikahan Pramudya & Feristina. Ada yang bisa saya bantu?
-                    </div>
-                </div>
-                <div class="suggested-questions">
-                    <button class="suggestion-btn" data-question="Kapan acaranya?">Kapan acaranya?</button>
-                    <button class="suggestion-btn" data-question="Di mana lokasinya?">Di mana lokasinya?</button>
-                    <button class="suggestion-btn" data-question="Dress code-nya apa ya?">Dress code-nya apa ya?</button>
-                </div>
-            `;
-            chatMessages.insertAdjacentHTML('beforeend', welcomeHTML);
-            
-            document.querySelectorAll('.suggestion-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const question = btn.getAttribute('data-question');
-                    chatInput.value = question;
-                    chatForm.dispatchEvent(new Event('submit', { cancelable: true }));
-                });
-            });
-        };
-
-        const executeCommand = (command) => {
-            switch (command) {
-                case 'scroll_to_rsvp':
-                    document.querySelector('.rsvp-section').scrollIntoView({ behavior: 'smooth' });
-                    break;
-                case 'scroll_to_gallery':
-                    document.querySelector('.gallery-carousel').scrollIntoView({ behavior: 'smooth' });
-                    break;
-                case 'scroll_to_location':
-                    document.querySelector('.map-wrapper').scrollIntoView({ behavior: 'smooth' });
-                    break;
-                case 'scroll_to_gift':
-                    document.querySelector('.wedding-gift-section').scrollIntoView({ behavior: 'smooth' });
-                    break;
-                case 'toggle_music':
-                    toggleMusic();
-                    break;
-                case 'copy_mandiri':
-                    copyToClipboard('1270013987944');
-                    break;
-                case 'copy_gopay':
-                    copyToClipboard('087771800110');
-                    break;
-                default:
-                    console.warn('Unknown command:', command);
-            }
-        };
-
-        initializeChat();
+        // Add the initial bot message to the UI
+        appendMessage('bot', 'Halo! Ada yang bisa saya bantu terkait pernikahan Pramudya & Feristina?');
         
+        // Handle form submission
         chatForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const userMessage = chatInput.value.trim();
             if (!userMessage) return;
-
-            const suggestions = document.querySelector('.suggested-questions');
-            if (suggestions) suggestions.remove();
 
             if (GEMINI_API_KEY === 'YOUR_API_KEY' || !GEMINI_API_KEY) {
                 appendMessage('bot', 'Maaf, chatbot belum diaktifkan. Harap masukkan API Key yang valid pada kode website.');
@@ -1862,8 +1668,8 @@
             appendMessage('user', userMessage);
             chatInput.value = '';
             typingIndicator.classList.remove('hidden');
-            typingIndicator.scrollIntoView({ behavior: 'smooth' });
 
+            // Add user message to history
             conversationHistory.push({ role: "user", parts: [{ text: userMessage }] });
 
             try {
@@ -1873,21 +1679,16 @@
                     body: JSON.stringify({ contents: conversationHistory })
                 });
 
-                if (!response.ok) throw new Error(`API Error: ${response.statusText}`);
-
-                const data = await response.json();
-                let botMessage = data.candidates[0].content.parts[0].text;
-                
-                const commandRegex = /\[COMMAND:(\w+)\]/;
-                const match = botMessage.match(commandRegex);
-                
-                if (match) {
-                    const command = match[1];
-                    botMessage = botMessage.replace(commandRegex, '').trim(); // Clean message for display
-                    executeCommand(command);
+                if (!response.ok) {
+                    throw new Error(`API Error: ${response.statusText}`);
                 }
 
+                const data = await response.json();
+                const botMessage = data.candidates[0].content.parts[0].text;
+                
+                // Add bot response to history
                 conversationHistory.push({ role: "model", parts: [{ text: botMessage }] });
+                
                 appendMessage('bot', botMessage);
 
             } catch (error) {
