@@ -911,13 +911,26 @@
         align-self: flex-start;
       }
       #chat-typing-indicator {
-        padding: 10px 20px;
-        font-size: 0.9rem;
-        color: #999;
-        font-style: italic;
+        align-self: flex-start;
+        padding: 10px 15px;
       }
       #chat-typing-indicator.hidden {
         display: none;
+      }
+      #chat-typing-indicator span {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #ccc;
+        margin: 0 2px;
+        animation: bounce 1.4s infinite ease-in-out both;
+      }
+      #chat-typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+      #chat-typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+      @keyframes bounce {
+        0%, 80%, 100% { transform: scale(0); }
+        40% { transform: scale(1.0); }
       }
       #chat-form {
         display: flex;
@@ -1188,7 +1201,7 @@
             <div class="map-wrapper animated-child">
                 <h3>Lokasi Acara</h3>
                 <div class="map-container">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d294.77107682859435!2d106.84490926636506!3d-6.270165536103122!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f26c7bf4e5fd%3A0x52ec054280886588!2sKementerian%20Dalam%20Negeri%20-%20Ditjen%20Bina%20Pemerintahan%20Desa!5e0!3m2!1sen!2sid!4v1756023942640!5m2!1sen!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d294.77107682859435!2d106.84490926636506!3d-6.270165536103122!2m3!1f0!2f0!3f0!3m2!i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f26c7bf4e5fd%3A0x52ec054280886588!2sKementerian%20Dalam%20Negeri%20-%20Ditjen%20Bina%20Pemerintahan%20Desa!5e0!3m2!1sen!2sid!4v1756023942640!5m2!1sen!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
                 <a href="https://maps.app.goo.gl/pB9XnHQSxj8bdVGFA" target="_blank" class="rsvp-button map-button">Buka di Google Maps</a>
             </div>
@@ -1324,7 +1337,7 @@
     <div id="chatbot-container">
       <div id="chat-window">
         <div id="chat-header">
-          <span>Bot Pembantu</span>
+          <span>Asisten Pernikahan</span>
           <button id="close-chat-btn" aria-label="Close Chat">&times;</button>
         </div>
         <div id="chat-messages">
@@ -1573,7 +1586,7 @@
             }
         }
         
-        // --- CHATBOT LOGIC ---
+        // --- CHATBOT LOGIC (ENHANCED) ---
         const chatWindow = document.getElementById('chat-window');
         const chatbotToggleBtn = document.getElementById('chatbot-toggle-btn');
         const closeChatBtn = document.getElementById('close-chat-btn');
@@ -1583,59 +1596,73 @@
         const typingIndicator = document.getElementById('chat-typing-indicator');
 
         // --- IMPORTANT: REPLACE WITH YOUR KEY ---
-        const GEMINI_API_KEY = 'AIzaSyD6rkhvtJGhHWVKgk85QZvsMFSUuA1S4A0'; // <--- PASTE YOUR API KEY HERE
+        const GEMINI_API_KEY = 'YOUR_GEMINI_API_KEY_HERE'; // <--- PASTE YOUR GOOGLE GEMINI API KEY HERE
         const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`;
         
         // This context provides the AI with all the information it needs about the wedding.
         const weddingContext = `
-            You are a friendly and helpful wedding assistant for the wedding of Pramudya and Feristina.
-            Your role is to answer guest questions based ONLY on the information provided below.
-            Be polite, concise, and cheerful. Keep answers short and to the point.
-            If a question is unrelated to the wedding, politely decline to answer.
+            You are "Asisten Pernikahan Ceria," a friendly, polite, and helpful AI assistant for the wedding of Pramudya and Feristina.
+            Your primary goal is to answer guest questions based ONLY on the information provided below.
+            Keep your answers concise, cheerful, and to the point.
+            If a question is unrelated to the wedding (e.g., politics, general knowledge), politely state that you are here only to help with wedding-related questions.
             The current date is ${new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}.
-            
-            **SPECIAL INSTRUCTION:** If a user's question directly relates to a specific section, provide your normal text answer and then, on a new line, add a special command: [SCROLL_TO:section-id].
-            Use the following section IDs:
-            - For questions about the couple (siapa mempelainya, orang tua): [SCROLL_TO:kisah-kami]
-            - For questions about location, venue, map, or event times (lokasi, tempat, peta, jam acara): [SCROLL_TO:detail-pernikahan]
-            - For questions about the couple's story or timeline (cerita cinta, perjalanan): [SCROLL_TO:perjalanan-kami]
-            - For questions about photos or gallery (galeri, foto): [SCROLL_TO:galeri-foto]
-            - For questions about RSVP, confirming attendance, or sending wishes (konfirmasi hadir, RSVP, ucapan): [SCROLL_TO:konfirmasi-kehadiran]
-            - For questions about seeing other people's wishes (lihat ucapan lain): [SCROLL_TO:ucapan-doa]
-            - For questions about dress code, gifts, parking (dress code, hadiah, parkir): [SCROLL_TO:tanya-jawab]
-            - For questions about wedding gifts or bank accounts (amplop, kado, transfer): [SCROLL_TO:konfirmasi-kehadiran]
 
-            **WEDDING DETAILS:**
-            - **Couple:** Pramudya & Feristina
-            - **Groom's Parents:** Bapak Yuhardi & Ibu Amalia Fiora Irma
-            - **Bride's Parents:** Bapak Ferry Yanes & Ibu Risma Amalia
-            - **Wedding Date:** 30 November 2025
-            
-            **EVENT SCHEDULE:**
-            - **Akad Nikah (Ceremony):** 09:00 WIB (Time is still tentative)
-            - **Resepsi (Reception):** 11:00 - 13:00 WIB
-            
-            **LOCATION (for both Ceremony and Reception):**
-            - **Venue:** Aula Direktorat Jenderal Bina Pemerintahan Desa Kemendagri
-            - **Address:** Jl. Raya Pasar Minggu No.19, Pejaten Barat, Kec. Ps. Minggu, Jakarta Selatan.
-            - **Google Maps Link:** https://maps.app.goo.gl/pB9XnHQSxj8bdVGFA
-            
-            **COUPLE'S JOURNEY:**
-            - **August 2017:** Their story began.
-            - **September 2020:** First adventure together.
-            - **October 2024:** The proposal.
-            - **November 2025:** They get married.
-            
-            **ADDITIONAL INFORMATION:**
-            - **Dress Code:** Semi-formal or formal attire. Guests should dress neatly.
-            - **Gifts:** Gifts are welcome. For guests unable to attend, they can send gifts via:
+            **INTERACTIVE COMMANDS:**
+            When a user's request matches one of the following actions, include the corresponding command on a NEW LINE after your text response.
+            - Scroll to a section: [SCROLL_TO:section-id]
+            - Play background music: [PLAY_MUSIC]
+            - Pause background music: [PAUSE_MUSIC]
+            - Open the location in Google Maps: [OPEN_MAPS]
+
+            **COMMAND USAGE EXAMPLES:**
+            - User: "Dimana lokasinya?" -> Bot: "Acaranya di Aula Kemendagri, Pasar Minggu. Saya akan tunjukkan petanya." followed by [OPEN_MAPS] on a new line.
+            - User: "Putar musiknya dong" -> Bot: "Tentu, selamat menikmati musiknya!" followed by [PLAY_MUSIC] on a new line.
+            - User: "Siapa nama orang tua mempelai wanita?" -> Bot: "Mempelai wanita, Feristina, adalah putri dari Bapak Ferry Yanes & Ibu Risma Amalia. Info lengkapnya ada di bagian ini." followed by [SCROLL_TO:kisah-kami] on a new line.
+
+            **SECTION MAPPING FOR [SCROLL_TO]:**
+            - Couple's info, parents' names: [SCROLL_TO:kisah-kami]
+            - Location, venue, map, event times: [SCROLL_TO:detail-pernikahan]
+            - Couple's story, timeline: [SCROLL_TO:perjalanan-kami]
+            - Photo gallery: [SCROLL_TO:galeri-foto]
+            - RSVP, confirming attendance, sending wishes: [SCROLL_TO:konfirmasi-kehadiran]
+            - Wedding gifts, bank accounts, digital envelope: [SCROLL_TO:konfirmasi-kehadiran]
+            - Viewing other guests' wishes: [SCROLL_TO:ucapan-doa]
+            - Dress code, parking, general FAQ: [SCROLL_TO:tanya-jawab]
+
+            ---
+            **WEDDING INFORMATION DATABASE:**
+
+            **1. THE COUPLE:**
+            - Groom: Pramudya
+            - Bride: Feristina
+            - Groom's Parents: Bapak Yuhardi & Ibu Amalia Fiora Irma
+            - Bride's Parents: Bapak Ferry Yanes & Ibu Risma Amalia
+
+            **2. EVENT DETAILS:**
+            - Wedding Date: 30 November 2025
+            - Akad Nikah (Ceremony): 09:00 WIB (Time is still tentative)
+            - Resepsi (Reception): 11:00 - 13:00 WIB
+            - Venue (for both events): Aula Direktorat Jenderal Bina Pemerintahan Desa Kemendagri
+            - Address: Jl. Raya Pasar Minggu No.19, Pejaten Barat, Kec. Ps. Minggu, Jakarta Selatan.
+            - Google Maps Link: https://maps.app.goo.gl/pB9XnHQSxj8bdVGFA
+
+            **3. COUPLE'S JOURNEY:**
+            - August 2017: Their story began.
+            - September 2020: First adventure together.
+            - October 2024: The proposal.
+            - November 2025: They get married.
+
+            **4. GUEST INFORMATION (FAQ):**
+            - Dress Code: Semi-formal or formal. Neat attire is requested.
+            - Gifts & Digital Envelope: Gifts are welcome but not obligatory. For those who wish to give a gift, especially if unable to attend, they can use:
                 - Bank Mandiri: 1270013987944
                 - Gopay: 087771800110
-            - **Parking:** Ample parking is available for cars and motorcycles.
-            - **RSVP:** Guests should confirm attendance via the form on the website before November 30, 2025.
-            - **Photo Gallery:** Yes, there is a photo gallery section on the website.
-            - **Background Music:** The song is "Golden Hour (Instrumental)" by Jvke.
-            - **Website Creator:** This invitation was created by Kuy F.A.M.
+            - Parking: Ample parking is available for cars and motorcycles at the venue.
+            - RSVP: Guests should confirm their attendance using the form on the website before November 30, 2025.
+
+            **5. WEBSITE & MUSIC:**
+            - Background Music: The song playing is an instrumental version of "Golden Hour" by Jvke.
+            - Website Creator: This invitation website was created by "Kuy F.A.M.".
         `;
 
         let conversationHistory = [{
@@ -1643,10 +1670,9 @@
             parts: [{ text: weddingContext }]
         }, {
             role: "model",
-            parts: [{ text: "Tentu, saya siap membantu! Ada yang bisa ditanyakan mengenai pernikahan Pramudya dan Feristina?" }]
+            parts: [{ text: "Tentu, saya Asisten Pernikahan Ceria! Siap membantu menjawab pertanyaan seputar hari bahagia Pramudya dan Feristina." }]
         }];
         
-        // Function to toggle the chat window
         const toggleChatWindow = () => {
             chatWindow.classList.toggle('show');
             if (chatWindow.classList.contains('show')) {
@@ -1657,7 +1683,6 @@
         chatbotToggleBtn.addEventListener('click', toggleChatWindow);
         closeChatBtn.addEventListener('click', toggleChatWindow);
         
-        // Function to append a message to the chat UI
         const appendMessage = (sender, message) => {
             const messageElement = document.createElement('div');
             messageElement.classList.add('chat-message', sender);
@@ -1666,17 +1691,15 @@
             chatMessages.scrollTop = chatMessages.scrollHeight;
         };
         
-        // Add the initial bot message to the UI
-        appendMessage('bot', 'Halo! Ada yang bisa saya bantu terkait pernikahan Pramudya & Feristina?');
+        appendMessage('bot', 'Halo! Saya Asisten Pernikahan Ceria. Ada yang bisa saya bantu terkait pernikahan Pramudya & Feristina?');
         
-        // Handle form submission
         chatForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const userMessage = chatInput.value.trim();
             if (!userMessage) return;
 
-            if (GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY_HERE') {
-                appendMessage('bot', 'Maaf, chatbot belum diaktifkan. Harap masukkan API Key yang valid pada kode website.');
+            if (GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY_HERE' || !GEMINI_API_KEY) {
+                appendMessage('bot', 'Maaf, chatbot belum diaktifkan. Pemilik website perlu memasukkan API Key yang valid pada kode.');
                 chatInput.value = '';
                 return;
             }
@@ -1684,8 +1707,8 @@
             appendMessage('user', userMessage);
             chatInput.value = '';
             typingIndicator.classList.remove('hidden');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
 
-            // Add user message to history
             conversationHistory.push({ role: "user", parts: [{ text: userMessage }] });
 
             try {
@@ -1696,29 +1719,45 @@
                 });
 
                 if (!response.ok) {
-                    throw new Error(`API Error: ${response.statusText}`);
+                    const errorData = await response.json();
+                    throw new Error(`API Error: ${response.status} ${response.statusText} - ${errorData.error.message}`);
                 }
 
                 const data = await response.json();
                 const botMessage = data.candidates[0].content.parts[0].text;
                 
-                // --- NEW: SCROLL LOGIC ---
-                const scrollCommandRegex = /\[SCROLL_TO:([\w-]+)\]/;
-                const scrollMatch = botMessage.match(scrollCommandRegex);
-                let cleanMessage = botMessage;
+                const commandRegex = /\[(SCROLL_TO|PLAY_MUSIC|PAUSE_MUSIC|OPEN_MAPS):?([\w-]+)?\]/g;
+                const matches = [...botMessage.matchAll(commandRegex)];
+                let cleanMessage = botMessage.replace(commandRegex, '').trim();
 
-                if (scrollMatch && scrollMatch[1]) {
-                    const sectionId = scrollMatch[1];
-                    const sectionElement = document.getElementById(sectionId);
-                    if (sectionElement) {
-                        sectionElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                    // Remove the command from the message displayed to the user
-                    cleanMessage = botMessage.replace(scrollCommandRegex, '').trim();
+                if (matches.length > 0) {
+                    matches.forEach(match => {
+                        const command = match[1];
+                        const value = match[2];
+                        
+                        switch(command) {
+                            case 'SCROLL_TO':
+                                if (value) {
+                                    const sectionElement = document.getElementById(value);
+                                    if (sectionElement) {
+                                        sectionElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                    }
+                                }
+                                break;
+                            case 'PLAY_MUSIC':
+                                if (music.paused) music.play();
+                                break;
+                            case 'PAUSE_MUSIC':
+                                if (!music.paused) music.pause();
+                                break;
+                            case 'OPEN_MAPS':
+                                window.open('https://maps.app.goo.gl/pB9XnHQSxj8bdVGFA', '_blank');
+                                break;
+                        }
+                    });
                 }
 
-                // Add the cleaned bot response to history and UI
-                conversationHistory.push({ role: "model", parts: [{ text: botMessage }] }); // Push original response to history
+                conversationHistory.push({ role: "model", parts: [{ text: botMessage }] });
                 
                 if (cleanMessage) {
                     appendMessage('bot', cleanMessage);
@@ -1726,7 +1765,7 @@
 
             } catch (error) {
                 console.error("Chatbot Error:", error);
-                appendMessage('bot', 'Maaf, terjadi sedikit gangguan. Coba tanyakan lagi nanti ya.');
+                appendMessage('bot', 'Maaf, sepertinya ada sedikit gangguan di sistem. Coba tanyakan lagi nanti ya.');
             } finally {
                 typingIndicator.classList.add('hidden');
             }
