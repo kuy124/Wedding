@@ -182,7 +182,6 @@
         font-weight: 300;
         margin: 0 0 20px;
       }
-      /* Styling for "Kepada Yth..." h3 to use Quicksand font */
       .guest-name-wrapper h3:first-child {
         font-family: var(--font-body);
         font-size: 1.1rem;
@@ -467,8 +466,8 @@
         gap: 50px;
       }
       .couple-img {
-        width: 250px; /* Increased size */
-        height: 250px; /* Increased size */
+        width: 250px;
+        height: 250px;
         border-radius: 50%;
         object-fit: cover;
         border: 8px solid #fff;
@@ -626,14 +625,10 @@
       .map-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
       .map-button { margin-top: 30px; }
       
-      /* === GALLERY CAROUSEL STYLES (IMPROVED) === */
+      /* === GALLERY CAROUSEL STYLES === */
       @keyframes kenburns-zoom {
-        0% {
-            transform: scale(1.05) translateY(0);
-        }
-        100% {
-            transform: scale(1.15) translateY(-3px);
-        }
+        0% { transform: scale(1.05) translateY(0); }
+        100% { transform: scale(1.15) translateY(-3px); }
       }
       .gallery-carousel {
         max-width: 800px;
@@ -651,9 +646,9 @@
       .gallery-slide {
         flex: 0 0 100%;
         position: relative;
-        overflow: hidden; /* Important for the zoom effect */
+        overflow: hidden;
       }
-      .gallery-slide::after { /* Adds a nice vignette effect */
+      .gallery-slide::after {
           content: '';
           position: absolute;
           top: 0;
@@ -668,7 +663,7 @@
         display: block;
         aspect-ratio: 4 / 5;
         object-fit: cover;
-        object-position: center 30%; /* Moves image focus slightly up */
+        object-position: center 30%;
       }
       .gallery-slide.active-slide img {
           animation: kenburns-zoom 12s ease-out forwards;
@@ -692,7 +687,7 @@
         line-height: 1;
         transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
         z-index: 10;
-        padding-bottom: 5px; /* Visual alignment */
+        padding-bottom: 5px;
         text-shadow: 0 0 5px rgba(0,0,0,0.1);
       }
       .carousel-btn:hover {
@@ -768,10 +763,10 @@
       /* === SCROLL ANIMATION & NOTIFICATION === */
       #copy-notification {
         position: fixed;
-        bottom: -100px; /* Initially hidden */
+        bottom: -100px;
         left: 50%;
         transform: translateX(-50%);
-        background-color: #00796b; /* Success color */
+        background-color: #00796b;
         color: white;
         padding: 15px 30px;
         border-radius: 50px;
@@ -785,7 +780,7 @@
         transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       }
       #copy-notification.show {
-        bottom: 30px; /* Position when shown */
+        bottom: 30px;
         opacity: 1;
         visibility: visible;
       }
@@ -802,14 +797,19 @@
       .animated-item.visible .animated-child:nth-child(4) { animation-delay: 0.8s; }
       .animated-item.visible .animated-child:nth-child(5) { animation-delay: 1.0s; }
       
-      /* === CHATBOT STYLES === */
+      /* === PREMIUM CHATBOT STYLES === */
+      @keyframes chatbot-pulse {
+        0% { box-shadow: 0 4px 15px rgba(0,0,0,0.2), 0 0 0 0 rgba(184, 147, 142, 0.7); }
+        70% { box-shadow: 0 4px 25px rgba(0,0,0,0.3), 0 0 0 10px rgba(184, 147, 142, 0); }
+        100% { box-shadow: 0 4px 15px rgba(0,0,0,0.2), 0 0 0 0 rgba(184, 147, 142, 0); }
+      }
       #chatbot-toggle-btn {
         position: fixed;
         bottom: 20px;
         right: 20px;
         width: 60px;
         height: 60px;
-        background-color: var(--primary-color);
+        background: linear-gradient(45deg, var(--primary-color-dark), var(--primary-color));
         color: white;
         border-radius: 50%;
         border: none;
@@ -819,11 +819,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        transition: transform 0.3s ease, background-color 0.3s ease;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        animation: chatbot-pulse 2.5s infinite;
       }
       #chatbot-toggle-btn:hover {
         transform: scale(1.1);
-        background-color: var(--primary-color-dark);
+        animation-play-state: paused;
       }
       #chatbot-toggle-btn svg {
         width: 32px;
@@ -833,13 +834,14 @@
         position: fixed;
         bottom: 100px;
         right: 20px;
-        width: 350px;
+        width: 370px;
         max-width: 90vw;
-        height: 500px;
-        max-height: 70vh;
-        background-color: white;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        height: 550px;
+        max-height: 75vh;
+        background-color: #fff;
+        background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23e4eaf2' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.2);
         z-index: 9999;
         display: flex;
         flex-direction: column;
@@ -848,6 +850,7 @@
         opacity: 0;
         pointer-events: none;
         transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s ease;
+        border: 1px solid #eee;
       }
       #chat-window.show {
         transform: scale(1) translateY(0);
@@ -855,7 +858,7 @@
         pointer-events: auto;
       }
       #chat-header {
-        background-color: var(--primary-color);
+        background: linear-gradient(45deg, var(--primary-color), var(--primary-color-dark));
         color: white;
         padding: 15px 20px;
         display: flex;
@@ -864,6 +867,15 @@
         font-family: var(--font-body);
         font-weight: bold;
         font-size: 1.1rem;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+        flex-shrink: 0;
+      }
+      #chat-header::before {
+        content: 'P&F';
+        font-family: var(--font-heading);
+        font-size: 1.5rem;
+        margin-right: 10px;
+        opacity: 0.7;
       }
       #close-chat-btn {
         background: none;
@@ -874,93 +886,85 @@
         padding: 0 5px;
         line-height: 1;
         opacity: 0.8;
-        transition: opacity 0.2s ease;
+        transition: opacity 0.2s ease, transform 0.2s ease;
       }
       #close-chat-btn:hover {
         opacity: 1;
+        transform: rotate(90deg);
       }
       #chat-messages {
         flex-grow: 1;
-        padding: 20px;
+        padding: 15px;
         overflow-y: auto;
         display: flex;
         flex-direction: column;
         gap: 12px;
+        scroll-behavior: smooth;
+        scrollbar-width: thin;
+        scrollbar-color: var(--primary-color-dark) #f1f1f1;
       }
-      .chat-message {
-        padding: 10px 15px;
-        border-radius: 18px;
-        max-width: 80%;
-        line-height: 1.5;
-        font-size: 0.95rem;
-      }
-      .chat-message.user {
-        background-color: var(--primary-color);
-        color: white;
-        border-bottom-right-radius: 4px;
-        align-self: flex-end;
-      }
-      .chat-message.bot {
-        background-color: #f1f1f1;
-        color: var(--text-color);
-        border-bottom-left-radius: 4px;
-        align-self: flex-start;
-      }
-      #chat-typing-indicator {
-        padding: 10px 20px;
-        font-size: 0.9rem;
-        color: #999;
-        font-style: italic;
-      }
-      #chat-typing-indicator.hidden {
-        display: none;
-      }
-      #chat-form {
-        display: flex;
-        border-top: 1px solid #eee;
-        padding: 10px;
-      }
-      #chat-input {
-        flex-grow: 1;
-        border: none;
-        padding: 10px;
-        font-size: 1rem;
-        font-family: var(--font-body);
-        outline: none;
-      }
-      #chat-send-btn {
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-        padding: 0 10px;
-        color: var(--primary-color);
-        transition: color 0.2s;
-      }
-      #chat-send-btn:hover {
-        color: var(--primary-color-dark);
-      }
-      #chat-send-btn svg {
-        width: 24px;
-        height: 24px;
-      }
+      #chat-messages::-webkit-scrollbar { width: 6px; }
+      #chat-messages::-webkit-scrollbar-track { background: #f1f1f1; }
+      #chat-messages::-webkit-scrollbar-thumb { background-color: var(--primary-color-dark); border-radius: 6px; }
       
-      /* === MEDIA QUERIES FOR RESPONSIVE DESIGN === */
+      .bot-welcome { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 20px 10px; gap: 10px; }
+      .bot-avatar { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(45deg, var(--primary-color), var(--accent-color)); color: white; display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-size: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+      .bot-welcome p { margin: 0; line-height: 1.5; font-size: 0.95rem; }
+      .bot-welcome p strong { font-weight: 700; color: var(--primary-color-dark); }
+      
+      @keyframes message-pop-in {
+        from { opacity: 0; transform: translateY(10px) scale(0.95); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+      }
+      .message-container { display: flex; max-width: 90%; animation: message-pop-in 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+      .message-container.user { align-self: flex-end; flex-direction: row-reverse; }
+      .message-container.bot { align-self: flex-start; }
+      .chat-message { padding: 10px 15px; border-radius: 18px; line-height: 1.5; font-size: 0.95rem; position: relative; box-shadow: 0 2px 5px rgba(0,0,0,0.08); word-wrap: break-word; }
+      .message-container.user .chat-message { background: linear-gradient(45deg, var(--primary-color), var(--primary-color-dark)); color: white; border-bottom-right-radius: 4px; }
+      .message-container.bot .chat-message { background-color: #f1f1f1; color: var(--text-color); border-bottom-left-radius: 4px; }
+      /* Message bubble tails */
+      .chat-message::after { content: ''; position: absolute; bottom: 0; width: 0; height: 0; border: 10px solid transparent; }
+      .message-container.user .chat-message::after { right: -8px; border-left-color: var(--primary-color-dark); border-right: 0; border-bottom: 0; }
+      .message-container.bot .chat-message::after { left: -8px; border-right-color: #f1f1f1; border-left: 0; border-bottom: 0; }
+
+      .chat-message b, .chat-message strong { color: var(--primary-color-dark); font-weight: 700; }
+      .message-container.user .chat-message b, .message-container.user .chat-message strong { color: white; background: rgba(255,255,255,0.2); padding: 0 4px; border-radius: 3px; }
+      .chat-message ul { padding-left: 20px; margin: 5px 0 0; }
+      .chat-message li { margin-bottom: 4px; }
+      .copy-btn { background: rgba(0,0,0,0.1); border: none; color: inherit; padding: 4px 8px; border-radius: 5px; cursor: pointer; font-size: 0.8em; margin-left: 8px; font-family: var(--font-body); }
+      .copy-btn:hover { background: rgba(0,0,0,0.2); }
+
+      #chat-suggestions { padding: 5px 15px 10px; display: flex; flex-wrap: wrap; gap: 8px; flex-shrink: 0; animation: message-pop-in 0.5s 0.3s cubic-bezier(0.23, 1, 0.32, 1) forwards; opacity: 0;}
+      .suggestion-btn { background-color: #fff; border: 1px solid #ddd; border-radius: 20px; padding: 8px 15px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s ease; font-family: var(--font-body); color: var(--primary-color-dark); }
+      .suggestion-btn:hover { background-color: var(--primary-color); color: white; border-color: var(--primary-color); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(184, 147, 142, 0.2); }
+      
+      #chat-typing-indicator { display: flex; align-items: center; padding: 0 10px; transition: opacity 0.3s ease; height: 30px; }
+      #chat-typing-indicator.hidden { opacity: 0; height: 0; padding: 0 10px; pointer-events: none; }
+      #chat-typing-indicator .chat-message { padding: 10px 15px; }
+      #chat-typing-indicator span { height: 8px; width: 8px; margin: 0 2px; background-color: #ccc; border-radius: 50%; display: inline-block; animation: chat-typing-animation 1.4s infinite ease-in-out both; }
+      #chat-typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+      #chat-typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+      @keyframes chat-typing-animation { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1.0); } }
+
+      #chat-form { display: flex; border-top: 1px solid #eee; padding: 10px; background: #fff; box-shadow: 0 -5px 15px -5px rgba(0,0,0,0.05); flex-shrink: 0; }
+      #chat-input { flex-grow: 1; border: 1px solid #ddd; padding: 12px 15px; font-size: 1rem; font-family: var(--font-body); outline: none; border-radius: 20px; transition: border-color 0.2s, box-shadow 0.2s; }
+      #chat-input:focus { border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(184, 147, 142, 0.3); }
+      #chat-send-btn { background-color: var(--primary-color); border: none; cursor: pointer; padding: 0 10px; margin-left: 10px; color: white; transition: all 0.2s; border-radius: 50%; width: 45px; height: 45px; flex-shrink: 0; }
+      #chat-send-btn:hover { background-color: var(--primary-color-dark); transform: scale(1.1); }
+      #chat-send-btn svg { width: 24px; height: 24px; }
+      
+      /* === MEDIA QUERIES === */
       @media (max-width: 1024px) { 
         body { font-size: 16px; } 
         .section { padding: 70px 20px; } 
         .section h2 { font-size: 5rem; } 
-        h1 { 
-          font-size: 7rem;
-          line-height: 1.2;
-        }
-        .mobile-break {
-          display: block;
-        }
+        h1 { font-size: 7rem; line-height: 1.2; }
+        .mobile-break { display: block; }
         .hero p { font-size: 1.5rem; } 
         #countdown { gap: 20px; } 
         #countdown div { padding: 12px 20px; min-width: 90px; font-size: 2.5rem; } 
         #countdown span { font-size: 1rem; } 
-        .couple-img { width: 225px; height: 225px; } /* Proportional increase */
+        .couple-img { width: 225px; height: 225px; }
       }
       
       @media (max-width: 768px) {
@@ -970,32 +974,16 @@
         .heading-divider { width: 320px; height: 105px; margin-bottom: 30px; }
         .splash-content h1 { font-size: 5.5rem; }
         .splash-content h2 { font-size: 1.3rem; }
-        h1 {
-          font-size: 6rem;
-          line-height: 1.2;
-        }
+        h1 { font-size: 6rem; line-height: 1.2; }
         .hero p { font-size: 1.3rem; letter-spacing: 3.5px; }
         #countdown div { min-width: 80px; font-size: 2.2rem; }
         #countdown span { font-size: 0.9rem; }
-
-        .couple-details {
-            flex-direction: column;
-            gap: 20px;
-        }
+        .couple-details { flex-direction: column; gap: 20px; }
         .couple-details .person-details { text-align: center; }
         .couple-details .person-details h3 { font-size: 4rem; }
-        .couple-details .son-daughter-of {
-            font-size: 1rem;
-            margin-bottom: 20px;
-        }
+        .couple-details .son-daughter-of { font-size: 1rem; margin-bottom: 20px; }
         .couple-images.desktop-only { display: none; }
-        .couple-img.mobile-only {
-            display: inline-block;
-            width: 200px; /* Increased size */
-            height: 200px; /* Increased size */
-            margin: 0 auto;
-        }
-
+        .couple-img.mobile-only { display: inline-block; width: 200px; height: 200px; margin: 0 auto; }
         .event-info { flex-direction: column; align-items: center; gap: 35px; }
         .timeline::before { left: 31px; }
         .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
@@ -1024,20 +1012,20 @@
         .guest-name { font-size: 1.5rem; }
         #open-invitation-btn { padding: 12px 28px; font-size: 0.9rem; }
         .bismillah { font-size: 2rem; margin-bottom: 15px;}
-        h1 {
-          font-size: 4.2rem;
-          line-height: 1.2;
-        }
+        h1 { font-size: 4.2rem; line-height: 1.2; }
         .hero p { font-size: 0.9rem; letter-spacing: 3px; margin: 10px 0 25px; }
         #countdown { flex-direction: row; flex-wrap: nowrap; gap: 8px; justify-content: center; width: 100%; box-sizing: border-box; padding: 0 10px; }
         #countdown div { padding: 10px 5px; min-width: 0; flex: 1; font-size: 1.8rem; border-radius: 8px; line-height: 1.1; }
         #countdown span { font-size: 0.65rem; margin-top: 6px; letter-spacing: 1px; word-break: keep-all; }
-        
         .couple-details .person-details h3 { font-size: 3.5rem; }
         .couple-details .son-daughter-of { font-size: 0.9rem; }
         .couple-details .ampersand { font-size: 4rem; }
-        .couple-img.mobile-only { width: 180px; height: 180px; } /* Increased size */
-
+        .couple-img.mobile-only { width: 180px; height: 180px; }
+        .carousel-btn { width: 36px; height: 36px; font-size: 1.5rem; }
+        .carousel-btn.prev { left: 10px; }
+        .carousel-btn.next { right: 10px; }
+        .carousel-nav { padding: 5px 10px; gap: 8px; bottom: 10px; }
+        .nav-dot { width: 8px; height: 8px; }
         .container p { font-size: 0.95rem; }
         .timeline-content h3 { font-size: 2rem; }
         .timeline-content p { font-size: 0.9rem; }
@@ -1047,20 +1035,9 @@
         .song-info { display: none; }
         footer .final-thanks { font-size: 40px; }
         
-        /* Chatbot responsive styles */
-        #chatbot-toggle-btn {
-            width: 50px;
-            height: 50px;
-            right: 15px;
-            bottom: 15px;
-        }
+        #chatbot-toggle-btn { width: 50px; height: 50px; right: 15px; bottom: 15px; }
         #chatbot-toggle-btn svg { width: 28px; height: 28px; }
-        #chat-window {
-            bottom: 80px;
-            right: 15px;
-            left: 15px;
-            width: auto;
-        }
+        #chat-window { bottom: 80px; right: 15px; left: 15px; width: auto; }
       }
     </style>
   </head>
@@ -1320,14 +1297,21 @@
     <div id="chatbot-container">
       <div id="chat-window">
         <div id="chat-header">
-          <span>Bot Pembantu</span>
+          <span>BantuBot</span>
           <button id="close-chat-btn" aria-label="Close Chat">&times;</button>
         </div>
         <div id="chat-messages">
             <!-- Messages will be appended here -->
         </div>
+        <div id="chat-suggestions">
+            <!-- Suggestion buttons will be injected by JS -->
+        </div>
         <div id="chat-typing-indicator" class="hidden">
-            <span></span><span></span><span></span>
+            <div class="message-container bot">
+                <div class="chat-message">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
         </div>
         <form id="chat-form">
           <input type="text" id="chat-input" placeholder="Tanya sesuatu..." autocomplete="off" required>
@@ -1356,11 +1340,15 @@
       });
 
       let notificationTimeout;
-      function copyToClipboard(text) {
+      function copyToClipboard(text, element = null) {
         navigator.clipboard.writeText(text).then(() => {
             const notification = document.getElementById('copy-notification');
-            notification.textContent = 'Nomor berhasil disalin!';
-            notification.style.backgroundColor = '#00796b'; // Success color
+            if (element) {
+                element.textContent = 'Disalin!';
+                setTimeout(() => { element.textContent = 'Salin'; }, 2000);
+            }
+            notification.textContent = 'Berhasil disalin!';
+            notification.style.backgroundColor = '#00796b';
             notification.classList.add('show');
             clearTimeout(notificationTimeout);
             notificationTimeout = setTimeout(() => {
@@ -1368,8 +1356,8 @@
             }, 3000);
         }, (err) => {
             const notification = document.getElementById('copy-notification');
-            notification.textContent = 'Gagal menyalin nomor.';
-            notification.style.backgroundColor = '#c62828'; // Error color
+            notification.textContent = 'Gagal menyalin.';
+            notification.style.backgroundColor = '#c62828';
             notification.classList.add('show');
             clearTimeout(notificationTimeout);
             notificationTimeout = setTimeout(() => {
@@ -1516,7 +1504,7 @@
 
         fetchAndDisplayComments();
 
-        // --- GALLERY CAROUSEL LOGIC (IMPROVED) ---
+        // --- GALLERY CAROUSEL LOGIC ---
         const slider = document.querySelector('.gallery-slider');
         if (slider) {
             const slides = Array.from(slider.children);
@@ -1526,50 +1514,29 @@
             let currentIndex = 0;
 
             if(slides.length > 0) {
-              // Create nav dots
               slides.forEach((_, index) => {
                   const dot = document.createElement('button');
                   dot.classList.add('nav-dot');
                   dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
                   navContainer.appendChild(dot);
               });
-              
               const dots = Array.from(navContainer.children);
-
               const goToSlide = (index) => {
                   slides.forEach(slide => slide.classList.remove('active-slide'));
-                  
                   currentIndex = index;
                   slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-                  
                   dots.forEach(dot => dot.classList.remove('active'));
                   dots[currentIndex].classList.add('active');
-                  
                   slides[currentIndex].classList.add('active-slide');
               };
-
-              nextBtn.addEventListener('click', () => {
-                  const nextIndex = (currentIndex + 1) % slides.length;
-                  goToSlide(nextIndex);
-              });
-
-              prevBtn.addEventListener('click', () => {
-                  const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
-                  goToSlide(prevIndex);
-              });
-              
-              dots.forEach((dot, index) => {
-                  dot.addEventListener('click', () => {
-                      goToSlide(index);
-                  });
-              });
-
-              // Initialize first slide
+              nextBtn.addEventListener('click', () => goToSlide((currentIndex + 1) % slides.length));
+              prevBtn.addEventListener('click', () => goToSlide((currentIndex - 1 + slides.length) % slides.length));
+              dots.forEach((dot, index) => dot.addEventListener('click', () => goToSlide(index)));
               goToSlide(0);
             }
         }
         
-        // --- CHATBOT LOGIC ---
+        // --- PREMIUM CHATBOT LOGIC ---
         const chatWindow = document.getElementById('chat-window');
         const chatbotToggleBtn = document.getElementById('chatbot-toggle-btn');
         const closeChatBtn = document.getElementById('close-chat-btn');
@@ -1577,99 +1544,116 @@
         const chatInput = document.getElementById('chat-input');
         const chatMessages = document.getElementById('chat-messages');
         const typingIndicator = document.getElementById('chat-typing-indicator');
+        const chatSuggestionsContainer = document.getElementById('chat-suggestions');
 
         // --- IMPORTANT: REPLACE WITH YOUR KEY ---
-        const GEMINI_API_KEY = 'AIzaSyD6rkhvtJGhHWVKgk85QZvsMFSUuA1S4A0'; // <--- PASTE YOUR API KEY HERE
+        // To get a key, visit https://aistudio.google.com/app/apikey
+        const GEMINI_API_KEY = 'AIzaSyD6rkhvtJGhHWVKgk85QZvsMFSUuA1S4A0'; // <-- IMPORTANT: PASTE YOUR API KEY HERE
         const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`;
         
-        // This context provides the AI with all the information it needs about the wedding.
         const weddingContext = `
-            You are a friendly, cheerful, and helpful wedding assistant chatbot for the wedding of Pramudya and Feristina.
+            You are 'BantuBot', a friendly, cheerful, and helpful wedding assistant chatbot for the wedding of Pramudya and Feristina.
             Your main role is to answer guest questions based ONLY on the information provided below.
-            Always be polite and keep your answers concise and to the point.
-            If a question is unrelated to the wedding (e.g., asking about politics, personal opinions, or random facts), you must politely decline. A good response would be: "Maaf, saya hanya bisa menjawab pertanyaan seputar pernikahan Pramudya dan Feristina."
-            The current date is ${new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}. Use this to answer questions about how far away the wedding is.
+            Always be polite and keep your answers concise and helpful. Use a friendly tone and occasional appropriate emojis (like 😊, ✨, 🙏, 📅, 📍) to make the conversation feel warm.
+            **Crucially, use markdown for formatting:** use **bold** for important details like names, dates, or times. Use *italics* for notes or side comments. Use bulleted lists for schedules, addresses, or gift details.
+            If a question is unrelated to the wedding, you must politely decline. A good response would be: "Maaf, saya hanya bisa menjawab pertanyaan seputar pernikahan Pramudya dan Feristina. 😊"
+            The current date is ${new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}. Use this to calculate how many days are left until the wedding if asked.
 
             **=== CORE WEDDING DETAILS ===**
             - **The Couple:** Pramudya & Feristina
             - **Groom's Parents:** Bapak Yuhardi & Ibu Amalia Fiora Irma
             - **Bride's Parents:** Bapak Ferry Yanes & Ibu Risma Amalia
-            - **Wedding Date:** 30 November 2025
+            - **Wedding Date:** **30 November 2025**
 
             **=== EVENT SCHEDULE & LOCATION ===**
-            - **Akad Nikah (Ceremony):** Starts at 09:00 WIB. The time is still tentative, but this is the current plan.
-            - **Resepsi (Reception):** From 11:00 to 13:00 WIB.
+            - **Akad Nikah (Ceremony):** Starts at **09:00 WIB**. *Waktu masih tentatif, namun ini rencana saat ini.*
+            - **Resepsi (Reception):** From **11:00 to 13:00 WIB**.
             - **Venue (for both events):** Aula Direktorat Jenderal Bina Pemerintahan Desa Kemendagri.
-            - **Address:** Jl. Raya Pasar Minggu No.19, Pejaten Barat, Kecamatan Pasar Minggu, Jakarta Selatan.
+            - **Address:** 
+                * Jl. Raya Pasar Minggu No.19, 
+                * Pejaten Barat, Kecamatan Pasar Minggu, 
+                * Jakarta Selatan.
             - **Google Maps Link:** https://maps.app.goo.gl/pB9XnHQSxj8bdVGFA
 
             **=== GUEST INFORMATION (FAQ) ===**
-            - **Dress Code:** The dress code is Semi-Formal or Formal. Guests are kindly requested to dress neatly and appropriately for a wedding celebration. Batik or a suit/dress would be perfect.
-            - **Wedding Gifts:** Your presence and prayers are the greatest gift. However, if you wish to give a gift, you can do so at the venue. For those unable to attend, digital gifts are also appreciated via:
-                - Bank Mandiri: 1270013987944
-                - Gopay: 087771800110
-            - **Parking:** Yes, there is ample parking space available for both cars and motorcycles at the venue.
-            - **RSVP / Attendance Confirmation:** Guests are kindly requested to confirm their attendance by filling out the form on this website before the wedding day, November 30, 2025. This helps the couple with preparations.
+            - **Dress Code:** Aturan berpakaiannya adalah **Semi-Formal atau Formal**. Pakaian rapi seperti batik, setelan, atau gaun akan sangat dihargai. ✨
+            - **Wedding Gifts:** Doa dan kehadiran Anda adalah hadiah terindah. Namun, jika ingin memberikan tanda kasih, bisa melalui:
+                * Bank Mandiri: **1270013987944**
+                * Gopay: **087771800110**
+            - **Parking:** Ya, tersedia area parkir yang luas untuk mobil dan motor di lokasi acara.
+            - **RSVP / Attendance Confirmation:** Mohon konfirmasi kehadiran dengan mengisi formulir di undangan ini sebelum **30 November 2025**. 🙏
 
             **=== THE COUPLE'S STORY ===**
-            - **How they met:** Their story began in August 2017 with an unexpected meeting.
-            - **First big adventure:** They went on their first trip together in September 2020.
-            - **The Engagement:** Pramudya proposed to Feristina in October 2024.
-            - **The Big Day:** They will be married on November 30, 2025.
-
-            **=== FUN FACTS & OTHER INFO ===**
-            - **Website Creator:** This invitation website was lovingly created by Kun Faris Al-Malik, Pramudya's younger brother.
-            - **Quranic Verses:** The invitation features verses from the Quran, specifically An-Nur: 32 and An-Nahl: 72, which speak about the sanctity and blessings of marriage in Islam.
+            - **How they met:** Kisah mereka dimulai pada **Agustus 2017**.
+            - **The Engagement:** Pramudya melamar Feristina pada **Oktober 2024**.
         `;
 
-        let conversationHistory = [{
-            role: "user",
-            parts: [{ text: weddingContext }]
-        }, {
-            role: "model",
-            parts: [{ text: "Tentu, saya siap membantu! Ada yang bisa ditanyakan mengenai pernikahan Pramudya dan Feristina?" }]
-        }];
+        let conversationHistory = [{ role: "user", parts: [{ text: weddingContext }] }, { role: "model", parts: [{ text: "Tentu, saya siap membantu! 😊" }] }];
         
-        // Function to toggle the chat window
-        const toggleChatWindow = () => {
-            chatWindow.classList.toggle('show');
-            if (chatWindow.classList.contains('show')) {
-                chatInput.focus();
-            }
-        };
-
+        const toggleChatWindow = () => chatWindow.classList.toggle('show');
         chatbotToggleBtn.addEventListener('click', toggleChatWindow);
         closeChatBtn.addEventListener('click', toggleChatWindow);
         
-        // Function to append a message to the chat UI
+        const parseMarkdown = (text) => {
+            let html = text
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/^\* (.*$)/gm, '<ul><li>$1</li></ul>')
+                .replace(/(\<\/ul\>\n\<ul\>)/g, '');
+
+            const accountRegex = /(\d{10,})/g;
+            html = html.replace(accountRegex, (match) => `${match} <button class="copy-btn" data-copy="${match}">Salin</button>`);
+            return html;
+        };
+
         const appendMessage = (sender, message) => {
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('chat-message', sender);
-            messageElement.textContent = message;
-            chatMessages.appendChild(messageElement);
+            const messageContainer = document.createElement('div');
+            messageContainer.className = `message-container ${sender}`;
+            
+            const messageBubble = document.createElement('div');
+            messageBubble.className = 'chat-message';
+            messageBubble.innerHTML = parseMarkdown(message);
+
+            messageContainer.appendChild(messageBubble);
+            chatMessages.appendChild(messageContainer);
             chatMessages.scrollTop = chatMessages.scrollHeight;
         };
         
-        // Add the initial bot message to the UI
-        appendMessage('bot', 'Halo! Ada yang bisa saya bantu terkait pernikahan Pramudya & Feristina?');
-        
-        // Handle form submission
-        chatForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const userMessage = chatInput.value.trim();
-            if (!userMessage) return;
+        const showWelcomeMessage = () => {
+            const welcomeHTML = `
+                <div class="bot-welcome">
+                    <div class="bot-avatar">P&F</div>
+                    <p>Halo! Saya <strong>BantuBot</strong>, asisten virtual untuk pernikahan <strong>Pramudya & Feristina</strong>. Ada yang bisa saya bantu?</p>
+                </div>`;
+            chatMessages.innerHTML = welcomeHTML;
+            
+            const suggestions = ["Kapan & di mana acaranya?", "Apa dresscode-nya?", "Bagaimana cara memberi hadiah?"];
+            chatSuggestionsContainer.innerHTML = '';
+            suggestions.forEach(text => {
+                const btn = document.createElement('button');
+                btn.textContent = text;
+                btn.className = 'suggestion-btn';
+                btn.onclick = () => sendMessageToAI(text);
+                chatSuggestionsContainer.appendChild(btn);
+            });
+            chatSuggestionsContainer.style.display = 'flex';
+        };
 
-            if (GEMINI_API_KEY === 'YOUR_API_KEY' || !GEMINI_API_KEY) {
+        const sendMessageToAI = async (userMessage) => {
+            if (chatSuggestionsContainer.style.display !== 'none') {
+                chatSuggestionsContainer.style.display = 'none';
+            }
+
+            if (GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY_HERE' || !GEMINI_API_KEY) {
                 appendMessage('bot', 'Maaf, chatbot belum diaktifkan. Harap masukkan API Key yang valid pada kode website.');
-                chatInput.value = '';
                 return;
             }
             
             appendMessage('user', userMessage);
             chatInput.value = '';
             typingIndicator.classList.remove('hidden');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
 
-            // Add user message to history
             conversationHistory.push({ role: "user", parts: [{ text: userMessage }] });
 
             try {
@@ -1680,24 +1664,40 @@
                 });
 
                 if (!response.ok) {
-                    throw new Error(`API Error: ${response.statusText}`);
+                    const errorData = await response.json();
+                    throw new Error(`API Error: ${response.statusText} - ${errorData.error.message}`);
                 }
-
                 const data = await response.json();
+                
+                if (!data.candidates || data.candidates.length === 0) {
+                    throw new Error('No response from API. The request might have been blocked due to safety settings.');
+                }
                 const botMessage = data.candidates[0].content.parts[0].text;
-                
-                // Add bot response to history
                 conversationHistory.push({ role: "model", parts: [{ text: botMessage }] });
-                
                 appendMessage('bot', botMessage);
-
             } catch (error) {
                 console.error("Chatbot Error:", error);
                 appendMessage('bot', 'Maaf, terjadi sedikit gangguan. Coba tanyakan lagi nanti ya.');
             } finally {
                 typingIndicator.classList.add('hidden');
             }
+        };
+
+        chatForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const userMessage = chatInput.value.trim();
+            if (!userMessage) return;
+            sendMessageToAI(userMessage);
         });
+
+        chatMessages.addEventListener('click', (e) => {
+            if (e.target.classList.contains('copy-btn')) {
+                const textToCopy = e.target.dataset.copy;
+                copyToClipboard(textToCopy, e.target);
+            }
+        });
+
+        showWelcomeMessage(); // Initialize chat with welcome message
       });
     </script>
   </body>
