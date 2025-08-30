@@ -21,6 +21,10 @@
         --font-body: "Quicksand", sans-serif;
       }
 
+      html {
+        scroll-behavior: smooth;
+      }
+
       body {
         font-family: var(--font-body);
         margin: 0;
@@ -1083,7 +1087,7 @@
         <button id="open-invitation-btn">Buka Undangan</button>
         <blockquote class="splash-quote">
             <p dir="rtl" class="splash-arabic">وَاَنْكِحُوا الْاَيَامٰى مِنْكُمْ وَالصّٰلِحِيْنَ مِنْ عِبَادِكُمْ وَاِمَاۤىِٕكُمْۗ اِنْ يَّكُوْنُوْا فُقَرَاۤءَ يُغْنِهِمُ اللّٰهُ مِنْ فَضْلِهٖۗ وَاللّٰهُ وَاسِعٌ عَلِيْمٌ</p>
-            <p class="splash-translation">"Nikahkanlah orang-orang yang masih membujang di antara kamu dan juga orang-orang yang layak (menikah) dari hamba-hamba sahayamu, baik laki-laki maupun perempuan. Jika mereka miskin, Allah akan memberi kemampuan kepada mereka dengan karunia-Nya. Allah Mahaluas (pemberian-Nya) lagi Maha Mengetahui."<br><strong>- QS An-Nur: 32 -</strong></p>
+            <p class="translation">"Nikahkanlah orang-orang yang masih membujang di antara kamu dan juga orang-orang yang layak (menikah) dari hamba-hamba sahayamu, baik laki-laki maupun perempuan. Jika mereka miskin, Allah akan memberi kemampuan kepada mereka dengan karunia-Nya. Allah Mahaluas (pemberian-Nya) lagi Maha Mengetahui."<br><strong>- QS An-Nur: 32 -</strong></p>
         </blockquote>
       </div>
     </div>
@@ -1124,7 +1128,7 @@
       </header>
 
       <main>
-        <section class="section about animated-item">
+        <section id="kisah-kami" class="section about animated-item">
           <div class="container">
             <h2>Kisah Kami</h2>
             <hr class="heading-divider" />
@@ -1160,7 +1164,7 @@
           </div>
         </section>
 
-        <section class="section details animated-item">
+        <section id="detail-pernikahan" class="section details animated-item">
           <div class="container">
             <h2>Detail Pernikahan</h2>
             <hr class="heading-divider" />
@@ -1192,7 +1196,7 @@
           </div>
         </section>
 
-        <section class="section journey-section animated-item">
+        <section id="perjalanan-kami" class="section journey-section animated-item">
           <div class="container">
             <h2>Perjalanan Kami</h2>
             <hr class="heading-divider" />
@@ -1205,7 +1209,7 @@
           </div>
         </section>
 
-        <section class="section party-section animated-item">
+        <section id="galeri-foto" class="section party-section animated-item">
           <div class="container">
             <h2>Galeri Foto</h2>
             <hr class="heading-divider" />
@@ -1240,7 +1244,7 @@
           </div>
         </section>
 
-        <section class="section rsvp-section animated-item">
+        <section id="konfirmasi-kehadiran" class="section rsvp-section animated-item">
           <div class="container">
             <h2>Konfirmasi Kehadiran</h2>
             <hr class="heading-divider" />
@@ -1281,7 +1285,7 @@
           </div>
         </section>
 
-        <section class="section guestbook-section animated-item">
+        <section id="ucapan-doa" class="section guestbook-section animated-item">
           <div class="container">
             <h2>Ucapan & Doa</h2>
             <hr class="heading-divider" />
@@ -1293,7 +1297,7 @@
           </div>
         </section>
 
-        <section class="section faq-section animated-item">
+        <section id="tanya-jawab" class="section faq-section animated-item">
           <div class="container">
             <h2>Tanya Jawab</h2>
             <hr class="heading-divider" />
@@ -1590,6 +1594,17 @@
             If a question is unrelated to the wedding, politely decline to answer.
             The current date is ${new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}.
             
+            **SPECIAL INSTRUCTION:** If a user's question directly relates to a specific section, provide your normal text answer and then, on a new line, add a special command: [SCROLL_TO:section-id].
+            Use the following section IDs:
+            - For questions about the couple (siapa mempelainya, orang tua): [SCROLL_TO:kisah-kami]
+            - For questions about location, venue, map, or event times (lokasi, tempat, peta, jam acara): [SCROLL_TO:detail-pernikahan]
+            - For questions about the couple's story or timeline (cerita cinta, perjalanan): [SCROLL_TO:perjalanan-kami]
+            - For questions about photos or gallery (galeri, foto): [SCROLL_TO:galeri-foto]
+            - For questions about RSVP, confirming attendance, or sending wishes (konfirmasi hadir, RSVP, ucapan): [SCROLL_TO:konfirmasi-kehadiran]
+            - For questions about seeing other people's wishes (lihat ucapan lain): [SCROLL_TO:ucapan-doa]
+            - For questions about dress code, gifts, parking (dress code, hadiah, parkir): [SCROLL_TO:tanya-jawab]
+            - For questions about wedding gifts or bank accounts (amplop, kado, transfer): [SCROLL_TO:konfirmasi-kehadiran]
+
             **WEDDING DETAILS:**
             - **Couple:** Pramudya & Feristina
             - **Groom's Parents:** Bapak Yuhardi & Ibu Amalia Fiora Irma
@@ -1605,14 +1620,22 @@
             - **Address:** Jl. Raya Pasar Minggu No.19, Pejaten Barat, Kec. Ps. Minggu, Jakarta Selatan.
             - **Google Maps Link:** https://maps.app.goo.gl/pB9XnHQSxj8bdVGFA
             
-            **FAQ / GUEST INFORMATION:**
-            - **Dress Code:** Semi-formal or formal attire is requested. Guests should dress neatly.
-            - **Gifts:** Gifts are welcome. For guests who cannot attend but wish to give a gift, they can use the provided bank/e-wallet details.
+            **COUPLE'S JOURNEY:**
+            - **August 2017:** Their story began.
+            - **September 2020:** First adventure together.
+            - **October 2024:** The proposal.
+            - **November 2025:** They get married.
+            
+            **ADDITIONAL INFORMATION:**
+            - **Dress Code:** Semi-formal or formal attire. Guests should dress neatly.
+            - **Gifts:** Gifts are welcome. For guests unable to attend, they can send gifts via:
                 - Bank Mandiri: 1270013987944
                 - Gopay: 087771800110
-            - **Parking:** Ample parking space is available for cars and motorcycles at the venue.
-            - **RSVP:** Guests are asked to confirm their attendance via the form on the website before November 30, 2025.
-            - **MAKER OF WEBSITE:** It is Kun Faris Al-Malik the little brother of Pramudya
+            - **Parking:** Ample parking is available for cars and motorcycles.
+            - **RSVP:** Guests should confirm attendance via the form on the website before November 30, 2025.
+            - **Photo Gallery:** Yes, there is a photo gallery section on the website.
+            - **Background Music:** The song is "Golden Hour (Instrumental)" by Jvke.
+            - **Website Creator:** This invitation was created by Kuy F.A.M.
         `;
 
         let conversationHistory = [{
@@ -1652,7 +1675,7 @@
             const userMessage = chatInput.value.trim();
             if (!userMessage) return;
 
-            if (GEMINI_API_KEY === 'YOUR_API_KEY') {
+            if (GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY_HERE') {
                 appendMessage('bot', 'Maaf, chatbot belum diaktifkan. Harap masukkan API Key yang valid pada kode website.');
                 chatInput.value = '';
                 return;
@@ -1679,10 +1702,27 @@
                 const data = await response.json();
                 const botMessage = data.candidates[0].content.parts[0].text;
                 
-                // Add bot response to history
-                conversationHistory.push({ role: "model", parts: [{ text: botMessage }] });
+                // --- NEW: SCROLL LOGIC ---
+                const scrollCommandRegex = /\[SCROLL_TO:([\w-]+)\]/;
+                const scrollMatch = botMessage.match(scrollCommandRegex);
+                let cleanMessage = botMessage;
+
+                if (scrollMatch && scrollMatch[1]) {
+                    const sectionId = scrollMatch[1];
+                    const sectionElement = document.getElementById(sectionId);
+                    if (sectionElement) {
+                        sectionElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                    // Remove the command from the message displayed to the user
+                    cleanMessage = botMessage.replace(scrollCommandRegex, '').trim();
+                }
+
+                // Add the cleaned bot response to history and UI
+                conversationHistory.push({ role: "model", parts: [{ text: botMessage }] }); // Push original response to history
                 
-                appendMessage('bot', botMessage);
+                if (cleanMessage) {
+                    appendMessage('bot', cleanMessage);
+                }
 
             } catch (error) {
                 console.error("Chatbot Error:", error);
