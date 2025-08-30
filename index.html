@@ -1,3 +1,5 @@
+--- START OF FILE index.html ---
+
 <!DOCTYPE html>
 <html lang="id">
   <head>
@@ -960,6 +962,17 @@
         width: 24px;
         height: 24px;
       }
+
+      /* === SECTION HIGHLIGHT FOR CHATBOT === */
+      @keyframes highlight-fade {
+        0% { box-shadow: 0 0 0 0 rgba(184, 147, 142, 0); }
+        40% { box-shadow: 0 0 40px 10px rgba(184, 147, 142, 0.5); }
+        100% { box-shadow: 0 0 0 0 rgba(184, 147, 142, 0); }
+      }
+      .highlighted-section {
+        animation: highlight-fade 2.5s ease-out;
+        border-radius: 15px; /* To make the glow effect rounded */
+      }
       
       /* === MEDIA QUERIES FOR RESPONSIVE DESIGN === */
       @media (max-width: 1024px) { 
@@ -1740,7 +1753,21 @@
                                 if (value) {
                                     const sectionElement = document.getElementById(value);
                                     if (sectionElement) {
-                                        sectionElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                        // Scroll the section into the center of the view for better context
+                                        sectionElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                        
+                                        // Remove the highlight from any previously highlighted section
+                                        document.querySelectorAll('.highlighted-section').forEach(el => {
+                                            el.classList.remove('highlighted-section');
+                                        });
+
+                                        // Add the highlight class, then remove it after the animation completes
+                                        setTimeout(() => {
+                                            sectionElement.classList.add('highlighted-section');
+                                            setTimeout(() => {
+                                                sectionElement.classList.remove('highlighted-section');
+                                            }, 2500); // Must match the animation duration in CSS
+                                        }, 500); // Small delay to start highlight after scrolling starts
                                     }
                                 }
                                 break;
