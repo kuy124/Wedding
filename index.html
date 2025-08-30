@@ -182,6 +182,7 @@
         font-weight: 300;
         margin: 0 0 20px;
       }
+      /* Styling for "Kepada Yth..." h3 to use Quicksand font */
       .guest-name-wrapper h3:first-child {
         font-family: var(--font-body);
         font-size: 1.1rem;
@@ -391,7 +392,9 @@
         letter-spacing: 0;
         text-transform: none;
       }
-      .mobile-break { display: none; }
+      .mobile-break {
+        display: none;
+      }
       h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: normal; }
       h1 { font-size: 9rem; line-height: 1; margin: 0; text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.4); }
       .hero p { font-family: var(--font-body); font-size: 1.8rem; margin: 15px 0 40px; text-transform: uppercase; letter-spacing: 4px; font-weight: 300; }
@@ -427,18 +430,58 @@
       .container { max-width: 960px; margin: 0 auto; position: relative; z-index: 2; }
       .container p { font-size: 1.2rem; max-width: 800px; margin-left: auto; margin-right: auto; }
 
-      /* === "KISAH KAMI" SECTION === */
-      .couple-details { display: flex; margin-bottom: 20px; }
-      .couple-details .person-details { flex-basis: 46%; }
-      .couple-details .person-details h3 { font-size: 5rem; color: var(--primary-color-dark); margin: 0 0 10px; font-family: var(--font-heading); }
-      .couple-details .son-daughter-of { font-size: 1.1rem; margin: 0; }
-      .couple-details .ampersand { font-family: var(--font-heading); font-size: 5rem; color: var(--accent-color); line-height: 1; flex-basis: 8%; align-self: center; }
+      /* === "KISAH KAMI" SECTION - DESKTOP STYLES === */
+      .couple-details {
+        display: flex;
+        margin-bottom: 20px;
+      }
+      .couple-details .person-details {
+        flex-basis: 46%;
+      }
+      .couple-details .person-details h3 {
+        font-size: 5rem;
+        color: var(--primary-color-dark);
+        margin: 0 0 10px;
+        font-family: var(--font-heading);
+      }
+      .couple-details .son-daughter-of {
+        font-size: 1.1rem;
+        margin: 0;
+      }
+      .couple-details .ampersand {
+        font-family: var(--font-heading);
+        font-size: 5rem;
+        color: var(--accent-color);
+        line-height: 1;
+        flex-basis: 8%;
+        align-self: center;
+      }
       .couple-details .groom-details { text-align: right; }
       .couple-details .bride-details { text-align: left; }
-      .couple-images { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 50px; }
-      .couple-img { width: 250px; height: 250px; border-radius: 50%; object-fit: cover; border: 8px solid #fff; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15); transition: transform 0.4s ease, box-shadow 0.4s ease; }
-      .couple-img:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); }
-      .couple-img.mobile-only { display: none; }
+      
+      .couple-images {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 50px;
+      }
+      .couple-img {
+        width: 250px; /* Increased size */
+        height: 250px; /* Increased size */
+        border-radius: 50%;
+        object-fit: cover;
+        border: 8px solid #fff;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+      }
+      .couple-img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+      .couple-img.mobile-only {
+          display: none;
+      }
       
       /* === FORM STYLES === */
       .rsvp-form { max-width: 600px; margin: 40px auto 0; text-align: left; }
@@ -450,27 +493,102 @@
       #form-status { margin-top: 20px; font-size: 1rem; text-align: center; min-height: 24px; font-weight: bold; }
 
       /* === WEDDING GIFT SECTION === */
-      .wedding-gift-section { margin-top: 60px; padding: 30px; border-radius: 15px; background: rgba(255, 255, 255, 0.7); box-shadow: 0 8px 32px 0 rgba(184, 147, 142, 0.2); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border: 1px solid rgba(255, 255, 255, 0.18); max-width: 600px; margin-left: auto; margin-right: auto; }
-      .wedding-gift-section h3 { font-family: var(--font-heading); font-size: 3.5rem; color: var(--primary-color-dark); margin: 0 0 20px 0; }
-      .wedding-gift-section p { font-size: 1rem; margin: 15px 0; line-height: 1.6; }
-      .account-details { font-weight: bold; color: var(--text-color); background: #fdfdfd; padding: 10px 15px; border-radius: 8px; border-left: 4px solid var(--accent-color); margin-top: 5px; cursor: pointer; transition: background-color 0.3s; }
-      .account-details:hover { background-color: #f5f5f5; }
+      .wedding-gift-section {
+        margin-top: 60px;
+        padding: 30px;
+        border-radius: 15px;
+        background: rgba(255, 255, 255, 0.7);
+        box-shadow: 0 8px 32px 0 rgba(184, 147, 142, 0.2);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .wedding-gift-section h3 {
+        font-family: var(--font-heading);
+        font-size: 3.5rem;
+        color: var(--primary-color-dark);
+        margin: 0 0 20px 0;
+      }
+      .wedding-gift-section p {
+        font-size: 1rem;
+        margin: 15px 0;
+        line-height: 1.6;
+      }
+      .account-details {
+        font-weight: bold;
+        color: var(--text-color);
+        background: #fdfdfd;
+        padding: 10px 15px;
+        border-radius: 8px;
+        border-left: 4px solid var(--accent-color);
+        margin-top: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      .account-details:hover {
+          background-color: #f5f5f5;
+      }
       
       /* === GUESTBOOK STYLES === */
-      .guestbook-wrapper { max-width: 800px; margin: 40px auto 0; background: rgba(255, 255, 255, 0.7); border-radius: 15px; padding: 30px; box-shadow: 0 8px 32px 0 rgba(184, 147, 142, 0.2); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border: 1px solid rgba(255, 255, 255, 0.18); }
-      #comments-container { margin: 0; padding: 0 15px 0 5px; max-height: 500px; overflow-y: auto; text-align: left; scrollbar-width: thin; scrollbar-color: var(--primary-color) transparent; }
+      .guestbook-wrapper {
+        max-width: 800px;
+        margin: 40px auto 0;
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 8px 32px 0 rgba(184, 147, 142, 0.2);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+      }
+      #comments-container {
+        margin: 0;
+        padding: 0 15px 0 5px;
+        max-height: 500px;
+        overflow-y: auto;
+        text-align: left;
+        scrollbar-width: thin;
+        scrollbar-color: var(--primary-color) transparent;
+      }
       #comments-container::-webkit-scrollbar { width: 8px; }
       #comments-container::-webkit-scrollbar-track { background: transparent; }
-      #comments-container::-webkit-scrollbar-thumb { background-color: var(--primary-color); border-radius: 10px; border: 2px solid rgba(245, 249, 253, 0.8); }
-      .comment-card { background-color: #ffffff; border-left: 5px solid var(--primary-color); border-radius: 8px; padding: 20px 25px; margin-bottom: 15px; margin-right: 5px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); transition: transform 0.3s ease, box-shadow 0.3s ease; }
-      .comment-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+      #comments-container::-webkit-scrollbar-thumb {
+        background-color: var(--primary-color);
+        border-radius: 10px;
+        border: 2px solid rgba(245, 249, 253, 0.8);
+      }
+      .comment-card {
+        background-color: #ffffff;
+        border-left: 5px solid var(--primary-color);
+        border-radius: 8px;
+        padding: 20px 25px;
+        margin-bottom: 15px;
+        margin-right: 5px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .comment-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      }
       .comment-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 10px;}
       .comment-name { font-family: var(--font-heading); font-size: 2rem; color: var(--primary-color-dark); margin: 0;}
       .comment-status { font-size: 0.9rem; font-weight: bold; padding: 5px 12px; border-radius: 20px; white-space: nowrap;}
       .comment-status.attending { background-color: #e0f2f1; color: #00796b; }
       .comment-status.not-attending { background-color: #ffcdd2; color: #c62828; }
       .comment-body { font-size: 1rem; line-height: 1.6; color: var(--text-color); margin: 0; word-wrap: break-word; }
-      .loader { width: 50px; height: 50px; border: 5px solid #f3f3f3; border-top: 5px solid var(--primary-color); border-radius: 50%; animation: spin 1s linear infinite; margin: 40px auto; }
+      .loader {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid var(--primary-color);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 40px auto;
+      }
       .empty-guestbook { text-align: center; padding: 40px 20px; opacity: 0.7; }
       .empty-guestbook h4 { font-family: var(--font-heading); color: var(--primary-color-dark); font-size: 2rem; margin-bottom: 10px; }
       .empty-guestbook p { font-size: 1rem; color: var(--text-color); }
@@ -508,22 +626,122 @@
       .map-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
       .map-button { margin-top: 30px; }
       
-      /* === GALLERY CAROUSEL STYLES === */
-      @keyframes kenburns-zoom { 0% { transform: scale(1.05) translateY(0); } 100% { transform: scale(1.15) translateY(-3px); } }
-      .gallery-carousel { max-width: 800px; margin: 40px auto 0; position: relative; overflow: hidden; border-radius: 15px; box-shadow: 0 10px 40px rgba(184, 147, 142, 0.3); border: 5px solid white; }
-      .gallery-slider { display: flex; transition: transform 0.6s cubic-bezier(0.455, 0.03, 0.515, 0.955); }
-      .gallery-slide { flex: 0 0 100%; position: relative; overflow: hidden; }
-      .gallery-slide::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; box-shadow: inset 0 0 80px rgba(0,0,0,0.3); z-index: 1; }
-      .gallery-slide img { width: 100%; display: block; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 30%; }
-      .gallery-slide.active-slide img { animation: kenburns-zoom 12s ease-out forwards; }
-      .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(255, 255, 255, 0.7); border: none; color: var(--text-color); font-size: 2rem; font-weight: bold; cursor: pointer; border-radius: 50%; width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; line-height: 1; transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; z-index: 10; padding-bottom: 5px; text-shadow: 0 0 5px rgba(0,0,0,0.1); }
-      .carousel-btn:hover { background-color: var(--primary-color); color: white; transform: translateY(-50%) scale(1.1); }
+      /* === GALLERY CAROUSEL STYLES (IMPROVED) === */
+      @keyframes kenburns-zoom {
+        0% {
+            transform: scale(1.05) translateY(0);
+        }
+        100% {
+            transform: scale(1.15) translateY(-3px);
+        }
+      }
+      .gallery-carousel {
+        max-width: 800px;
+        margin: 40px auto 0;
+        position: relative;
+        overflow: hidden;
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(184, 147, 142, 0.3);
+        border: 5px solid white;
+      }
+      .gallery-slider {
+        display: flex;
+        transition: transform 0.6s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+      }
+      .gallery-slide {
+        flex: 0 0 100%;
+        position: relative;
+        overflow: hidden; /* Important for the zoom effect */
+      }
+      .gallery-slide::after { /* Adds a nice vignette effect */
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          box-shadow: inset 0 0 80px rgba(0,0,0,0.3);
+          z-index: 1;
+      }
+      .gallery-slide img {
+        width: 100%;
+        display: block;
+        aspect-ratio: 4 / 5;
+        object-fit: cover;
+        object-position: center 30%; /* Moves image focus slightly up */
+      }
+      .gallery-slide.active-slide img {
+          animation: kenburns-zoom 12s ease-out forwards;
+      }
+      .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(255, 255, 255, 0.7);
+        border: none;
+        color: var(--text-color);
+        font-size: 2rem;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 1;
+        transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+        z-index: 10;
+        padding-bottom: 5px; /* Visual alignment */
+        text-shadow: 0 0 5px rgba(0,0,0,0.1);
+      }
+      .carousel-btn:hover {
+        background-color: var(--primary-color);
+        color: white;
+        transform: translateY(-50%) scale(1.1);
+      }
       .carousel-btn.prev { left: 15px; }
       .carousel-btn.next { right: 15px; }
-      .carousel-nav { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 10; background: rgba(0,0,0,0.2); padding: 8px 15px; border-radius: 20px; }
-      .nav-dot { width: 12px; height: 12px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.6); cursor: pointer; transition: background-color 0.3s ease, transform 0.3s ease; border: 1px solid rgba(0,0,0,0.1); padding: 0; }
-      .nav-dot.active { background-color: white; transform: scale(1.2); box-shadow: 0 0 5px rgba(0,0,0,0.3); }
-      .carousel-counter { display: none; position: absolute; top: 15px; right: 15px; background-color: rgba(0, 0, 0, 0.4); color: white; padding: 5px 12px; border-radius: 15px; font-size: 0.9rem; font-weight: bold; z-index: 10; }
+      .carousel-nav {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+        z-index: 10;
+        background: rgba(0,0,0,0.2);
+        padding: 8px 15px;
+        border-radius: 20px;
+      }
+      .nav-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.6);
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        border: 1px solid rgba(0,0,0,0.1);
+        padding: 0;
+      }
+      .nav-dot.active {
+        background-color: white;
+        transform: scale(1.2);
+        box-shadow: 0 0 5px rgba(0,0,0,0.3);
+      }
+      .carousel-counter {
+        display: none; /* Hidden by default */
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background-color: rgba(0, 0, 0, 0.4);
+        color: white;
+        padding: 5px 12px;
+        border-radius: 15px;
+        font-size: 0.9rem;
+        font-weight: bold;
+        z-index: 10;
+      }
 
       /* === FOOTER STYLES === */
       footer { padding: 60px 20px 20px; text-align: center; background-color: #383838; color: white; font-family: var(--font-body); font-weight: 300; font-size: 1rem; position: relative; z-index: 1;}
@@ -561,8 +779,29 @@
       .faq-section::after { background-image: url('data/image/Flower2.png'); width: 200px; height: 200px; bottom: 12%; left: 10%; }
       
       /* === SCROLL ANIMATION & NOTIFICATION === */
-      #copy-notification { position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%); background-color: #00796b; color: white; padding: 15px 30px; border-radius: 50px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 25000; font-family: var(--font-body); font-weight: bold; font-size: 1rem; opacity: 0; visibility: hidden; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-      #copy-notification.show { bottom: 30px; opacity: 1; visibility: visible; }
+      #copy-notification {
+        position: fixed;
+        bottom: -100px; /* Initially hidden */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #00796b; /* Success color */
+        color: white;
+        padding: 15px 30px;
+        border-radius: 50px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        z-index: 25000;
+        font-family: var(--font-body);
+        font-weight: bold;
+        font-size: 1rem;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      #copy-notification.show {
+        bottom: 30px; /* Position when shown */
+        opacity: 1;
+        visibility: visible;
+      }
       @keyframes goldPulse { 0% { background-size: 200% 200%; } 50% { background-size: 250% 250%; } 100% { background-size: 200% 200%; } }
       @keyframes sunPulse { 0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); opacity: 0.1; } 50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.05); opacity: 0.15; } 100% { transform: translate(-50%, -50%) rotate(360deg) scale(1); opacity: 0.1; } }
       @keyframes move-clouds { 0% { left: -450px; } 100% { left: 100vw; } }
@@ -576,7 +815,7 @@
       .animated-item.visible .animated-child:nth-child(4) { animation-delay: 0.8s; }
       .animated-item.visible .animated-child:nth-child(5) { animation-delay: 1.0s; }
       
-      /* === CHATBOT STYLES (ENHANCED) === */
+      /* === CHATBOT STYLES (IMPROVED) === */
       #chatbot-toggle-btn {
         position: fixed;
         bottom: 20px;
@@ -626,13 +865,13 @@
         position: fixed;
         bottom: 100px;
         right: 20px;
-        width: 370px;
+        width: 350px;
         max-width: 90vw;
-        height: 550px;
-        max-height: 75vh;
+        height: 500px;
+        max-height: 70vh;
         background-color: white;
         border-radius: 15px;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         z-index: 9999;
         display: flex;
         flex-direction: column;
@@ -648,7 +887,7 @@
         pointer-events: auto;
       }
       #chat-header {
-        background: linear-gradient(135deg, var(--primary-color-dark), var(--primary-color));
+        background-color: var(--primary-color);
         color: white;
         padding: 15px 20px;
         display: flex;
@@ -658,7 +897,6 @@
         font-weight: bold;
         font-size: 1.1rem;
         flex-shrink: 0;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       }
       #chat-header > div {
         display: flex;
@@ -668,7 +906,20 @@
         font-size: 0.75rem;
         font-weight: 400;
         opacity: 0.8;
-        color: #e0f2f1; /* Mint green for online status */
+      }
+      #close-chat-btn {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.8rem;
+        cursor: pointer;
+        padding: 0 5px;
+        line-height: 1;
+        opacity: 0.8;
+        transition: opacity 0.2s ease;
+      }
+      #close-chat-btn:hover {
+        opacity: 1;
       }
       #chat-messages {
         flex-grow: 1;
@@ -677,61 +928,57 @@
         display: flex;
         flex-direction: column;
         gap: 12px;
-        background-color: #f9fafb;
+        background-color: #f9f9f9;
       }
       @keyframes message-fade-in {
         from { opacity: 0; transform: translateY(15px) scale(0.95); }
         to { opacity: 1; transform: translateY(0) scale(1); }
       }
       .chat-message {
-        padding: 12px 18px;
-        border-radius: 20px;
+        padding: 10px 15px;
+        border-radius: 18px;
         max-width: 80%;
         line-height: 1.5;
         font-size: 0.95rem;
         animation: message-fade-in 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        word-wrap: break-word;
       }
-      .chat-message p { margin: 0 0 5px 0; }
-      .chat-message p:last-child { margin-bottom: 0; }
       .chat-message.user {
         background-color: var(--primary-color);
         color: white;
-        border-bottom-right-radius: 5px;
+        border-bottom-right-radius: 4px;
         align-self: flex-end;
       }
       .chat-message.bot {
         background-color: #e9e9eb;
         color: var(--text-color);
-        border-bottom-left-radius: 5px;
+        border-bottom-left-radius: 4px;
         align-self: flex-start;
       }
       .bot-welcome {
         display: flex;
         align-items: flex-start;
         gap: 10px;
-        max-width: 95%;
+        max-width: 90%;
         animation: message-fade-in 0.4s cubic-bezier(0.23, 1, 0.32, 1);
       }
       .bot-avatar {
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        background: linear-gradient(135deg, var(--accent-color), #e6c66e);
+        background-color: var(--primary-color);
         color: white;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-shrink: 0;
         font-family: var(--font-heading);
-        font-size: 1.8rem;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        font-size: 1.5rem;
       }
       .bot-welcome-text {
         background-color: #e9e9eb;
-        padding: 12px 18px;
-        border-radius: 20px;
-        border-bottom-left-radius: 5px;
+        padding: 10px 15px;
+        border-radius: 18px;
+        border-bottom-left-radius: 4px;
         font-size: 0.95rem;
         line-height: 1.5;
       }
@@ -745,7 +992,7 @@
         animation: message-fade-in 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0.2s both;
       }
       .suggestion-btn {
-        background: #fff;
+        background: none;
         border: 1px solid var(--primary-color);
         color: var(--primary-color);
         padding: 8px 15px;
@@ -753,23 +1000,21 @@
         cursor: pointer;
         font-size: 0.85rem;
         font-family: var(--font-body);
-        transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        transition: background-color 0.3s ease, color 0.3s ease;
       }
       .suggestion-btn:hover {
         background-color: var(--primary-color);
         color: white;
-        transform: translateY(-2px);
       }
       #chat-typing-indicator {
         align-self: flex-start;
         display: flex;
         align-items: center;
         gap: 5px;
-        padding: 12px 18px;
+        padding: 10px 15px;
         background-color: #e9e9eb;
-        border-radius: 20px;
-        border-bottom-left-radius: 5px;
+        border-radius: 18px;
+        border-bottom-left-radius: 4px;
       }
       #chat-typing-indicator span {
         width: 8px;
@@ -792,8 +1037,6 @@
         border-top: 1px solid #eee;
         padding: 10px;
         flex-shrink: 0;
-        background: #fff;
-        box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
       }
       #chat-input {
         flex-grow: 1;
@@ -802,7 +1045,6 @@
         font-size: 1rem;
         font-family: var(--font-body);
         outline: none;
-        background: transparent;
       }
       #chat-send-btn {
         background-color: transparent;
@@ -810,29 +1052,33 @@
         cursor: pointer;
         padding: 0 10px;
         color: var(--primary-color);
-        transition: color 0.2s, transform 0.2s;
+        transition: color 0.2s;
       }
       #chat-send-btn:hover {
         color: var(--primary-color-dark);
-        transform: scale(1.1);
       }
       #chat-send-btn svg {
         width: 24px;
         height: 24px;
       }
       
-      /* === MEDIA QUERIES === */
+      /* === MEDIA QUERIES FOR RESPONSIVE DESIGN === */
       @media (max-width: 1024px) { 
         body { font-size: 16px; } 
         .section { padding: 70px 20px; } 
         .section h2 { font-size: 5rem; } 
-        h1 { font-size: 7rem; line-height: 1.2; }
-        .mobile-break { display: block; }
+        h1 { 
+          font-size: 7rem;
+          line-height: 1.2;
+        }
+        .mobile-break {
+          display: block;
+        }
         .hero p { font-size: 1.5rem; } 
         #countdown { gap: 20px; } 
         #countdown div { padding: 12px 20px; min-width: 90px; font-size: 2.5rem; } 
         #countdown span { font-size: 1rem; } 
-        .couple-img { width: 225px; height: 225px; }
+        .couple-img { width: 225px; height: 225px; } /* Proportional increase */
       }
       
       @media (max-width: 768px) {
@@ -842,16 +1088,32 @@
         .heading-divider { width: 320px; height: 105px; margin-bottom: 30px; }
         .splash-content h1 { font-size: 5.5rem; }
         .splash-content h2 { font-size: 1.3rem; }
-        h1 { font-size: 6rem; line-height: 1.2; }
+        h1 {
+          font-size: 6rem;
+          line-height: 1.2;
+        }
         .hero p { font-size: 1.3rem; letter-spacing: 3.5px; }
         #countdown div { min-width: 80px; font-size: 2.2rem; }
         #countdown span { font-size: 0.9rem; }
-        .couple-details { flex-direction: column; gap: 20px; }
+
+        .couple-details {
+            flex-direction: column;
+            gap: 20px;
+        }
         .couple-details .person-details { text-align: center; }
         .couple-details .person-details h3 { font-size: 4rem; }
-        .couple-details .son-daughter-of { font-size: 1rem; margin-bottom: 20px; }
+        .couple-details .son-daughter-of {
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
         .couple-images.desktop-only { display: none; }
-        .couple-img.mobile-only { display: inline-block; width: 200px; height: 200px; margin: 0 auto; }
+        .couple-img.mobile-only {
+            display: inline-block;
+            width: 200px; /* Increased size */
+            height: 200px; /* Increased size */
+            margin: 0 auto;
+        }
+
         .event-info { flex-direction: column; align-items: center; gap: 35px; }
         .timeline::before { left: 31px; }
         .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
@@ -880,15 +1142,20 @@
         .guest-name { font-size: 1.5rem; }
         #open-invitation-btn { padding: 12px 28px; font-size: 0.9rem; }
         .bismillah { font-size: 2rem; margin-bottom: 15px;}
-        h1 { font-size: 4.2rem; line-height: 1.2; }
+        h1 {
+          font-size: 4.2rem;
+          line-height: 1.2;
+        }
         .hero p { font-size: 0.9rem; letter-spacing: 3px; margin: 10px 0 25px; }
         #countdown { flex-direction: row; flex-wrap: nowrap; gap: 8px; justify-content: center; width: 100%; box-sizing: border-box; padding: 0 10px; }
         #countdown div { padding: 10px 5px; min-width: 0; flex: 1; font-size: 1.8rem; border-radius: 8px; line-height: 1.1; }
         #countdown span { font-size: 0.65rem; margin-top: 6px; letter-spacing: 1px; word-break: keep-all; }
+        
         .couple-details .person-details h3 { font-size: 3.5rem; }
         .couple-details .son-daughter-of { font-size: 0.9rem; }
         .couple-details .ampersand { font-size: 4rem; }
-        .couple-img.mobile-only { width: 180px; height: 180px; }
+        .couple-img.mobile-only { width: 180px; height: 180px; } /* Increased size */
+
         .container p { font-size: 0.95rem; }
         .timeline-content h3 { font-size: 2rem; }
         .timeline-content p { font-size: 0.9rem; }
@@ -897,12 +1164,26 @@
         .section::before, .section::after { display: none; }
         .song-info { display: none; }
         footer .final-thanks { font-size: 40px; }
+        
+        /* Carousel mobile improvements */
         .carousel-nav { display: none; }
         .carousel-counter { display: block; }
         .carousel-btn { width: 40px; height: 40px; font-size: 1.5rem; }
-        #chatbot-toggle-btn { width: 50px; height: 50px; right: 15px; bottom: 15px; }
+
+        /* Chatbot responsive styles */
+        #chatbot-toggle-btn {
+            width: 50px;
+            height: 50px;
+            right: 15px;
+            bottom: 15px;
+        }
         #chatbot-toggle-btn svg { width: 28px; height: 28px; }
-        #chat-window { bottom: 80px; right: 15px; left: 15px; width: auto; height: 60vh; }
+        #chat-window {
+            bottom: 80px;
+            right: 15px;
+            left: 15px;
+            width: auto;
+        }
       }
     </style>
   </head>
@@ -992,7 +1273,7 @@
 
             <blockquote style="margin-top: 40px; border: none; padding: 0;" class="animated-child">
               <p dir="rtl" style="font-size: 2rem; color: var(--primary-color-dark); margin-bottom: 20px;">
-                وَاللّٰهُ جَعَلَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا وَّجَعَلَ لَكُمْ مِّنْ اَزْوَاجِكُمْ بَنِيْنَ وَحَفَدَةً وَّرَزَقَكُمْ مِّنَ الطَّيِّبٰتِۗ اَفَبِالْبَاطِلِ يُؤْمِنُوْنَ وَبِنِعْمَتِ اللّٰهِ هُمْ يَكْفُرُوْنَۙ
+                وَاللّٰهُ جَعَلَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا وَّجَعَلَ لَكُمْ مِّنْ اَزْوَاجِكُمْ بَنِيْنَ وَحَفَدَةً وَّرَזَقَكُمْ مِّنَ الطَّيِّبٰتِۗ اَفَبِالْبَاطِلِ يُؤْمِنُوْنَ وَبِنِعْمَتِ اللّٰهِ هُمْ يَكْفُرُوْنَۙ
               </p>
               <p style="font-size: 1.1rem; font-style: italic; max-width: 700px; margin: 0 auto;">
                 "Allah menjadikan bagimu pasangan (suami atau istri) dari jenis kamu sendiri, menjadikan bagimu dari pasanganmu anak-anak dan cucu-cucu, serta menganugerahi kamu rezeki yang baik-baik. Mengapa terhadap yang batil mereka beriman, sedangkan terhadap nikmat Allah mereka ingkar?"
@@ -1161,14 +1442,15 @@
 
     <div id="copy-notification">Nomor berhasil disalin!</div>
 
-    <!-- CHATBOT UI (ENHANCED) -->
+    <!-- CHATBOT UI (IMPROVED) -->
     <div id="chatbot-container">
       <div id="chat-window">
         <div id="chat-header">
           <div>
-            <span>Bina, Asisten Pernikahan</span>
+            <span>Bot Asisten</span>
             <small>Online</small>
           </div>
+          <button id="close-chat-btn" aria-label="Close Chat">&times;</button>
         </div>
         <div id="chat-messages">
             <!-- Messages will be appended here -->
@@ -1208,7 +1490,7 @@
         navigator.clipboard.writeText(text).then(() => {
             const notification = document.getElementById('copy-notification');
             notification.textContent = 'Nomor berhasil disalin!';
-            notification.style.backgroundColor = '#00796b';
+            notification.style.backgroundColor = '#00796b'; // Success color
             notification.classList.add('show');
             clearTimeout(notificationTimeout);
             notificationTimeout = setTimeout(() => {
@@ -1217,7 +1499,7 @@
         }, (err) => {
             const notification = document.getElementById('copy-notification');
             notification.textContent = 'Gagal menyalin nomor.';
-            notification.style.backgroundColor = '#c62828';
+            notification.style.backgroundColor = '#c62828'; // Error color
             notification.classList.add('show');
             clearTimeout(notificationTimeout);
             notificationTimeout = setTimeout(() => {
@@ -1227,24 +1509,35 @@
       }
 
       document.addEventListener("DOMContentLoaded", () => {
+        // --- PREVENT RIGHT-CLICK ON IMAGES ---
         document.addEventListener('contextmenu', event => {
-            if (event.target.tagName === 'IMG') event.preventDefault();
+            if (event.target.tagName === 'IMG') {
+                event.preventDefault();
+            }
         });
 
         const urlParams = new URLSearchParams(window.location.search);
         const guestName = urlParams.get('to');
-        if (guestName) {
-          document.querySelector('.guest-name').textContent = guestName;
+        const guestNameElement = document.querySelector('.guest-name');
+        if (guestName && guestNameElement) {
+          guestNameElement.textContent = guestName;
         }
         
         const openBtn = document.getElementById("open-invitation-btn");
         const splashScreen = document.getElementById("splash-screen");
+        const splashContent = document.querySelector(".splash-content");
         const mainContent = document.getElementById("main-content");
         const music = document.getElementById("background-music");
         const musicBtn = document.getElementById("music-toggle-btn");
 
         openBtn.addEventListener("click", () => {
-          music.play().then(() => musicBtn.classList.add("is-playing")).catch(e => console.log("Autoplay prevented."));
+          music.play().then(() => {
+            musicBtn.classList.add("is-playing");
+          }).catch(() => {
+            console.log("Autoplay was prevented by the browser.");
+          });
+
+          splashContent.classList.add("closing");
           splashScreen.classList.add("fade-out");
           mainContent.style.display = "block";
           document.body.style.overflowY = "auto";
@@ -1257,31 +1550,31 @@
           const now = new Date().getTime();
           const gap = countDate - now;
           if (gap < 0) {
-            if(document.getElementById("countdown")) document.getElementById("countdown").style.display = "none";
-            if(document.getElementById("countdown-end")) document.getElementById("countdown-end").style.display = "block";
+            if (document.getElementById("countdown")) document.getElementById("countdown").style.display = "none";
+            if (document.getElementById("countdown-end")) document.getElementById("countdown-end").style.display = "block";
             clearInterval(countdownInterval);
             return;
           }
-          const s = 1000, m = s * 60, h = m * 60, d = h * 24;
-          const pad = (n) => String(n).padStart(2, "0");
-          document.getElementById("days").innerText = pad(Math.floor(gap / d));
-          document.getElementById("hours").innerText = pad(Math.floor((gap % d) / h));
-          document.getElementById("minutes").innerText = pad(Math.floor((gap % h) / m));
-          document.getElementById("seconds").innerText = pad(Math.floor((gap % m) / s));
+          const second = 1000, minute = second * 60, hour = minute * 60, day = hour * 24;
+          const pad = (num) => String(num).padStart(2, "0");
+          document.getElementById("days").innerText = pad(Math.floor(gap / day));
+          document.getElementById("hours").innerText = pad(Math.floor((gap % day) / hour));
+          document.getElementById("minutes").innerText = pad(Math.floor((gap % hour) / minute));
+          document.getElementById("seconds").innerText = pad(Math.floor((gap % minute) / second));
         };
         const countdownInterval = setInterval(countdown, 1000);
 
         const animatedItems = document.querySelectorAll(".animated-item");
-        const appearOptions = { threshold: 0, rootMargin: window.innerWidth <= 768 ? "0px 0px -150px 0px" : "0px 0px -200px 0px" };
+        const isMobile = window.innerWidth <= 768;
+        const appearOptions = { threshold: 0, rootMargin: isMobile ? "0px 0px -150px 0px" : "0px 0px -200px 0px" };
         const appearOnScroll = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-              observer.unobserve(entry.target);
-            }
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
           });
         }, appearOptions);
-        animatedItems.forEach(item => appearOnScroll.observe(item));
+        animatedItems.forEach((item) => appearOnScroll.observe(item));
 
         const toggleMusic = () => {
           music.paused ? music.play() : music.pause();
@@ -1317,7 +1610,9 @@
                         card.innerHTML = `<div class="comment-header"><h4 class="comment-name">${safeName}</h4><span class="comment-status ${statusClass}">${statusText}</span></div><p class="comment-body">${safeMessage}</p>`;
                         commentsContainer.appendChild(card);
                     });
-                } else { throw new Error('Failed to fetch data'); }
+                } else {
+                    commentsContainer.innerHTML = '<p class="error-message">Gagal memuat ucapan. Coba segarkan halaman.</p>';
+                }
             } catch (error) {
                 commentsContainer.innerHTML = '<p class="error-message">Gagal memuat ucapan. Periksa koneksi Anda.</p>';
             }
@@ -1335,7 +1630,9 @@
                     formStatus.style.color = 'green';
                     rsvpForm.reset();
                     fetchAndDisplayComments();
-                } else { throw new Error(data.error || 'Unknown error'); }
+                } else {
+                    throw new Error(data.error || 'An unknown error occurred.');
+                }
             })
             .catch(error => {
                 formStatus.textContent = 'Oops! Terjadi kesalahan. Silakan coba lagi.';
@@ -1349,9 +1646,9 @@
 
         fetchAndDisplayComments();
 
-        // --- GALLERY CAROUSEL LOGIC ---
+        // --- GALLERY CAROUSEL LOGIC (IMPROVED) ---
         const slider = document.querySelector('.gallery-slider');
-        if (slider && slider.children.length > 0) {
+        if (slider) {
             const slides = Array.from(slider.children);
             const nextBtn = document.querySelector('.carousel-btn.next');
             const prevBtn = document.querySelector('.carousel-btn.prev');
@@ -1359,32 +1656,53 @@
             const counterElement = document.querySelector('.carousel-counter');
             let currentIndex = 0;
 
-            slides.forEach((_, index) => {
-                const dot = document.createElement('button');
-                dot.classList.add('nav-dot');
-                dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
-                navContainer.appendChild(dot);
-            });
-            
-            const dots = Array.from(navContainer.children);
-            const goToSlide = (index) => {
-                slides.forEach(slide => slide.classList.remove('active-slide'));
-                currentIndex = (index + slides.length) % slides.length;
-                slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-                dots.forEach(dot => dot.classList.remove('active'));
-                dots[currentIndex].classList.add('active');
-                counterElement.textContent = `${currentIndex + 1} / ${slides.length}`;
-                slides[currentIndex].classList.add('active-slide');
-            };
-            nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
-            prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
-            dots.forEach((dot, index) => dot.addEventListener('click', () => goToSlide(index)));
-            goToSlide(0);
+            if(slides.length > 0) {
+              slides.forEach((_, index) => {
+                  const dot = document.createElement('button');
+                  dot.classList.add('nav-dot');
+                  dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+                  navContainer.appendChild(dot);
+              });
+              
+              const dots = Array.from(navContainer.children);
+
+              const goToSlide = (index) => {
+                  slides.forEach(slide => slide.classList.remove('active-slide'));
+                  
+                  currentIndex = index;
+                  slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+                  
+                  dots.forEach(dot => dot.classList.remove('active'));
+                  dots[currentIndex].classList.add('active');
+                  counterElement.textContent = `${currentIndex + 1} / ${slides.length}`;
+                  
+                  slides[currentIndex].classList.add('active-slide');
+              };
+
+              nextBtn.addEventListener('click', () => {
+                  const nextIndex = (currentIndex + 1) % slides.length;
+                  goToSlide(nextIndex);
+              });
+
+              prevBtn.addEventListener('click', () => {
+                  const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+                  goToSlide(prevIndex);
+              });
+              
+              dots.forEach((dot, index) => {
+                  dot.addEventListener('click', () => {
+                      goToSlide(index);
+                  });
+              });
+
+              goToSlide(0);
+            }
         }
         
-        // --- CHATBOT LOGIC (ENHANCED) ---
+        // --- CHATBOT LOGIC (IMPROVED) ---
         const chatWindow = document.getElementById('chat-window');
         const chatbotToggleBtn = document.getElementById('chatbot-toggle-btn');
+        const closeChatBtn = document.getElementById('close-chat-btn');
         const chatForm = document.getElementById('chat-form');
         const chatInput = document.getElementById('chat-input');
         const chatMessages = document.getElementById('chat-messages');
@@ -1394,65 +1712,62 @@
         const GEMINI_API_KEY = 'AIzaSyD6rkhvtJGhHWVKgk85QZvsMFSUuA1S4A0'; 
         const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`;
         
-        const enhancedWeddingContext = `
-            You are "Bina", a highly intelligent, warm, and proactive digital assistant for the wedding of Pramudya and Feristina.
-            Your goal is to provide the most helpful and delightful experience for the guests.
+        const weddingContext = `
+            You are a friendly, cheerful, and helpful wedding assistant chatbot for the wedding of Pramudya and Feristina. Your personality is helpful and slightly playful.
+            Your main role is to answer guest questions based ONLY on the information provided below.
+            If a question is unrelated to the wedding, you must politely decline. A good response would be: "Maaf, saya adalah asisten virtual untuk pernikahan Pramudya & Feristina, jadi hanya bisa menjawab pertanyaan seputar acara spesial ini ya."
+            The current date is ${new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}. Use this to answer questions about how far away the wedding is.
 
-            **Core Instructions:**
-            1.  **Persona:** Your tone is enthusiastic, warm, and professional. Use friendly emojis (like 😊, ✨, 🎉) where appropriate to enhance the tone, but maintain clarity and don't overdo it.
-            2.  **Information Source:** ONLY answer questions based on the information provided in this prompt. If you don't know the answer, politely say so. E.g., "Informasi tersebut tidak tersedia, tapi saya bisa bantu dengan hal lain."
-            3.  **Proactivity:** After answering a question, anticipate the user's next logical need and offer help. For example, after giving the address, ask "Apakah Anda butuh petunjuk arah di Google Maps?".
-            4.  **Contextual Awareness:** Pay close attention to the conversation history to provide relevant, contextual follow-ups.
-            5.  **Formatting:** Use simple Markdown like **bold** for emphasis or bullet points (*) for lists to make your answers clear and easy to read.
-            6.  **Safety:** If asked about personal opinions, sensitive topics, or anything outside the wedding scope, politely decline. E.g., "That's a bit outside my expertise as a wedding assistant! Is there anything about Pramudya and Feristina's big day I can help with?"
-            7.  **Current Date:** Today is ${new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}. Use this to answer time-related questions.
+            **=== CORE WEDDING DETAILS ===**
+            - **The Couple:** Pramudya & Feristina
+            - **Groom's Parents:** Bapak Yuhardi & Ibu Amalia Fiora Irma
+            - **Bride's Parents:** Bapak Ferry Yanes & Ibu Risma Amalia
+            - **Wedding Date:** 30 November 2025
 
-            **=== WEDDING KNOWLEDGE BASE ===**
+            **=== EVENT SCHEDULE & LOCATION ===**
+            - **Akad Nikah (Ceremony):** Starts at 09:00 WIB. (Time is still tentative).
+            - **Resepsi (Reception):** From 11:00 to 13:00 WIB.
+            - **Venue (for both events):** Aula Direktorat Jenderal Bina Pemerintahan Desa Kemendagri. It is an indoor, air-conditioned venue.
+            - **Address:** Jl. Raya Pasar Minggu No.19, Pejaten Barat, Kecamatan Pasar Minggu, Jakarta Selatan.
+            - **Google Maps Link:** https://maps.app.goo.gl/pB9XnHQSxj8bdVGFA
 
-            **The Couple: Pramudya & Feristina**
-            *   **Groom's Parents:** Bapak Yuhardi & Ibu Amalia Fiora Irma
-            *   **Bride's Parents:** Bapak Ferry Yanes & Ibu Risma Amalia
-            *   **Our Story:** Their story began in August 2017 with an unexpected meeting that sparked a lifelong connection. They shared their first adventure together in September 2020, creating unforgettable memories. The magical proposal happened in October 2024, leading them to their special day.
+            **=== GUEST INFORMATION (FAQ) ===**
+            - **Dress Code:** Semi-Formal or Formal. Guests are kindly requested to dress neatly. Batik or a suit/dress would be perfect.
+            - **Gifts:** Your presence and prayers are the greatest gift. For those unable to attend, digital gifts are also appreciated via:
+                - Bank Mandiri: 1270013987944
+                - Gopay: 087771800110
+            - **Parking:** Yes, there is ample parking space available for cars and motorcycles.
+            - **RSVP:** Guests should confirm attendance via the form on the website before November 30, 2025.
 
-            **Event Schedule & Location**
-            *   **Date:** 30 November 2025
-            *   **Akad Nikah (Ceremony):** Starts at 09:00 WIB. (Note: The time is still tentative).
-            *   **Resepsi (Reception):** 11:00 - 13:00 WIB.
-            *   **Venue (Both Events):** Aula Direktorat Jenderal Bina Pemerintahan Desa Kemendagri (an indoor, air-conditioned venue).
-            *   **Address:** Jl. Raya Pasar Minggu No.19, Pejaten Barat, Kecamatan Pasar Minggu, Jakarta Selatan.
-            *   **Google Maps:** https://maps.app.goo.gl/pB9XnHQSxj8bdVGFA
+            **=== CHATBOT COMMANDS ===**
+            You can also perform actions for the user! If a user's request matches one of the actions below, formulate a helpful natural language response and place the corresponding command tag at the very end of your sentence.
 
-            **Guest Information (FAQ)**
-            *   **Dress Code:** The requested dress code is **Semi-Formal or Formal**. Guests are kindly requested to dress neatly. Batik, a suit, or a formal dress would be perfect.
-            *   **Gifts:** Your presence and prayers are the greatest gift! However, for those who wish to give a tangible gift, you can use the following:
-                *   Bank Mandiri: 1270013987944
-                *   Gopay: 087771800110
-            *   **Parking:** Yes, there is ample parking space available for both cars and motorcycles at the venue.
-            *   **RSVP:** Guests are kindly requested to confirm their attendance using the RSVP form on this website before the wedding day.
+            **Available Commands:**
+            *   '[COMMAND:scroll_to_rsvp]' - Scrolls the page to the RSVP form.
+            *   '[COMMAND:scroll_to_gallery]' - Scrolls the page to the photo gallery.
+            *   '[COMMAND:scroll_to_location]' - Scrolls the page to the event location map.
+            *   '[COMMAND:scroll_to_gift]' - Scrolls the page to the wedding gift section.
+            *   '[COMMAND:toggle_music]' - Plays or pauses the background music.
+            *   '[COMMAND:copy_mandiri]' - Copies the Mandiri account number to the clipboard.
+            *   '[COMMAND:copy_gopay]' - Copies the Gopay number to the clipboard.
 
-            **=== INTERACTIVE COMMANDS ===**
-            Integrate these commands naturally into your responses. They will be executed by the website.
-            *   '[COMMAND:scroll_to_rsvp]': To show the RSVP form.
-            *   '[COMMAND:scroll_to_gallery]': To show the photo gallery.
-            *   '[COMMAND:scroll_to_location]': To show the event location map.
-            *   '[COMMAND:scroll_to_gift]': To show the wedding gift section.
-            *   '[COMMAND:toggle_music]': To play or pause the music.
-            *   '[COMMAND:copy_mandiri]': To copy the Mandiri account number.
-            *   '[COMMAND:copy_gopay]': To copy the Gopay number.
-            
-            **Example Interactions:**
+            **Command Usage Examples:**
             *   User: "Gimana cara aku konfirmasi hadir?"
-            *   Bina: "Tentu! Anda bisa mengisi formulir konfirmasi kehadiran di bagian bawah halaman. Saya akan langsung antar Anda ke sana ya. [COMMAND:scroll_to_rsvp]"
-            *   User: "Mau kasih hadiah tapi gak bisa dateng"
-            *   Bina: "Terima kasih banyak atas niat baiknya, itu sangat berarti! 😊 Anda bisa mengirimkannya melalui Bank Mandiri. Saya bantu salinkan nomor rekeningnya untuk Anda ya. [COMMAND:copy_mandiri]"
+            *   Your response: "Tentu! Saya akan langsung arahkan Anda ke formulir konfirmasi kehadiran ya. [COMMAND:scroll_to_rsvp]"
+            *   User: "Mau liat foto-fotonya dong"
+            *   Your response: "Siap! Ini dia galeri foto-foto pre-wedding mereka. [COMMAND:scroll_to_gallery]"
+            *   User: "Tolong putar musiknya."
+            *   Your response: "Oke, musiknya saya mainkan untuk Anda! [COMMAND:toggle_music]"
+            *   User: "Boleh minta nomor rekening Mandiri untuk hadiah?"
+            *   Your response: "Tentu, ini nomor rekening Mandiri-nya. Saya juga bantu salin nomornya untuk Anda. [COMMAND:copy_mandiri]"
         `;
 
         let conversationHistory = [{
             role: "user",
-            parts: [{ text: enhancedWeddingContext }]
+            parts: [{ text: weddingContext }]
         }, {
             role: "model",
-            parts: [{ text: "Initialization successful. I am Bina, ready to assist." }]
+            parts: [{ text: "Tentu, saya siap membantu! Ada yang bisa ditanyakan mengenai pernikahan Pramudya dan Feristina?" }]
         }];
         
         const toggleChatWindow = () => {
@@ -1463,57 +1778,69 @@
           }
         };
         chatbotToggleBtn.addEventListener('click', toggleChatWindow);
+        closeChatBtn.addEventListener('click', toggleChatWindow);
         
-        const appendMessage = (sender, messageContent) => {
+        const appendMessage = (sender, message) => {
             const messageElement = document.createElement('div');
             messageElement.classList.add('chat-message', sender);
-            
-            // Basic Markdown to HTML conversion
-            let htmlContent = messageContent
-                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold
-                .replace(/\*(.*?)\*/g, '<em>$1</em>');       // Italics
-            
-            messageElement.innerHTML = htmlContent;
+            messageElement.textContent = message;
             chatMessages.appendChild(messageElement);
             chatMessages.scrollTop = chatMessages.scrollHeight;
         };
         
         const initializeChat = () => {
             chatMessages.innerHTML = ''; 
+
             const welcomeHTML = `
                 <div class="bot-welcome">
                     <div class="bot-avatar">B</div>
                     <div class="bot-welcome-text">
-                        Halo! Saya Bina, asisten virtual untuk pernikahan Pramudya & Feristina. Ada yang bisa saya bantu? 😊
+                        Halo! Saya adalah asisten virtual untuk pernikahan Pramudya & Feristina. Ada yang bisa saya bantu?
                     </div>
                 </div>
                 <div class="suggested-questions">
                     <button class="suggestion-btn" data-question="Kapan acaranya?">Kapan acaranya?</button>
                     <button class="suggestion-btn" data-question="Di mana lokasinya?">Di mana lokasinya?</button>
                     <button class="suggestion-btn" data-question="Dress code-nya apa ya?">Dress code-nya apa ya?</button>
-                </div>`;
+                </div>
+            `;
             chatMessages.insertAdjacentHTML('beforeend', welcomeHTML);
             
             document.querySelectorAll('.suggestion-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
-                    chatInput.value = btn.dataset.question;
+                    const question = btn.getAttribute('data-question');
+                    chatInput.value = question;
                     chatForm.dispatchEvent(new Event('submit', { cancelable: true }));
                 });
             });
         };
 
         const executeCommand = (command) => {
-            const actions = {
-                scroll_to_rsvp: () => document.querySelector('.rsvp-section').scrollIntoView({ behavior: 'smooth' }),
-                scroll_to_gallery: () => document.querySelector('.gallery-carousel').scrollIntoView({ behavior: 'smooth' }),
-                scroll_to_location: () => document.querySelector('.map-wrapper').scrollIntoView({ behavior: 'smooth' }),
-                scroll_to_gift: () => document.querySelector('.wedding-gift-section').scrollIntoView({ behavior: 'smooth' }),
-                toggle_music: toggleMusic,
-                copy_mandiri: () => copyToClipboard('1270013987944'),
-                copy_gopay: () => copyToClipboard('087771800110'),
-            };
-            if (actions[command]) actions[command]();
-            else console.warn('Unknown command:', command);
+            switch (command) {
+                case 'scroll_to_rsvp':
+                    document.querySelector('.rsvp-section').scrollIntoView({ behavior: 'smooth' });
+                    break;
+                case 'scroll_to_gallery':
+                    document.querySelector('.gallery-carousel').scrollIntoView({ behavior: 'smooth' });
+                    break;
+                case 'scroll_to_location':
+                    document.querySelector('.map-wrapper').scrollIntoView({ behavior: 'smooth' });
+                    break;
+                case 'scroll_to_gift':
+                    document.querySelector('.wedding-gift-section').scrollIntoView({ behavior: 'smooth' });
+                    break;
+                case 'toggle_music':
+                    toggleMusic();
+                    break;
+                case 'copy_mandiri':
+                    copyToClipboard('1270013987944');
+                    break;
+                case 'copy_gopay':
+                    copyToClipboard('087771800110');
+                    break;
+                default:
+                    console.warn('Unknown command:', command);
+            }
         };
 
         initializeChat();
@@ -1523,7 +1850,8 @@
             const userMessage = chatInput.value.trim();
             if (!userMessage) return;
 
-            document.querySelector('.suggested-questions')?.remove();
+            const suggestions = document.querySelector('.suggested-questions');
+            if (suggestions) suggestions.remove();
 
             if (GEMINI_API_KEY === 'YOUR_API_KEY' || !GEMINI_API_KEY) {
                 appendMessage('bot', 'Maaf, chatbot belum diaktifkan. Harap masukkan API Key yang valid pada kode website.');
@@ -1542,20 +1870,21 @@
                 const response = await fetch(API_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ contents: conversationHistory, generationConfig: { temperature: 0.7 } })
+                    body: JSON.stringify({ contents: conversationHistory })
                 });
 
-                if (!response.ok) throw new Error(`API Error: ${response.status} ${response.statusText}`);
+                if (!response.ok) throw new Error(`API Error: ${response.statusText}`);
 
                 const data = await response.json();
                 let botMessage = data.candidates[0].content.parts[0].text;
                 
-                const commandRegex = /\[COMMAND:(\w+)\]/g;
-                const commands = [...botMessage.matchAll(commandRegex)].map(match => match[1]);
+                const commandRegex = /\[COMMAND:(\w+)\]/;
+                const match = botMessage.match(commandRegex);
                 
-                if (commands.length > 0) {
-                    botMessage = botMessage.replace(commandRegex, '').trim();
-                    commands.forEach(executeCommand);
+                if (match) {
+                    const command = match[1];
+                    botMessage = botMessage.replace(commandRegex, '').trim(); // Clean message for display
+                    executeCommand(command);
                 }
 
                 conversationHistory.push({ role: "model", parts: [{ text: botMessage }] });
