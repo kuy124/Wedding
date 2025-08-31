@@ -487,6 +487,7 @@
       .form-group { margin-bottom: 25px; }
       .form-group label { display: block; font-family: var(--font-body); font-weight: bold; margin-bottom: 8px; color: var(--primary-color); font-size: 1.1rem; }
       .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 15px; font-family: var(--font-body); font-size: 1rem; border-radius: 8px; border: 1px solid #ddd; box-sizing: border-box; transition: border-color 0.3s, box-shadow 0.3s; }
+      .form-group input[readonly] { background-color: #f1f1f1; cursor: not-allowed; }
       .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 8px rgba(184, 147, 142, 0.5); }
       #submit-button { width: 100%; cursor: pointer; }
       #form-status { margin-top: 20px; font-size: 1rem; text-align: center; min-height: 24px; font-weight: bold; }
@@ -579,6 +580,20 @@
       .comment-status.attending { background-color: #e0f2f1; color: #00796b; }
       .comment-status.not-attending { background-color: #ffcdd2; color: #c62828; }
       .comment-body { font-size: 1rem; line-height: 1.6; color: var(--text-color); margin: 0; word-wrap: break-word; }
+      .comment-footer { margin-top: 15px; text-align: right; }
+      .reply-btn {
+        background: none;
+        border: none;
+        color: var(--primary-color-dark);
+        font-family: var(--font-body);
+        font-weight: bold;
+        font-size: 0.9rem;
+        cursor: pointer;
+        padding: 5px 10px;
+        border-radius: 5px;
+        transition: background-color 0.2s;
+      }
+      .reply-btn:hover { background-color: #f1f1f1; }
       .loader {
         width: 50px;
         height: 50px;
@@ -624,59 +639,67 @@
       .map-container { position: relative; overflow: hidden; padding-top: 56.25%; margin-top: 30px; border-radius: 15px; box-shadow: 0 8px 32px 0 rgba(184, 147, 142, 0.2); }
       .map-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
       .map-button { margin-top: 30px; }
+      .map-button + .map-button { margin-top: 15px; }
       
-      /* === GALLERY CAROUSEL STYLES === */
+      /* === REVAMPED GALLERY CAROUSEL STYLES === */
+      .gallery-carousel {
+        max-width: 900px;
+        max-height: 75vh;
+        margin: 40px auto 0;
+        position: relative;
+        overflow: visible;
+        aspect-ratio: 4 / 5;
+        padding: 12px;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(184, 147, 142, 0.25), 0 0 0 8px rgba(255, 255, 255, 0.5);
+      }
+      .gallery-slider {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .gallery-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+        z-index: 1;
+        visibility: hidden;
+      }
+      .gallery-slide.is-visible {
+        opacity: 1;
+        z-index: 2;
+        visibility: visible;
+      }
+      .gallery-slide img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        object-position: center 30%;
+      }
       @keyframes kenburns-zoom {
         0% { transform: scale(1.05) translateY(0); }
         100% { transform: scale(1.15) translateY(-3px); }
       }
-      .gallery-carousel {
-        max-width: 800px;
-        margin: 40px auto 0;
-        position: relative;
-        overflow: hidden;
-        border-radius: 15px;
-        box-shadow: 0 10px 40px rgba(184, 147, 142, 0.3);
-        border: 5px solid white;
-      }
-      .gallery-slider {
-        display: flex;
-        transition: transform 0.6s cubic-bezier(0.455, 0.03, 0.515, 0.955);
-      }
-      .gallery-slide {
-        flex: 0 0 100%;
-        position: relative;
-        overflow: hidden;
-      }
-      .gallery-slide::after {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          box-shadow: inset 0 0 80px rgba(0,0,0,0.3);
-          z-index: 1;
-      }
-      .gallery-slide img {
-        width: 100%;
-        display: block;
-        aspect-ratio: 4 / 5;
-        object-fit: cover;
-        object-position: center 30%;
-      }
-      .gallery-slide.active-slide img {
-          animation: kenburns-zoom 12s ease-out forwards;
+      .gallery-slide.is-visible img {
+        animation: kenburns-zoom 12s ease-out forwards;
       }
       .carousel-btn {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        background-color: rgba(255, 255, 255, 0.7);
+        background-color: rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
         border: none;
-        color: var(--text-color);
-        font-size: 2rem;
-        font-weight: bold;
+        color: white;
         cursor: pointer;
         border-radius: 50%;
         width: 50px;
@@ -684,45 +707,93 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        line-height: 1;
-        transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-        z-index: 10;
-        padding-bottom: 5px;
-        text-shadow: 0 0 5px rgba(0,0,0,0.1);
+        transition: background-color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+        z-index: 12;
+        opacity: 0;
+      }
+      .gallery-carousel:hover .carousel-btn {
+        opacity: 1;
       }
       .carousel-btn:hover {
-        background-color: var(--primary-color);
-        color: white;
-        transform: translateY(-50%) scale(1.1);
+        background-color: rgba(0, 0, 0, 0.45);
+        transform: translateY(-50%) scale(1.05);
       }
-      .carousel-btn.prev { left: 15px; }
-      .carousel-btn.next { right: 15px; }
-      .carousel-nav {
+      .carousel-btn.prev { left: 25px; }
+      .carousel-btn.next { right: 25px; }
+      .carousel-btn svg {
+        width: 28px;
+        height: 28px;
+        fill: white;
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+      }
+      .carousel-ui-overlay {
         position: absolute;
         bottom: 20px;
         left: 50%;
         transform: translateX(-50%);
+        width: auto;
+        padding: 8px 10px;
+        z-index: 12;
         display: flex;
-        gap: 10px;
-        z-index: 10;
-        background: rgba(0,0,0,0.2);
-        padding: 8px 15px;
-        border-radius: 20px;
+        align-items: center;
+        gap: 15px;
+        background: rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 50px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        box-sizing: border-box;
+      }
+      .carousel-counter {
+        background-color: transparent;
+        color: rgba(255, 255, 255, 0.95);
+        padding: 0 5px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      .carousel-nav {
+        display: flex;
+        gap: 8px;
+        border-left: 1px solid rgba(255, 255, 255, 0.2);
+        padding-left: 15px;
+        margin-left: -2px;
       }
       .nav-dot {
-        width: 12px;
-        height: 12px;
+        width: 9px;
+        height: 9px;
         border-radius: 50%;
-        background-color: rgba(255, 255, 255, 0.6);
+        background-color: rgba(255, 255, 255, 0.4);
         cursor: pointer;
         transition: background-color 0.3s ease, transform 0.3s ease;
-        border: 1px solid rgba(0,0,0,0.1);
-        padding: 0;
+        border: none;
       }
       .nav-dot.active {
         background-color: white;
-        transform: scale(1.2);
-        box-shadow: 0 0 5px rgba(0,0,0,0.3);
+        transform: scale(1.1);
+      }
+      .carousel-progress-bar {
+        position: absolute;
+        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 40px);
+        height: 3px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 3px;
+        overflow: hidden;
+        z-index: 11;
+      }
+      .carousel-progress-bar-inner {
+        width: 0%;
+        height: 100%;
+        background-color: white;
+        border-radius: 3px;
+      }
+      @keyframes progress {
+        from { width: 0%; }
+        to { width: 100%; }
       }
 
       /* === FOOTER STYLES === */
@@ -797,162 +868,6 @@
       .animated-item.visible .animated-child:nth-child(4) { animation-delay: 0.8s; }
       .animated-item.visible .animated-child:nth-child(5) { animation-delay: 1.0s; }
       
-      /* === PREMIUM CHATBOT STYLES === */
-      @keyframes chatbot-pulse {
-        0% { box-shadow: 0 4px 15px rgba(0,0,0,0.2), 0 0 0 0 rgba(184, 147, 142, 0.7); }
-        70% { box-shadow: 0 4px 25px rgba(0,0,0,0.3), 0 0 0 10px rgba(184, 147, 142, 0); }
-        100% { box-shadow: 0 4px 15px rgba(0,0,0,0.2), 0 0 0 0 rgba(184, 147, 142, 0); }
-      }
-      #chatbot-toggle-btn {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        width: 60px;
-        height: 60px;
-        background: linear-gradient(45deg, var(--primary-color-dark), var(--primary-color));
-        color: white;
-        border-radius: 50%;
-        border: none;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        cursor: pointer;
-        z-index: 9998;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        animation: chatbot-pulse 2.5s infinite;
-      }
-      #chatbot-toggle-btn:hover {
-        transform: scale(1.1);
-        animation-play-state: paused;
-      }
-      #chatbot-toggle-btn svg {
-        width: 32px;
-        height: 32px;
-      }
-      #chat-window {
-        position: fixed;
-        bottom: 100px;
-        right: 20px;
-        width: 370px;
-        max-width: 90vw;
-        height: 550px;
-        max-height: 75vh;
-        background-color: #fff;
-        background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23e4eaf2' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
-        border-radius: 20px;
-        box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-        z-index: 9999;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-        transform: scale(0.95) translateY(20px);
-        opacity: 0;
-        pointer-events: none;
-        transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s ease;
-        border: 1px solid #eee;
-      }
-      #chat-window.show {
-        transform: scale(1) translateY(0);
-        opacity: 1;
-        pointer-events: auto;
-      }
-      #chat-header {
-        background: linear-gradient(45deg, var(--primary-color), var(--primary-color-dark));
-        color: white;
-        padding: 15px 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-family: var(--font-body);
-        font-weight: bold;
-        font-size: 1.1rem;
-        border-bottom: 1px solid rgba(0,0,0,0.1);
-        flex-shrink: 0;
-      }
-      #chat-header::before {
-        content: 'P&F';
-        font-family: var(--font-heading);
-        font-size: 1.5rem;
-        margin-right: 10px;
-        opacity: 0.7;
-      }
-      #close-chat-btn {
-        background: none;
-        border: none;
-        color: white;
-        font-size: 1.8rem;
-        cursor: pointer;
-        padding: 0 5px;
-        line-height: 1;
-        opacity: 0.8;
-        transition: opacity 0.2s ease, transform 0.2s ease;
-      }
-      #close-chat-btn:hover {
-        opacity: 1;
-        transform: rotate(90deg);
-      }
-      #chat-messages {
-        flex-grow: 1;
-        padding: 15px;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        scroll-behavior: smooth;
-        scrollbar-width: thin;
-        scrollbar-color: var(--primary-color-dark) #f1f1f1;
-      }
-      #chat-messages::-webkit-scrollbar { width: 6px; }
-      #chat-messages::-webkit-scrollbar-track { background: #f1f1f1; }
-      #chat-messages::-webkit-scrollbar-thumb { background-color: var(--primary-color-dark); border-radius: 6px; }
-      
-      .bot-welcome { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 20px 10px; gap: 10px; }
-      .bot-avatar { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(45deg, var(--primary-color), var(--accent-color)); color: white; display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-size: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-      .bot-welcome p { margin: 0; line-height: 1.5; font-size: 0.95rem; }
-      .bot-welcome p strong { font-weight: 700; color: var(--primary-color-dark); }
-      
-      @keyframes message-pop-in {
-        from { opacity: 0; transform: translateY(10px) scale(0.95); }
-        to { opacity: 1; transform: translateY(0) scale(1); }
-      }
-      .message-container { display: flex; max-width: 90%; animation: message-pop-in 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
-      .message-container.user { align-self: flex-end; flex-direction: row-reverse; }
-      .message-container.bot { align-self: flex-start; }
-      .chat-message { padding: 10px 15px; border-radius: 18px; line-height: 1.5; font-size: 0.95rem; position: relative; box-shadow: 0 2px 5px rgba(0,0,0,0.08); word-wrap: break-word; }
-      .message-container.user .chat-message { background: linear-gradient(45deg, var(--primary-color), var(--primary-color-dark)); color: white; border-bottom-right-radius: 4px; }
-      .message-container.bot .chat-message { background-color: #f1f1f1; color: var(--text-color); border-bottom-left-radius: 4px; }
-      /* Message bubble tails */
-      .chat-message::after { content: ''; position: absolute; bottom: 0; width: 0; height: 0; border: 10px solid transparent; }
-      .message-container.user .chat-message::after { right: -8px; border-left-color: var(--primary-color-dark); border-right: 0; border-bottom: 0; }
-      .message-container.bot .chat-message::after { left: -8px; border-right-color: #f1f1f1; border-left: 0; border-bottom: 0; }
-
-      .chat-message b, .chat-message strong { color: var(--primary-color-dark); font-weight: 700; }
-      .message-container.user .chat-message b, .message-container.user .chat-message strong { color: white; background: rgba(255,255,255,0.2); padding: 0 4px; border-radius: 3px; }
-      .chat-message ul { padding-left: 20px; margin: 5px 0 0; }
-      .chat-message li { margin-bottom: 4px; }
-      .copy-btn { background: rgba(0,0,0,0.1); border: none; color: inherit; padding: 4px 8px; border-radius: 5px; cursor: pointer; font-size: 0.8em; margin-left: 8px; font-family: var(--font-body); }
-      .copy-btn:hover { background: rgba(0,0,0,0.2); }
-
-      #chat-suggestions { padding: 5px 15px 10px; display: flex; flex-wrap: wrap; gap: 8px; flex-shrink: 0; animation: message-pop-in 0.5s 0.3s cubic-bezier(0.23, 1, 0.32, 1) forwards; opacity: 0;}
-      .suggestion-btn { background-color: #fff; border: 1px solid #ddd; border-radius: 20px; padding: 8px 15px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s ease; font-family: var(--font-body); color: var(--primary-color-dark); }
-      .suggestion-btn:hover { background-color: var(--primary-color); color: white; border-color: var(--primary-color); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(184, 147, 142, 0.2); }
-      
-      #chat-typing-indicator { display: flex; align-items: center; padding: 0 10px; transition: opacity 0.3s ease; height: 30px; }
-      #chat-typing-indicator.hidden { opacity: 0; height: 0; padding: 0 10px; pointer-events: none; }
-      #chat-typing-indicator .chat-message { padding: 10px 15px; }
-      #chat-typing-indicator span { height: 8px; width: 8px; margin: 0 2px; background-color: #ccc; border-radius: 50%; display: inline-block; animation: chat-typing-animation 1.4s infinite ease-in-out both; }
-      #chat-typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
-      #chat-typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
-      @keyframes chat-typing-animation { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1.0); } }
-
-      #chat-form { display: flex; border-top: 1px solid #eee; padding: 10px; background: #fff; box-shadow: 0 -5px 15px -5px rgba(0,0,0,0.05); flex-shrink: 0; }
-      #chat-input { flex-grow: 1; border: 1px solid #ddd; padding: 12px 15px; font-size: 1rem; font-family: var(--font-body); outline: none; border-radius: 20px; transition: border-color 0.2s, box-shadow 0.2s; }
-      #chat-input:focus { border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(184, 147, 142, 0.3); }
-      #chat-send-btn { background-color: var(--primary-color); border: none; cursor: pointer; padding: 0 10px; margin-left: 10px; color: white; transition: all 0.2s; border-radius: 50%; width: 45px; height: 45px; flex-shrink: 0; }
-      #chat-send-btn:hover { background-color: var(--primary-color-dark); transform: scale(1.1); }
-      #chat-send-btn svg { width: 24px; height: 24px; }
-      
       /* === MEDIA QUERIES === */
       @media (max-width: 1024px) { 
         body { font-size: 16px; } 
@@ -996,6 +911,13 @@
         #comments-container { max-height: 400px; }
         .guestbook-wrapper { padding: 20px; }
         .map-wrapper h3 { font-size: 3.5rem; }
+
+        .gallery-carousel { padding: 10px; border-radius: 12px; }
+        .carousel-ui-overlay, .carousel-progress-bar { display: none; }
+        .carousel-btn { width: 45px; height: 45px; opacity: 1; background-color: rgba(0, 0, 0, 0.15); }
+        .carousel-btn svg { width: 24px; height: 24px; }
+        .carousel-btn.prev { left: 15px; }
+        .carousel-btn.next { right: 15px; }
       }
       
       @media (max-width: 480px) {
@@ -1021,11 +943,12 @@
         .couple-details .son-daughter-of { font-size: 0.9rem; }
         .couple-details .ampersand { font-size: 4rem; }
         .couple-img.mobile-only { width: 180px; height: 180px; }
-        .carousel-btn { width: 36px; height: 36px; font-size: 1.5rem; }
+        
+        .gallery-carousel { padding: 8px; border-radius: 10px; }
+        .carousel-btn { width: 40px; height: 40px; }
         .carousel-btn.prev { left: 10px; }
         .carousel-btn.next { right: 10px; }
-        .carousel-nav { padding: 5px 10px; gap: 8px; bottom: 10px; }
-        .nav-dot { width: 8px; height: 8px; }
+
         .container p { font-size: 0.95rem; }
         .timeline-content h3 { font-size: 2rem; }
         .timeline-content p { font-size: 0.9rem; }
@@ -1034,10 +957,6 @@
         .section::before, .section::after { display: none; }
         .song-info { display: none; }
         footer .final-thanks { font-size: 40px; }
-        
-        #chatbot-toggle-btn { width: 50px; height: 50px; right: 15px; bottom: 15px; }
-        #chatbot-toggle-btn svg { width: 28px; height: 28px; }
-        #chat-window { bottom: 80px; right: 15px; left: 15px; width: auto; }
       }
     </style>
   </head>
@@ -1164,6 +1083,7 @@
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d294.77107682859435!2d106.84490926636506!3d-6.270165536103122!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f26c7bf4e5fd%3A0x52ec054280886588!2sKementerian%20Dalam%20Negeri%20-%20Ditjen%20Bina%20Pemerintahan%20Desa!5e0!3m2!1sen!2sid!4v1756023942640!5m2!1sen!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
                 <a href="https://maps.app.goo.gl/pB9XnHQSxj8bdVGFA" target="_blank" class="rsvp-button map-button">Buka di Google Maps</a>
+                <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Pernikahan+Pramudya+%26+Feristina&dates=20251130T020000Z/20251130T060000Z&details=Dengan+penuh+rasa+syukur%2C+kami+mengundang+Anda+untuk+hadir+dan+memberikan+doa+restu+pada+acara+pernikahan+kami.%0A%0ADress+code%3A+Semi-formal%2FFormal.&location=Aula+Direktorat+Jenderal+Bina+Pemerintahan+Desa+Kemendagri%2C+Jl.+Raya+Pasar+Minggu+No.19%2C+Pejaten+Barat%2C+Kec.+Ps.+Minggu%2C+Jakarta+Selatan" target="_blank" class="rsvp-button map-button">Simpan ke Kalender</a>
             </div>
 
           </div>
@@ -1208,10 +1128,18 @@
                 <div class="gallery-slide"><img src="data/Image/KakFeris3.jpeg" alt="Feristina 2"></div>
                 <div class="gallery-slide"><img src="data/Image/KakFeris4.jpeg" alt="Feristina 2"></div>
               </div>
-              <button class="carousel-btn prev" aria-label="Previous Slide">&lt;</button>
-              <button class="carousel-btn next" aria-label="Next Slide">&gt;</button>
-              <div class="carousel-nav">
-                <!-- Dots are generated by JavaScript -->
+              <button class="carousel-btn prev" aria-label="Previous Slide">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+              </button>
+              <button class="carousel-btn next" aria-label="Next Slide">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+              </button>
+              <div class="carousel-progress-bar">
+                <div class="carousel-progress-bar-inner"></div>
+              </div>
+              <div class="carousel-ui-overlay">
+                  <div class="carousel-counter">1 / 19</div>
+                  <div class="carousel-nav"></div>
               </div>
             </div>
           </div>
@@ -1293,39 +1221,6 @@
 
     <div id="copy-notification">Nomor berhasil disalin!</div>
 
-    <!-- CHATBOT UI -->
-    <div id="chatbot-container">
-      <div id="chat-window">
-        <div id="chat-header">
-          <span>BantuBot</span>
-          <button id="close-chat-btn" aria-label="Close Chat">&times;</button>
-        </div>
-        <div id="chat-messages">
-            <!-- Messages will be appended here -->
-        </div>
-        <div id="chat-suggestions">
-            <!-- Suggestion buttons will be injected by JS -->
-        </div>
-        <div id="chat-typing-indicator" class="hidden">
-            <div class="message-container bot">
-                <div class="chat-message">
-                    <span></span><span></span><span></span>
-                </div>
-            </div>
-        </div>
-        <form id="chat-form">
-          <input type="text" id="chat-input" placeholder="Tanya sesuatu..." autocomplete="off" required>
-          <button type="submit" id="chat-send-btn" aria-label="Send Message">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-          </button>
-        </form>
-      </div>
-      <button id="chatbot-toggle-btn" aria-label="Open Chat">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
-      </button>
-    </div>
-
-
     <script>
       window.addEventListener('load', () => {
         const loadingScreen = document.getElementById('loading-screen');
@@ -1374,11 +1269,16 @@
             }
         });
 
+        // --- GUEST NAME & AUTO-FILL RSVP FORM ---
         const urlParams = new URLSearchParams(window.location.search);
         const guestName = urlParams.get('to');
         const guestNameElement = document.querySelector('.guest-name');
-        if (guestName && guestNameElement) {
+        const rsvpNameInput = document.getElementById('name');
+        
+        if (guestName) {
           guestNameElement.textContent = guestName;
+          rsvpNameInput.value = guestName;
+          rsvpNameInput.setAttribute('readonly', true);
         }
         
         const openBtn = document.getElementById("open-invitation-btn");
@@ -1465,7 +1365,16 @@
                         const statusText = comment.confirmation === 'Hadir' ? 'Akan Hadir' : 'Tidak Hadir';
                         const safeName = String(comment.name || '').replace(/</g, "&lt;").replace(/>/g, "&gt;");
                         const safeMessage = String(comment.message || '').replace(/</g, "&lt;").replace(/>/g, "&gt;");
-                        card.innerHTML = `<div class="comment-header"><h4 class="comment-name">${safeName}</h4><span class="comment-status ${statusClass}">${statusText}</span></div><p class="comment-body">${safeMessage}</p>`;
+                        card.innerHTML = `
+                            <div class="comment-header">
+                                <h4 class="comment-name">${safeName}</h4>
+                                <span class="comment-status ${statusClass}">${statusText}</span>
+                            </div>
+                            <p class="comment-body">${safeMessage}</p>
+                            <div class="comment-footer">
+                                <button class="reply-btn" data-name="${safeName}">Balas</button>
+                            </div>
+                        `;
                         commentsContainer.appendChild(card);
                     });
                 } else {
@@ -1480,13 +1389,21 @@
             e.preventDefault();
             submitButton.disabled = true;
             submitButton.textContent = 'Mengirim...';
-            fetch(scriptURL, { method: 'POST', body: new FormData(rsvpForm)})
+
+            const formData = new FormData(rsvpForm);
+            // If a guest name exists from the URL, ensure it's the one being submitted.
+            if (guestName) {
+                formData.set('name', guestName);
+            }
+            
+            fetch(scriptURL, { method: 'POST', body: formData})
             .then(res => res.json())
             .then(data => {
                 if (data.result === 'success') {
-                    formStatus.textContent = `Terima kasih, ${data.name}! Pesan Anda telah terkirim.`;
+                    formStatus.textContent = `Terima kasih, ${guestName || data.name}! Pesan Anda telah terkirim.`;
                     formStatus.style.color = 'green';
                     rsvpForm.reset();
+                    if(guestName) { rsvpNameInput.value = guestName; } // Re-fill name after reset
                     fetchAndDisplayComments();
                 } else {
                     throw new Error(data.error || 'An unknown error occurred.');
@@ -1502,202 +1419,90 @@
             });
         });
 
+        // --- COMMENT REPLY LOGIC ---
+        commentsContainer.addEventListener('click', e => {
+            if (e.target.classList.contains('reply-btn')) {
+                const nameToReply = e.target.dataset.name;
+                const messageInput = document.getElementById('message');
+                
+                messageInput.value = `@${nameToReply}: `;
+                rsvpForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                messageInput.focus();
+            }
+        });
+
         fetchAndDisplayComments();
 
-        // --- GALLERY CAROUSEL LOGIC ---
-        const slider = document.querySelector('.gallery-slider');
-        if (slider) {
-            const slides = Array.from(slider.children);
-            const nextBtn = document.querySelector('.carousel-btn.next');
-            const prevBtn = document.querySelector('.carousel-btn.prev');
-            const navContainer = document.querySelector('.carousel-nav');
+        // --- NEW ENHANCED GALLERY CAROUSEL LOGIC ---
+        const gallery = document.querySelector('.gallery-carousel');
+        if (gallery) {
+            const slides = Array.from(gallery.querySelectorAll('.gallery-slide'));
+            const nextBtn = gallery.querySelector('.carousel-btn.next');
+            const prevBtn = gallery.querySelector('.carousel-btn.prev');
+            const navContainer = gallery.querySelector('.carousel-nav');
+            const counter = gallery.querySelector('.carousel-counter');
+            const progressBarInner = gallery.querySelector('.carousel-progress-bar-inner');
+            const autoplayIntervalTime = 5000; // 5 seconds
             let currentIndex = 0;
+            let autoPlayInterval;
 
-            if(slides.length > 0) {
-              slides.forEach((_, index) => {
-                  const dot = document.createElement('button');
-                  dot.classList.add('nav-dot');
-                  dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
-                  navContainer.appendChild(dot);
-              });
-              const dots = Array.from(navContainer.children);
-              const goToSlide = (index) => {
-                  slides.forEach(slide => slide.classList.remove('active-slide'));
-                  currentIndex = index;
-                  slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-                  dots.forEach(dot => dot.classList.remove('active'));
-                  dots[currentIndex].classList.add('active');
-                  slides[currentIndex].classList.add('active-slide');
-              };
-              nextBtn.addEventListener('click', () => goToSlide((currentIndex + 1) % slides.length));
-              prevBtn.addEventListener('click', () => goToSlide((currentIndex - 1 + slides.length) % slides.length));
-              dots.forEach((dot, index) => dot.addEventListener('click', () => goToSlide(index)));
-              goToSlide(0);
+            if (slides.length > 0) {
+                // Create dots
+                slides.forEach((_, index) => {
+                    const dot = document.createElement('button');
+                    dot.classList.add('nav-dot');
+                    dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+                    navContainer.appendChild(dot);
+                });
+                const dots = Array.from(navContainer.children);
+
+                const updateCarousel = (newIndex) => {
+                    // Handlekenburns animation
+                    slides[currentIndex].classList.remove('is-visible');
+                    
+                    currentIndex = newIndex;
+                    
+                    slides[currentIndex].classList.add('is-visible');
+                    
+                    // Update counter
+                    counter.textContent = `${currentIndex + 1} / ${slides.length}`;
+
+                    // Update dots
+                    dots.forEach(dot => dot.classList.remove('active'));
+                    dots[currentIndex].classList.add('active');
+
+                    // Reset and start progress bar animation
+                    progressBarInner.style.animation = 'none';
+                    void progressBarInner.offsetWidth; // Trigger reflow
+                    progressBarInner.style.animation = `progress ${autoplayIntervalTime / 1000}s linear forwards`;
+                };
+
+                const stopAutoPlay = () => clearInterval(autoPlayInterval);
+                const startAutoPlay = () => {
+                    stopAutoPlay();
+                    autoPlayInterval = setInterval(() => {
+                        const nextIndex = (currentIndex + 1) % slides.length;
+                        updateCarousel(nextIndex);
+                    }, autoplayIntervalTime);
+                };
+                
+                const handleManualNav = (action) => {
+                    stopAutoPlay();
+                    action();
+                    startAutoPlay();
+                };
+
+                nextBtn.addEventListener('click', () => handleManualNav(() => updateCarousel((currentIndex + 1) % slides.length)));
+                prevBtn.addEventListener('click', () => handleManualNav(() => updateCarousel((currentIndex - 1 + slides.length) % slides.length)));
+                dots.forEach((dot, index) => dot.addEventListener('click', () => handleManualNav(() => updateCarousel(index))));
+                
+                gallery.addEventListener('mouseenter', stopAutoPlay);
+                gallery.addEventListener('mouseleave', startAutoPlay);
+
+                updateCarousel(0); // Initialize first slide
+                startAutoPlay(); // Start autoplay
             }
         }
-        
-        // --- PREMIUM CHATBOT LOGIC ---
-        const chatWindow = document.getElementById('chat-window');
-        const chatbotToggleBtn = document.getElementById('chatbot-toggle-btn');
-        const closeChatBtn = document.getElementById('close-chat-btn');
-        const chatForm = document.getElementById('chat-form');
-        const chatInput = document.getElementById('chat-input');
-        const chatMessages = document.getElementById('chat-messages');
-        const typingIndicator = document.getElementById('chat-typing-indicator');
-        const chatSuggestionsContainer = document.getElementById('chat-suggestions');
-
-        // --- IMPORTANT: REPLACE WITH YOUR KEY ---
-        // To get a key, visit https://aistudio.google.com/app/apikey
-        const GEMINI_API_KEY = 'AIzaSyD6rkhvtJGhHWVKgk85QZvsMFSUuA1S4A0'; // <-- IMPORTANT: PASTE YOUR API KEY HERE
-        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`;
-        
-        const weddingContext = `
-            You are 'BantuBot', a friendly, cheerful, and helpful wedding assistant chatbot for the wedding of Pramudya and Feristina.
-            Your main role is to answer guest questions based ONLY on the information provided below.
-            Always be polite and keep your answers concise and helpful. Use a friendly tone and occasional appropriate emojis (like 😊, ✨, 🙏, 📅, 📍) to make the conversation feel warm.
-            **Crucially, use markdown for formatting:** use **bold** for important details like names, dates, or times. Use *italics* for notes or side comments. Use bulleted lists for schedules, addresses, or gift details.
-            If a question is unrelated to the wedding, you must politely decline. A good response would be: "Maaf, saya hanya bisa menjawab pertanyaan seputar pernikahan Pramudya dan Feristina. 😊"
-            The current date is ${new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}. Use this to calculate how many days are left until the wedding if asked.
-
-            **=== CORE WEDDING DETAILS ===**
-            - **The Couple:** Pramudya & Feristina
-            - **Groom's Parents:** Bapak Yuhardi & Ibu Amalia Fiora Irma
-            - **Bride's Parents:** Bapak Ferry Yanes & Ibu Risma Amalia
-            - **Wedding Date:** **30 November 2025**
-
-            **=== EVENT SCHEDULE & LOCATION ===**
-            - **Akad Nikah (Ceremony):** Starts at **09:00 WIB**. *Waktu masih tentatif, namun ini rencana saat ini.*
-            - **Resepsi (Reception):** From **11:00 to 13:00 WIB**.
-            - **Venue (for both events):** Aula Direktorat Jenderal Bina Pemerintahan Desa Kemendagri.
-            - **Address:** 
-                * Jl. Raya Pasar Minggu No.19, 
-                * Pejaten Barat, Kecamatan Pasar Minggu, 
-                * Jakarta Selatan.
-            - **Google Maps Link:** https://maps.app.goo.gl/pB9XnHQSxj8bdVGFA
-
-            **=== GUEST INFORMATION (FAQ) ===**
-            - **Dress Code:** Aturan berpakaiannya adalah **Semi-Formal atau Formal**. Pakaian rapi seperti batik, setelan, atau gaun akan sangat dihargai. ✨
-            - **Wedding Gifts:** Doa dan kehadiran Anda adalah hadiah terindah. Namun, jika ingin memberikan tanda kasih, bisa melalui:
-                * Bank Mandiri: **1270013987944**
-                * Gopay: **087771800110**
-            - **Parking:** Ya, tersedia area parkir yang luas untuk mobil dan motor di lokasi acara.
-            - **RSVP / Attendance Confirmation:** Mohon konfirmasi kehadiran dengan mengisi formulir di undangan ini sebelum **30 November 2025**. 🙏
-
-            **=== THE COUPLE'S STORY ===**
-            - **How they met:** Kisah mereka dimulai pada **Agustus 2017**.
-            - **The Engagement:** Pramudya melamar Feristina pada **Oktober 2024**.
-        `;
-
-        let conversationHistory = [{ role: "user", parts: [{ text: weddingContext }] }, { role: "model", parts: [{ text: "Tentu, saya siap membantu! 😊" }] }];
-        
-        const toggleChatWindow = () => chatWindow.classList.toggle('show');
-        chatbotToggleBtn.addEventListener('click', toggleChatWindow);
-        closeChatBtn.addEventListener('click', toggleChatWindow);
-        
-        const parseMarkdown = (text) => {
-            let html = text
-                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                .replace(/\*(.*?)\*/g, '<em>$1</em>')
-                .replace(/^\* (.*$)/gm, '<ul><li>$1</li></ul>')
-                .replace(/(\<\/ul\>\n\<ul\>)/g, '');
-
-            const accountRegex = /(\d{10,})/g;
-            html = html.replace(accountRegex, (match) => `${match} <button class="copy-btn" data-copy="${match}">Salin</button>`);
-            return html;
-        };
-
-        const appendMessage = (sender, message) => {
-            const messageContainer = document.createElement('div');
-            messageContainer.className = `message-container ${sender}`;
-            
-            const messageBubble = document.createElement('div');
-            messageBubble.className = 'chat-message';
-            messageBubble.innerHTML = parseMarkdown(message);
-
-            messageContainer.appendChild(messageBubble);
-            chatMessages.appendChild(messageContainer);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        };
-        
-        const showWelcomeMessage = () => {
-            const welcomeHTML = `
-                <div class="bot-welcome">
-                    <div class="bot-avatar">P&F</div>
-                    <p>Halo! Saya <strong>BantuBot</strong>, asisten virtual untuk pernikahan <strong>Pramudya & Feristina</strong>. Ada yang bisa saya bantu?</p>
-                </div>`;
-            chatMessages.innerHTML = welcomeHTML;
-            
-            const suggestions = ["Kapan & di mana acaranya?", "Apa dresscode-nya?", "Bagaimana cara memberi hadiah?"];
-            chatSuggestionsContainer.innerHTML = '';
-            suggestions.forEach(text => {
-                const btn = document.createElement('button');
-                btn.textContent = text;
-                btn.className = 'suggestion-btn';
-                btn.onclick = () => sendMessageToAI(text);
-                chatSuggestionsContainer.appendChild(btn);
-            });
-            chatSuggestionsContainer.style.display = 'flex';
-        };
-
-        const sendMessageToAI = async (userMessage) => {
-            if (chatSuggestionsContainer.style.display !== 'none') {
-                chatSuggestionsContainer.style.display = 'none';
-            }
-
-            if (GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY_HERE' || !GEMINI_API_KEY) {
-                appendMessage('bot', 'Maaf, chatbot belum diaktifkan. Harap masukkan API Key yang valid pada kode website.');
-                return;
-            }
-            
-            appendMessage('user', userMessage);
-            chatInput.value = '';
-            typingIndicator.classList.remove('hidden');
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-
-            conversationHistory.push({ role: "user", parts: [{ text: userMessage }] });
-
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ contents: conversationHistory })
-                });
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(`API Error: ${response.statusText} - ${errorData.error.message}`);
-                }
-                const data = await response.json();
-                
-                if (!data.candidates || data.candidates.length === 0) {
-                    throw new Error('No response from API. The request might have been blocked due to safety settings.');
-                }
-                const botMessage = data.candidates[0].content.parts[0].text;
-                conversationHistory.push({ role: "model", parts: [{ text: botMessage }] });
-                appendMessage('bot', botMessage);
-            } catch (error) {
-                console.error("Chatbot Error:", error);
-                appendMessage('bot', 'Maaf, terjadi sedikit gangguan. Coba tanyakan lagi nanti ya.');
-            } finally {
-                typingIndicator.classList.add('hidden');
-            }
-        };
-
-        chatForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const userMessage = chatInput.value.trim();
-            if (!userMessage) return;
-            sendMessageToAI(userMessage);
-        });
-
-        chatMessages.addEventListener('click', (e) => {
-            if (e.target.classList.contains('copy-btn')) {
-                const textToCopy = e.target.dataset.copy;
-                copyToClipboard(textToCopy, e.target);
-            }
-        });
-
-        showWelcomeMessage(); // Initialize chat with welcome message
       });
     </script>
   </body>
