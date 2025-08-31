@@ -532,13 +532,13 @@
           background-color: #f5f5f5;
       }
       
-      /* === GUESTBOOK STYLES === */
+      /* === REVAMPED GUESTBOOK STYLES === */
       .guestbook-wrapper {
         max-width: 800px;
         margin: 40px auto 0;
         background: rgba(255, 255, 255, 0.7);
         border-radius: 15px;
-        padding: 30px;
+        padding: 10px 0; /* Reduced padding */
         box-shadow: 0 8px 32px 0 rgba(184, 147, 142, 0.2);
         backdrop-filter: blur(4px);
         -webkit-backdrop-filter: blur(4px);
@@ -546,7 +546,7 @@
       }
       #comments-container {
         margin: 0;
-        padding: 0 15px 0 5px;
+        padding: 0 10px; /* Padding for scrollbar */
         max-height: 500px;
         overflow-y: auto;
         text-align: left;
@@ -561,39 +561,68 @@
         border: 2px solid rgba(245, 249, 253, 0.8);
       }
       .comment-card {
-        background-color: #ffffff;
-        border-left: 5px solid var(--primary-color);
-        border-radius: 8px;
-        padding: 20px 25px;
-        margin-bottom: 15px;
-        margin-right: 5px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 20px 15px;
+        border-bottom: 1px solid rgba(0,0,0,0.08);
       }
-      .comment-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      .comment-card:last-child {
+        border-bottom: none;
       }
-      .comment-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 10px;}
-      .comment-name { font-family: var(--font-heading); font-size: 2rem; color: var(--primary-color-dark); margin: 0;}
-      .comment-status { font-size: 0.9rem; font-weight: bold; padding: 5px 12px; border-radius: 20px; white-space: nowrap;}
+      .comment-avatar {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: var(--font-body);
+        font-weight: 700;
+        font-size: 1.4rem;
+        flex-shrink: 0;
+        text-transform: uppercase;
+      }
+      .comment-main {
+        flex: 1;
+      }
+      .comment-header { 
+        display: flex; 
+        align-items: center; 
+        margin-bottom: 8px; 
+        flex-wrap: wrap; 
+        gap: 10px;
+      }
+      .comment-name { 
+        font-family: var(--font-body); 
+        font-size: 1.1rem; 
+        font-weight: 700;
+        color: var(--text-color); 
+        margin: 0;
+      }
+      .comment-status { 
+        font-size: 0.85rem; 
+        font-weight: 600; 
+        padding: 4px 10px; 
+        border-radius: 20px; 
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .comment-status svg {
+        width: 14px;
+        height: 14px;
+      }
       .comment-status.attending { background-color: #e0f2f1; color: #00796b; }
       .comment-status.not-attending { background-color: #ffcdd2; color: #c62828; }
-      .comment-body { font-size: 1rem; line-height: 1.6; color: var(--text-color); margin: 0; word-wrap: break-word; }
-      .comment-footer { margin-top: 15px; text-align: right; }
-      .reply-btn {
-        background: none;
-        border: none;
-        color: var(--primary-color-dark);
-        font-family: var(--font-body);
-        font-weight: bold;
-        font-size: 0.9rem;
-        cursor: pointer;
-        padding: 5px 10px;
-        border-radius: 5px;
-        transition: background-color 0.2s;
+      .comment-body { 
+        font-size: 1rem; 
+        line-height: 1.6; 
+        color: var(--text-color); 
+        margin: 0; 
+        word-wrap: break-word; 
       }
-      .reply-btn:hover { background-color: #f1f1f1; }
       .loader {
         width: 50px;
         height: 50px;
@@ -909,7 +938,7 @@
         .section::before, .section::after { width: 180px !important; height: 180px !important; opacity: 0.3; }
         .music-control { left: 15px; bottom: 15px; }
         #comments-container { max-height: 400px; }
-        .guestbook-wrapper { padding: 20px; }
+        .guestbook-wrapper { padding: 10px 0; }
         .map-wrapper h3 { font-size: 3.5rem; }
 
         .gallery-carousel { padding: 10px; border-radius: 12px; }
@@ -1347,6 +1376,18 @@
         const commentsContainer = document.getElementById('comments-container');
         const scriptURL = 'https://script.google.com/macros/s/AKfycbytcIYrMIrgHnRuvt22hmwNwgXHV9R_huknN0Txp3ancgl94rEfaSgokWwJ7N1-4k6i/exec';
 
+        // Helper function to generate a color from a string for the avatar
+        const getAvatarColor = (name) => {
+            let hash = 0;
+            if (name.length === 0) return 'hsl(0, 0%, 70%)';
+            for (let i = 0; i < name.length; i++) {
+                hash = name.charCodeAt(i) + ((hash << 5) - hash);
+                hash = hash & hash; // Ensure 32bit integer
+            }
+            const h = hash % 360;
+            return `hsl(${h}, 60%, 75%)`;
+        };
+
         const fetchAndDisplayComments = async () => {
             commentsContainer.innerHTML = '<div class="loader"></div>';
             try {
@@ -1361,18 +1402,30 @@
                     result.data.reverse().forEach(comment => {
                         const card = document.createElement('div');
                         card.className = 'comment-card';
-                        const statusClass = comment.confirmation === 'Hadir' ? 'attending' : 'not-attending';
-                        const statusText = comment.confirmation === 'Hadir' ? 'Akan Hadir' : 'Tidak Hadir';
+                        
+                        const isAttending = comment.confirmation === 'Hadir';
+                        const statusClass = isAttending ? 'attending' : 'not-attending';
+                        const statusText = isAttending ? 'Akan Hadir' : 'Tidak Hadir';
+                        const statusIcon = isAttending 
+                            ? `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>`
+                            : `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>`;
+
                         const safeName = String(comment.name || '').replace(/</g, "&lt;").replace(/>/g, "&gt;");
                         const safeMessage = String(comment.message || '').replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+                        const initial = (safeName || ' ').charAt(0);
+                        const avatarColor = getAvatarColor(safeName);
+
                         card.innerHTML = `
-                            <div class="comment-header">
-                                <h4 class="comment-name">${safeName}</h4>
-                                <span class="comment-status ${statusClass}">${statusText}</span>
+                            <div class="comment-avatar" style="background-color: ${avatarColor};">
+                                ${initial}
                             </div>
-                            <p class="comment-body">${safeMessage}</p>
-                            <div class="comment-footer">
-                                <button class="reply-btn" data-name="${safeName}">Balas</button>
+                            <div class="comment-main">
+                                <div class="comment-header">
+                                    <h4 class="comment-name">${safeName}</h4>
+                                    <span class="comment-status ${statusClass}">${statusIcon} ${statusText}</span>
+                                </div>
+                                <p class="comment-body">${safeMessage}</p>
                             </div>
                         `;
                         commentsContainer.appendChild(card);
@@ -1417,18 +1470,6 @@
                 submitButton.disabled = false;
                 submitButton.textContent = 'Kirim Pesan';
             });
-        });
-
-        // --- COMMENT REPLY LOGIC ---
-        commentsContainer.addEventListener('click', e => {
-            if (e.target.classList.contains('reply-btn')) {
-                const nameToReply = e.target.dataset.name;
-                const messageInput = document.getElementById('message');
-                
-                messageInput.value = `@${nameToReply}: `;
-                rsvpForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                messageInput.focus();
-            }
         });
 
         fetchAndDisplayComments();
