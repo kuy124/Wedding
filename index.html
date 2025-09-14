@@ -35,6 +35,11 @@
         overflow-y: hidden; /* Hide scrollbar initially */
       }
 
+      /* === REMOVE MOBILE TAP HIGHLIGHT === */
+      button, a, [onclick] {
+        -webkit-tap-highlight-color: transparent;
+      }
+
       /* === ORIENTATION LOCK OVERLAY === */
       #orientation-lock-overlay {
         position: fixed;
@@ -1602,30 +1607,28 @@
 
             if (slides.length > 0) {
                 // Create dots
-                slides.forEach((_, index) => {
-                    const dot = document.createElement('button');
-                    dot.classList.add('nav-dot');
-                    dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
-                    navContainer.appendChild(dot);
-                });
-                const dots = Array.from(navContainer.children);
+                if(navContainer){
+                  slides.forEach((_, index) => {
+                      const dot = document.createElement('button');
+                      dot.classList.add('nav-dot');
+                      dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+                      navContainer.appendChild(dot);
+                  });
+                }
+                const dots = navContainer ? Array.from(navContainer.children) : [];
 
                 const updateCarousel = (newIndex) => {
-                    // Handlekenburns animation
                     slides[currentIndex].classList.remove('is-visible');
-                    
                     currentIndex = newIndex;
-                    
                     slides[currentIndex].classList.add('is-visible');
                     
-                    // Update counter
                     if(counter) counter.textContent = `${currentIndex + 1} / ${slides.length}`;
 
-                    // Update dots
-                    dots.forEach(dot => dot.classList.remove('active'));
-                    if(dots[currentIndex]) dots[currentIndex].classList.add('active');
+                    if(dots.length > 0){
+                      dots.forEach(dot => dot.classList.remove('active'));
+                      dots[currentIndex].classList.add('active');
+                    }
 
-                    // Reset and start progress bar animation
                     if(progressBarInner) {
                       progressBarInner.style.animation = 'none';
                       void progressBarInner.offsetWidth; // Trigger reflow
