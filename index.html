@@ -35,6 +35,47 @@
         overflow-y: hidden; /* Hide scrollbar initially */
       }
 
+      /* === ORIENTATION LOCK OVERLAY === */
+      #orientation-lock-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: var(--background-color);
+        z-index: 30000;
+        display: none; /* Hidden by default */
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: var(--text-color);
+        padding: 20px;
+        box-sizing: border-box;
+      }
+      .orientation-overlay-content {
+        font-family: var(--font-body);
+      }
+      .orientation-overlay-content h3 {
+        font-family: var(--font-heading);
+        font-size: 3rem;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+        font-weight: normal;
+      }
+      .orientation-overlay-content p {
+        font-size: 1.1rem;
+        line-height: 1.5;
+        max-width: 90%;
+        margin: 0 auto;
+      }
+      
+      /* Show the overlay only on landscape phone-sized devices */
+      @media (orientation: landscape) and (max-width: 900px) {
+        #orientation-lock-overlay {
+          display: flex;
+        }
+      }
+
       /* === GOLDEN HOUR LOADING SCREEN STYLES === */
       #loading-screen {
         position: fixed;
@@ -126,6 +167,8 @@
         position: relative;
         z-index: 1;
         padding: 20px;
+        width: 100%;
+        box-sizing: border-box;
       }
 
       @keyframes splashFadeInUp {
@@ -342,7 +385,8 @@
       /* === HERO SECTION STYLES === */
       .hero {
         position: relative;
-        height: 100vh;
+        min-height: 100vh; /* Changed for responsiveness */
+        height: auto; /* Changed for responsiveness */
         color: #4a3728;
         text-align: center;
         display: flex;
@@ -354,6 +398,8 @@
         background-size: 200% 200%;
         background-position: center center;
         animation: goldPulse 12s ease-in-out infinite;
+        padding: 40px 20px; /* Added padding */
+        box-sizing: border-box; /* Added for better padding calculation */
       }
       .hero::before {
         content: '';
@@ -408,6 +454,7 @@
         position: relative; 
         z-index: 1;
         background-color: transparent;
+        overflow: hidden; /* Prevent floral decorations from creating scrollbars */
       }
       .section h2 { font-size: 6.5rem; margin-bottom: 20px; color: var(--primary-color); }
       .heading-divider { 
@@ -897,7 +944,37 @@
       .animated-item.visible .animated-child:nth-child(4) { animation-delay: 0.8s; }
       .animated-item.visible .animated-child:nth-child(5) { animation-delay: 1.0s; }
       
-      /* === MEDIA QUERIES === */
+      /* === START: RESPONSIVE MEDIA QUERIES === */
+      
+      /* Ultra-Wide Desktops */
+      @media (min-width: 1921px) {
+        .container { max-width: 1400px; }
+        h1 { font-size: 11rem; }
+        .section h2 { font-size: 8rem; }
+      }
+      
+      /* Large Desktops */
+      @media (min-width: 1601px) and (max-width: 1920px) {
+        .container { max-width: 1280px; }
+        h1 { font-size: 10rem; }
+        .section h2 { font-size: 7.5rem; }
+      }
+      
+      /* Standard Desktops */
+      @media (min-width: 1201px) and (max-width: 1600px) {
+        .container { max-width: 1100px; }
+        h1 { font-size: 9rem; }
+        .section h2 { font-size: 7rem; }
+      }
+
+      /* Laptops and Large Tablets */
+      @media (max-width: 1200px) {
+        .container { max-width: 960px; }
+        h1 { font-size: 8rem; }
+        .section h2 { font-size: 6rem; }
+      }
+      
+      /* Tablets (Portrait) & Small Laptops */
       @media (max-width: 1024px) { 
         body { font-size: 16px; } 
         .section { padding: 70px 20px; } 
@@ -911,6 +988,14 @@
         .couple-img { width: 225px; height: 225px; }
       }
       
+      /* Small Tablets */
+      @media (max-width: 900px) {
+        .couple-details .person-details h3 { font-size: 4.5rem; }
+        .timeline-content h3 { font-size: 2.5rem; }
+        .map-wrapper h3 { font-size: 3.8rem; }
+      }
+
+      /* Tablets (Landscape) & Large Phones */
       @media (max-width: 768px) {
         body { font-size: 15px; }
         .section { padding: 60px 20px; }
@@ -949,6 +1034,15 @@
         .carousel-btn.next { right: 15px; }
       }
       
+      /* Phones (Landscape) */
+      @media (max-width: 640px) {
+        .section h2 { font-size: 4rem; }
+        .splash-content h1 { font-size: 5rem; }
+        h1 { font-size: 5.2rem; }
+        .couple-details .person-details h3 { font-size: 3.8rem; }
+      }
+
+      /* Phones (Portrait) */
       @media (max-width: 480px) {
         body { font-size: 14px; line-height: 1.6; }
         .hero::before { width: 100vh; height: 100vh; opacity: 0.08; }
@@ -985,11 +1079,30 @@
         #music-toggle-btn { width: 50px; height: 50px; }
         .section::before, .section::after { display: none; }
         .song-info { display: none; }
-        footer .final-thanks { font-size: 40px; }
+        footer .final-thanks { font-size: 3rem; }
       }
+      
+      /* Very Small Phones */
+      @media (max-width: 360px) {
+        .section h2 { font-size: 2.8rem; }
+        .splash-content h1 { font-size: 3.5rem; }
+        h1 { font-size: 3.8rem; }
+        .hero p { font-size: 0.8rem; }
+        #countdown div { font-size: 1.5rem; }
+        #countdown span { font-size: 0.6rem; }
+      }
+      
+      /* === END: RESPONSIVE MEDIA QUERIES === */
     </style>
   </head>
   <body>
+    <div id="orientation-lock-overlay">
+      <div class="orientation-overlay-content">
+        <h3>Tampilan Terbaik dalam Mode Potret</h3>
+        <p>Silakan putar kembali perangkat Anda untuk melanjutkan.</p>
+      </div>
+    </div>
+
     <div id="loading-screen">
       <div class="loader-content">
         <div class="loader-monogram">P & F</div>
@@ -1007,7 +1120,7 @@
         </div>
         <button id="open-invitation-btn">Buka Undangan</button>
         <blockquote class="splash-quote">
-            <p dir="rtl" class="splash-arabic">وَاَنْكِحُوا الْاَيَامٰى مِنْكُمْ وَالصّٰلِحِيْنَ مِنْ عِبَادِكُمْ وَاِمَاۤىِٕكُمْۗ اِنْ يَّكُوْنُوْا فُقَرَاۤءَ يُغْنِهِمُ اللّٰهُ مِنْ فَضْلِهٖۗ وَاللّٰهُ وَاسِعٌ عَلِيْمٌ</p>
+            <p dir="rtl" class="splash-arabic">وَاَنْكِحُوا الْاَيَامٰى مِنْكُمْ وَالصّٰلِحِيْنَ مِنْ عِبَADAKAH وَاِمَاۤىِٕكُمْۗ اِنْ يَّكُوْنُوْا فُقَرَاۤءَ يُغْنِهِمُ اللّٰهُ مِنْ فَضْلِهٖۗ وَاللّٰهُ وَاسِعٌ عَلِيْمٌ</p>
             <p class="splash-translation">"Nikahkanlah orang-orang yang masih membujang di antara kamu dan juga orang-orang yang layak (menikah) dari hamba-hamba sahayamu, baik laki-laki maupun perempuan. Jika mereka miskin, Allah akan memberi kemampuan kepada mereka dengan karunia-Nya. Allah Mahaluas (pemberian-Nya) lagi Maha Mengetahui."<br><strong>- QS An-Nur: 32 -</strong></p>
         </blockquote>
       </div>
@@ -1506,16 +1619,18 @@
                     slides[currentIndex].classList.add('is-visible');
                     
                     // Update counter
-                    counter.textContent = `${currentIndex + 1} / ${slides.length}`;
+                    if(counter) counter.textContent = `${currentIndex + 1} / ${slides.length}`;
 
                     // Update dots
                     dots.forEach(dot => dot.classList.remove('active'));
-                    dots[currentIndex].classList.add('active');
+                    if(dots[currentIndex]) dots[currentIndex].classList.add('active');
 
                     // Reset and start progress bar animation
-                    progressBarInner.style.animation = 'none';
-                    void progressBarInner.offsetWidth; // Trigger reflow
-                    progressBarInner.style.animation = `progress ${autoplayIntervalTime / 1000}s linear forwards`;
+                    if(progressBarInner) {
+                      progressBarInner.style.animation = 'none';
+                      void progressBarInner.offsetWidth; // Trigger reflow
+                      progressBarInner.style.animation = `progress ${autoplayIntervalTime / 1000}s linear forwards`;
+                    }
                 };
 
                 const stopAutoPlay = () => clearInterval(autoPlayInterval);
