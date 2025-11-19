@@ -1153,7 +1153,7 @@
         <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div><div class="cloud c4"></div>
         <div class="hero-content">
           <p class="bismillah">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
-          <p>Kami Akan Menikah</p>
+          <p id="hero-tagline">Kami Akan Menikah</p>
           <h1>Pramudya<br class="mobile-break"> & <br class="mobile-break">Feristina</h1>
           <p>30 November 2025</p>
           <div id="countdown">
@@ -1431,6 +1431,12 @@
           rsvpNameInput.value = guestName;
           rsvpNameInput.setAttribute('readonly', true);
         }
+
+        const tagline = urlParams.get('tagline');
+        const taglineElement = document.getElementById('hero-tagline');
+        if (taglineElement && tagline) {
+          taglineElement.textContent = tagline;
+        }
         
         const updateAccountInfo = (paramName, elementId) => {
         const element = document.getElementById(elementId);
@@ -1452,7 +1458,7 @@
         updateAccountInfo('mandiri', 'mandiri-account');
         updateAccountInfo('bca', 'bca-account');
         updateAccountInfo('gopay', 'gopay-account');
-        
+
         const bcaParam = urlParams.get('bca');
         const mandiriParam = urlParams.get('mandiri');
         const gopayParam = urlParams.get('gopay');
