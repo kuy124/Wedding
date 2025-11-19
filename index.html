@@ -1437,14 +1437,12 @@
         const value = urlParams.get(paramName);
 
           if (element && value) {
-            // Jika nilainya adalah '-', sembunyikan seluruh baris <p>
             if (value === '-') {
               const parentParagraph = element.parentElement;
               if (parentParagraph) {
                 parentParagraph.style.display = 'none';
               }
             } else {
-              // Jika bukan '-', lakukan seperti biasa: ganti nomornya
               element.textContent = value;
               element.setAttribute('onclick', `copyToClipboard('${value}')`);
             }
