@@ -1452,6 +1452,18 @@
         updateAccountInfo('mandiri', 'mandiri-account');
         updateAccountInfo('bca', 'bca-account');
         updateAccountInfo('gopay', 'gopay-account');
+
+        // --- HIDE ENTIRE GIFT SECTION IF ALL ACCOUNTS ARE '-' ---
+        const bcaParam = urlParams.get('bca');
+        const mandiriParam = urlParams.get('mandiri');
+        const gopayParam = urlParams.get('gopay');
+
+        if (bcaParam === '-' && mandiriParam === '-' && gopayParam === '-') {
+          const giftSection = document.querySelector('.wedding-gift-section');
+          if (giftSection) {
+            giftSection.style.display = 'none';
+          }
+        }
         
         const openBtn = document.getElementById("open-invitation-btn");
         const splashScreen = document.getElementById("splash-screen");
