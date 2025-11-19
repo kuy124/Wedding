@@ -14,7 +14,7 @@
         --primary-color: #b8938e; /* Dusty Rose */
         --primary-color-dark: #a17a74; /* Darker Dusty Rose */
         --accent-color: #c9b474; /* Soft Gold */
-        --text-color: #4a4a4a; /* Soft Charcoal */
+        --text-color: #4a4a4a; /* Soft Charcoal */  
         --background-color: #f5f9fd; /* Warm Off-white */
         --animation-duration: 0.8s;
         --font-heading: "Great Vibes", cursive;
@@ -1323,15 +1323,15 @@
                 <p>Bagi Anda yang ingin memberikan tanda kasih, dapat melakukannya melalui tautan berikut. Terima kasih banyak atas kebaikan Anda.</p>
                 <p>
                     Bank Mandiri
-                    <span class="account-details" onclick="copyToClipboard('1270013987944')">1270013987944</span>
+                    <span id="mandiri-account" class="account-details" onclick="copyToClipboard('1270013987944')">1270013987944</span>
                 </p>
                 <p>
                     Bank BCA
-                    <span class="account-details" onclick="copyToClipboard('5520670043')">5520670043</span>
+                    <span id="bca-account" class="account-details" onclick="copyToClipboard('5520670043')">5520670043</span>
                 </p>
                 <p>
                     Gopay
-                    <span class="account-details" onclick="copyToClipboard('083198397729')">083198397729</span>
+                    <span id="gopay-account" class="account-details" onclick="copyToClipboard('083198397729')">083198397729</span>
                 </p>
             </div>
           </div>
@@ -1431,6 +1431,29 @@
           rsvpNameInput.value = guestName;
           rsvpNameInput.setAttribute('readonly', true);
         }
+        
+        const updateAccountInfo = (paramName, elementId) => {
+        const element = document.getElementById(elementId);
+        const value = urlParams.get(paramName);
+
+          if (element && value) {
+            // Jika nilainya adalah '-', sembunyikan seluruh baris <p>
+            if (value === '-') {
+              const parentParagraph = element.parentElement;
+              if (parentParagraph) {
+                parentParagraph.style.display = 'none';
+              }
+            } else {
+              // Jika bukan '-', lakukan seperti biasa: ganti nomornya
+              element.textContent = value;
+              element.setAttribute('onclick', `copyToClipboard('${value}')`);
+            }
+          }
+        };
+
+        updateAccountInfo('mandiri', 'mandiri-account');
+        updateAccountInfo('bca', 'bca-account');
+        updateAccountInfo('gopay', 'gopay-account');
         
         const openBtn = document.getElementById("open-invitation-btn");
         const splashScreen = document.getElementById("splash-screen");
